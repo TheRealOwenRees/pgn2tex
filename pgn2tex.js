@@ -1,3 +1,5 @@
+const MAX_VARIATION_DEPTH = 3; // maximum nested variations that will be displayed
+
 const { parse } = require('@mliebelt/pgn-parser');
 
 const pgn2tex = (pgn, diagrams) => {
@@ -15,40 +17,30 @@ const pgn2tex = (pgn, diagrams) => {
     return result;
   };
 
-  // TODO rewrite recursively with max depth as 3
-  const writeVariations = (move) => {
+  const writeVariations = (move, depth = 0, maxDepth = MAX_VARIATION_DEPTH) => {
+    // base case
+    if (depth >= maxDepth) {
+      return '';
+    }
+
     let variationString = '('; // with starting parenthesis
-    // variation depth 1
-    move.variations.forEach((variationDepth1) => {
-      variationDepth1.forEach((moveDepth1, indexDepth1) => {
-        variationString += writeVariationMove(moveDepth1, indexDepth1);
-        // variation depth 2
-        if (moveDepth1.variations.length > 0) {
-          moveDepth1.variations.forEach((variationDepth2) => {
-            variationString += '(';
-            variationDepth2.forEach((moveDepth2, indexDepth2) => {
-              variationString += writeVariationMove(moveDepth2, indexDepth2);
-              // variation depth 3
-              if (moveDepth2.variations.length > 0) {
-                moveDepth2.variations.forEach((variationDepth3) => {
-                  variationString += '(';
-                  variationDepth3.forEach((moveDepth3, indexDepth3) => {
-                    variationString += writeVariationMove(
-                      moveDepth3,
-                      indexDepth3,
-                    );
-                  });
-                  variationString = `${variationString.trim()}) `;
-                });
-              }
-            });
-            variationString = `${variationString.trim()}) `;
-          });
+    move.variations.forEach((variation) => {
+      variation.forEach((variationMove, index) => {
+        variationString += writeVariationMove(variationMove, index);
+        if (variationMove.variations.length > 0) {
+          variationString += writeVariations(variationMove, depth + 1, maxDepth);
         }
       });
-      variationString = `${variationString.trim()}`;
+
+      // Append closing parentheses to match depth of recursion
+      for (let i = 0; i < depth; i + 1) {
+        variationString += ')';
+      }
+
+      variationString = `${variationString.trim()} `;
     });
-    return `${variationString.trim()}) `; // with ending parenthesis
+
+    return `${variationString.trim()}`; // with ending parenthesis
   };
 
   // starting and ending markdown for TeX document
@@ -68,6 +60,7 @@ const pgn2tex = (pgn, diagrams) => {
         moveStr += `\\newline ${move.commentAfter.trim()} \\par `;
         if (move.turn === 'w') moveStr += `\\textbf{${move.moveNumber}...}`;
       }
+
       // display chessboard diagram at ply - object (ply/fen) to be passed as function parameter
       const diagramExists = diagrams.find((x) => x.ply === index + 1);
       if (diagramExists) {
@@ -76,12 +69,14 @@ const pgn2tex = (pgn, diagrams) => {
         // add ...dots if it is black to move next when resuming mainline
         if (move.turn === 'w') moveStr += `\\textbf{${move.moveNumber}...}`;
       }
+
       // Variations
       if (move.variations.length > 0) {
         moveStr += writeVariations(move);
         if (move.turn === 'w') moveStr += `\\textbf{${move.moveNumber}...}`;
       }
     });
+
     // end of moveStr
     moveStr += `\\textbf{${header.Result}}`;
     moveStr = moveStr.replaceAll(/#/g, '\\#'); // regex replace # with \# for LaTex
