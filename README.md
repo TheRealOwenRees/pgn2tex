@@ -3,7 +3,7 @@
 ## A chess PGN to TeX conversion tool
 
 # Installation
-`npm install @owenrees/pgn2tex`
+`npm install pgn2tex`
 
 Import this library into your code with `const pgn2tex = require('pgn2tex')`
 
