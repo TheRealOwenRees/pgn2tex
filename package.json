@@ -11,7 +11,8 @@
   "main": "pgn2tex.js",
   "scripts": {
     "start": "node pgn2tex.js",
-    "lint": "eslint . --ext .js --fix"
+    "lint": "eslint . --ext .js --fix",
+    "test": "jest"
   },
   "author": "Owen Rees <owenrees@tutanota.com>",
   "license": "Apache-2.0",
