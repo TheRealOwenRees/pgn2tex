@@ -2,6 +2,8 @@
 
 ## A chess PGN to TeX conversion tool
 
+See it on [NPM](https://www.npmjs.com/package/pgn2tex)
+
 # Installation
 `npm install pgn2tex`
 
