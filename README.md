@@ -1,4 +1,4 @@
-# PGN 2 TEX
+# PGN to TEX
 
 ## A chess PGN to TeX conversion tool
 
