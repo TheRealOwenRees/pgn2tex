@@ -4,6 +4,8 @@
 
 See it on [NPM](https://www.npmjs.com/package/pgn2tex)
 
+![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/therealowenrees/pgn2tex) ![npm](https://img.shields.io/npm/dw/pgn2tex)
+
 # Installation
 `npm install pgn2tex`
 
