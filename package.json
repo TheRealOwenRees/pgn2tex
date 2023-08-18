@@ -10,9 +10,10 @@
   ],
   "main": "pgn2tex.js",
   "scripts": {
-    "start": "node pgn2tex.js",
+    "start": "node dist/pgn2tex.js",
     "lint": "eslint . --ext .js --fix",
-    "test": "jest"
+    "test": "jest",
+    "build": "tsc"
   },
   "author": "Owen Rees <owenrees@tutanota.com>",
   "license": "Apache-2.0",
@@ -20,9 +21,14 @@
     "@mliebelt/pgn-parser": "^1.4.5"
   },
   "devDependencies": {
+    "@types/jest": "^29.5.3",
+    "@typescript-eslint/eslint-plugin": "^6.4.0",
+    "@typescript-eslint/parser": "^6.4.0",
     "eslint": "^8.31.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.27.4",
-    "jest": "^29.5.0"
+    "jest": "^29.5.0",
+    "ts-jest": "^29.1.1",
+    "typescript": "^5.1.6"
   }
 }

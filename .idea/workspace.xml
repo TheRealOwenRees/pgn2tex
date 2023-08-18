@@ -5,15 +5,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0670ff51-0caf-4565-b19a-4f74931eabb6" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/LICENSE" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/jest.config.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pgn2tex.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/tests/pgn2tex.test.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.eslintrc.js" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintrc.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pgn2tex.js" beforeDir="false" afterPath="$PROJECT_DIR$/old.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/pgn2tex.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/pgn2tex_helper.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ElmWorkspace">
+    <elmProjects />
+    <settings elmCompilerPath="/usr/local/bin/elm" elmFormatPath="null" elmTestPath="null" isElmFormatOnSaveEnabled="false" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -32,24 +42,12 @@
               <option name="branches">
                 <list>
                   <RecentBranch>
+                    <option name="branchName" value="rewrite" />
+                    <option name="lastUsedInstant" value="1692381708" />
+                  </RecentBranch>
+                  <RecentBranch>
                     <option name="branchName" value="main" />
                     <option name="lastUsedInstant" value="1683033480" />
-                  </RecentBranch>
-                  <RecentBranch>
-                    <option name="branchName" value="develop" />
-                    <option name="lastUsedInstant" value="1683033375" />
-                  </RecentBranch>
-                  <RecentBranch>
-                    <option name="branchName" value="tests" />
-                    <option name="lastUsedInstant" value="1683033204" />
-                  </RecentBranch>
-                  <RecentBranch>
-                    <option name="branchName" value="recursion" />
-                    <option name="lastUsedInstant" value="1682964943" />
-                  </RecentBranch>
-                  <RecentBranch>
-                    <option name="branchName" value="textbf" />
-                    <option name="lastUsedInstant" value="1682947610" />
                   </RecentBranch>
                 </list>
               </option>
@@ -59,6 +57,9 @@
         </option>
       </RecentBranches>
     </option>
+  </component>
+  <component name="GoLibraries">
+    <option name="indexEntireGoPath" value="true" />
   </component>
   <component name="MacroExpansionManager">
     <option name="directoryName" value="2r0kwo21" />
@@ -78,31 +79,53 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.go.formatter.settings.were.checked": "true",
+    "RunOnceActivity.go.migrated.go.modules.settings": "true",
     "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "rewrite",
+    "go.import.settings.migrated": "true",
+    "js.linters.configure.manually.selectedeslint": "true",
     "last_opened_file_path": "/home/owen/Dropbox/Coding Projects/JS/pgn2tex",
     "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.standard": "true",
     "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.eslint": "/media/owen/Mint Data/Projects/pgn2tex/node_modules/eslint",
+    "node.js.selected.package.standard": "",
     "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs.jest.jest_package": "/home/owen/Dropbox/Coding Projects/JS/pgn2tex/node_modules/jest",
+    "nodejs.jest.jest_package": "/media/owen/Mint Data/Projects/pgn2tex/node_modules/jest",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "org.elm.workspace.PROJECT_DISCOVERY": "true",
+    "settings.editor.selected.configurable": "settings.javascript.linters.eslint",
+    "ts.external.directory.path": "/media/owen/Mint Data/Projects/pgn2tex/node_modules/typescript/lib",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src" />
       <recent name="$PROJECT_DIR$/tests" />
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager" selected="Jest.All Tests">
+  <component name="RunManager" selected="Jest.Pgn2Tex">
     <configuration name="All Tests" type="JavaScriptTestRunnerJest" nameIsGenerated="true">
       <node-interpreter value="project" />
       <jest-package value="$PROJECT_DIR$/node_modules/jest" />
       <working-dir value="$PROJECT_DIR$" />
       <envs />
       <scope-kind value="ALL" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Pgn2Tex" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="SUITE" />
+      <test-file value="$PROJECT_DIR$/src/tests/pgn2tex.test.js" />
+      <test-names>
+        <test-name value="Pgn2Tex" />
+      </test-names>
       <method v="2" />
     </configuration>
     <configuration name="valid TeX output" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
@@ -145,6 +168,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Jest.Pgn2Tex" />
         <item itemvalue="Jest.valid TeX output" />
         <item itemvalue="Jest.valid TeX output.start of TeX output forms a valid document (1)" />
         <item itemvalue="Jest.valid TeX output.start of TeX output forms a valid document" />
@@ -167,11 +191,16 @@
       <workItem from="1683010501151" duration="2908000" />
       <workItem from="1683033280191" duration="389000" />
       <workItem from="1683033679054" duration="1350000" />
+      <workItem from="1692381599591" duration="5988000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VgoProject">
+    <integration-enabled>false</integration-enabled>
+    <settings-migrated>true</settings-migrated>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/pgn2tex$pgn2tex_test_js.info" NAME="pgn2tex.test.js Coverage Results" MODIFIED="1682968524176" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="JestJavaScriptTestRunnerCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
