@@ -1,11 +1,12 @@
 module.exports = {
   env: {
     browser: true,
-    es2021: true,
+    es2016: true,
     node: true,
     jest: true,
   },
-  extends: 'airbnb-base',
+  extends: ['airbnb-base', 'plugin:@typescript-eslint/recommended'],
+  plugins: ['@typescript-eslint'],
   overrides: [
   ],
   parserOptions: {
@@ -13,5 +14,6 @@ module.exports = {
     sourceType: 'module',
   },
   rules: {
+    'lines-between-class-members': 'off',
   },
 };
