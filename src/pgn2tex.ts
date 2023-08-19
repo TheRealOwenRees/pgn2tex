@@ -20,7 +20,7 @@ class Pgn2Tex {
     this.pgn = pgn;
     this.diagrams = diagrams;
     this.game = parseGame(this.pgn);
-    this.moveStr = ''; // TODO consider moving inside of toTex() and returning from each method instead of concatenating the string directly
+    this.moveStr = '';
     this.header = this.game.tags;
     this.texStart = `\\documentclass{article}\\usepackage{xskak}\\usepackage{multicol}\\usepackage[a4paper]{geometry}\\usepackage{parskip}\\geometry{left=1.25cm,right=1.25cm,top=1.5cm,bottom=1.5cm,columnsep=1.2cm}\\setlength{\\parindent}{0pt}\\title{${this.header?.White} (${this.header?.WhiteElo}) - ${this.header?.Black} (${this.header?.BlackElo})}\\date{${this.header?.Date.value}, ${this.header?.Site}}\\author{${this.header?.Event}}\\begin{document}\\begin{multicols}{2}\\maketitle\\newchessgame`;
     this.texEnd = '\n\\end{multicols}\\end{document}';
@@ -36,7 +36,6 @@ class Pgn2Tex {
     this.moveStr += `\\textbf{${move.notation.notation}} `;
   }
 
-  // TODO write commentsBefore method
   private commentsAfter(move: PgnMove) {
     if (move.commentAfter) {
       this.moveStr += `\\newline ${move.commentAfter.trim()} \\par `;
@@ -47,7 +46,7 @@ class Pgn2Tex {
   private diagram(move: PgnMove, index: number) {
     const diagramExists = this.diagrams.find((x) => x.ply === index + 1);
     if (diagramExists) {
-      this.moveStr += `\\par\\chessboard[setfen=${diagramExists.fen}]\\par `; // TODO check if the diagram was at the last move
+      this.moveStr += `\\par\\chessboard[setfen=${diagramExists.fen}]\\par `;
       this.addThreeDots(move);
     }
   }
