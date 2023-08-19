@@ -5,16 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0670ff51-0caf-4565-b19a-4f74931eabb6" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/jest.config.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pgn2tex.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/tests/pgn2tex.test.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eslintrc.js" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintrc.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pgn2tex.js" beforeDir="false" afterPath="$PROJECT_DIR$/old.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/pgn2tex.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/pgn2tex_helper.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pgn2tex.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/pgn2tex.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tests/pgn2tex.test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/pgn2tex.test.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -191,7 +185,7 @@
       <workItem from="1683010501151" duration="2908000" />
       <workItem from="1683033280191" duration="389000" />
       <workItem from="1683033679054" duration="1350000" />
-      <workItem from="1692381599591" duration="5988000" />
+      <workItem from="1692381599591" duration="15623000" />
     </task>
     <servers />
   </component>
