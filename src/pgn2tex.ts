@@ -20,7 +20,7 @@ class Pgn2Tex {
     this.pgn = pgn;
     this.diagrams = diagrams;
     this.game = parseGame(this.pgn);
-    this.moveStr = ''; // TODO consider moving inside of toTex() and returning from each method instead of writing here
+    this.moveStr = ''; // TODO consider moving inside of toTex() and returning from each method instead of concatenating the string directly
     this.header = this.game.tags;
     this.texStart = `\\documentclass{article}\\usepackage{xskak}\\usepackage{multicol}\\usepackage[a4paper]{geometry}\\usepackage{parskip}\\geometry{left=1.25cm,right=1.25cm,top=1.5cm,bottom=1.5cm,columnsep=1.2cm}\\setlength{\\parindent}{0pt}\\title{${this.header?.White} (${this.header?.WhiteElo}) - ${this.header?.Black} (${this.header?.BlackElo})}\\date{${this.header?.Date.value}, ${this.header?.Site}}\\author{${this.header?.Event}}\\begin{document}\\begin{multicols}{2}\\maketitle\\newchessgame`;
     this.texEnd = '\n\\end{multicols}\\end{document}';
@@ -52,49 +52,28 @@ class Pgn2Tex {
     }
   }
 
-  private variations(move: PgnMove) {
-    const writeVariations = (currentMove: PgnMove, index: number) => {
-      let result = '';
-      if (currentMove.turn === 'b' && index === 0) result += '...';
-      if (currentMove.turn === 'w') result += `${currentMove.moveNumber}.`;
-      result += `${currentMove.notation.notation} `;
-      return result;
-    };
-    let variationString = '(';
-    // variation depth 1
+  private variations(move: PgnMove, depth: number = 1): string {
+    let variationString = '';
+
     if (move.variations.length > 0) {
-      move.variations.forEach((variationDepth1) => {
-        variationDepth1.forEach((moveDepth1, indexDepth1) => {
-          variationString += writeVariations(moveDepth1, indexDepth1);
-          // variation depth 2
-          if (moveDepth1.variations.length > 0) {
-            moveDepth1.variations.forEach((variationDepth2) => {
-              variationString += '(';
-              variationDepth2.forEach((moveDepth2, indexDepth2) => {
-                variationString += writeVariations(moveDepth2, indexDepth2);
-                // variation depth 3
-                if (moveDepth2.variations.length > 0) {
-                  moveDepth2.variations.forEach((variationDepth3) => {
-                    variationString += '(';
-                    variationDepth3.forEach((moveDepth3, indexDepth3) => {
-                      variationString += writeVariations(
-                        moveDepth3,
-                        indexDepth3,
-                      );
-                    });
-                    variationString = `${variationString.trim()}) `;
-                  });
-                }
-              });
-              variationString = `${variationString.trim()}) `;
-            });
-          }
+      move.variations.forEach((variation) => {
+        variationString += '(';
+        variation.forEach((varMove, varIndex) => {
+          const dots = varMove.turn === 'b' && varIndex === 0 ? '...' : '';
+          const moveNumber = varMove.turn === 'w' ? `${varMove.moveNumber}.` : '';
+          variationString += `${dots}${moveNumber}${varMove.notation.notation} `;
+          variationString += this.variations(varMove, depth + 1);
         });
-        variationString = `${variationString.trim()}`;
+        variationString = `${variationString.trim()}) `;
       });
-      this.moveStr += `${variationString.trim()}) `;
-      this.addThreeDots(move);
+
+      if (depth === 1) {
+        this.moveStr += `${variationString.trim()} `;
+        this.addThreeDots(move);
+      }
     }
+
+    return variationString.trim();
   }
 
   private format() {
