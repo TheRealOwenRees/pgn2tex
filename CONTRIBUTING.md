@@ -6,6 +6,6 @@ If you are wanting to tackle one of the pre-existing issues, please comment on t
 Alternatively, just send a PR and I will check it asap. Please bear in mind that I may not be reactive if I was not expecting a PR.
 
 ## Guidelines
-- Commit and push your work on a new branch that is self-explanatory. `feature/comments-before-moves` would be a good example.
-- Write good commit messages
+- Commit and push your work on a new branch that is self-explanatory. `feature/comments-before-moves` would be a good example
+- Write good commit messages. These are for my benefit, as the PR will be rebased onto the main branch anyway
 - Explain the changes in the PR comments
