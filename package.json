@@ -1,6 +1,6 @@
 {
   "name": "pgn2tex",
-  "version": "0.1.0",
+  "version": "0.2.1",
   "description": "PGN to TeX converter.",
   "keywords": [
     "chess",
