@@ -2,5 +2,5 @@
 
 ## v0.2
 - this changelog file was added
-- codebase rewritten using classes
+- codebase rewritten using OOP and Typescript
 - variations method cleaned up, now using recursion instead of nested statements
