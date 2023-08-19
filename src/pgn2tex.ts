@@ -1,4 +1,5 @@
-import { parse } from '@mliebelt/pgn-parser';
+import { parseGame, ParseTree } from '@mliebelt/pgn-parser';
+import type { PgnMove, Tags } from '@mliebelt/pgn-parser';
 
 interface Diagram {
   ply: number;
@@ -8,52 +9,42 @@ interface Diagram {
 class Pgn2Tex {
   private readonly pgn: string;
   private diagrams: Diagram[];
-  private readonly game: any;
+  private readonly game: ParseTree;
   private moveStr: string;
-  private texStart: string;
-  private texEnd: string;
+  private readonly texStart: string;
+  private readonly texEnd: string;
+  private readonly header: Tags | undefined;
+  private moves: PgnMove[];
 
   constructor(pgn: string, diagrams: Diagram[]) {
     this.pgn = pgn;
     this.diagrams = diagrams;
-    this.game = parse(this.pgn, { startRule: 'game' });
-    this.moveStr = '';
-    this.texStart = '';
-    this.texEnd = '';
-    this.init();
-  }
-
-  private init() {
-    const header = this.game.tags;
-    const { moves } = this.game;
-    this.texStart = `\\documentclass{article}\\usepackage{xskak}\\usepackage{multicol}\\usepackage[a4paper]{geometry}\\usepackage{parskip}\\geometry{left=1.25cm,right=1.25cm,top=1.5cm,bottom=1.5cm,columnsep=1.2cm}\\setlength{\\parindent}{0pt}\\title{${header.White} (${header.WhiteElo}) - ${header.Black} (${header.BlackElo})}\\date{${header.Date.value}, ${header.Site}}\\author{${header.Event}}\\begin{document}\\begin{multicols}{2}\\maketitle\\newchessgame`;
+    this.game = parseGame(this.pgn);
+    this.moveStr = ''; // TODO consider moving inside of toTex() and returning from each method instead of writing here
+    this.header = this.game.tags;
+    this.texStart = `\\documentclass{article}\\usepackage{xskak}\\usepackage{multicol}\\usepackage[a4paper]{geometry}\\usepackage{parskip}\\geometry{left=1.25cm,right=1.25cm,top=1.5cm,bottom=1.5cm,columnsep=1.2cm}\\setlength{\\parindent}{0pt}\\title{${this.header?.White} (${this.header?.WhiteElo}) - ${this.header?.Black} (${this.header?.BlackElo})}\\date{${this.header?.Date.value}, ${this.header?.Site}}\\author{${this.header?.Event}}\\begin{document}\\begin{multicols}{2}\\maketitle\\newchessgame`;
     this.texEnd = '\n\\end{multicols}\\end{document}';
-    this.movesToText(moves);
+    this.moves = this.game.moves;
   }
 
-  private formatString() {
-    this.moveStr += `\\textbf{${this.game.tags.Result}}`;
-    this.moveStr.replaceAll(/#/g, '\\#');
-  }
-
-  private addThreeDots(move) {
+  private addThreeDots(move: PgnMove) {
     if (move.turn === 'w') this.moveStr += `\\textbf{${move.moveNumber}...}`;
   }
 
-  private sideToMove(move) {
+  private sideToMove(move: PgnMove) {
     if (move.turn === 'w') this.moveStr += `\\textbf{${move.moveNumber}.}`;
     this.moveStr += `\\textbf{${move.notation.notation}} `;
   }
 
   // TODO write commentsBefore method
-  private commentsAfter(move) {
+  private commentsAfter(move: PgnMove) {
     if (move.commentAfter) {
       this.moveStr += `\\newline ${move.commentAfter.trim()} \\par `;
       this.addThreeDots(move);
     }
   }
 
-  private diagram(move, index: number) {
+  private diagram(move: PgnMove, index: number) {
     const diagramExists = this.diagrams.find((x) => x.ply === index + 1);
     if (diagramExists) {
       this.moveStr += `\\par\\chessboard[setfen=${diagramExists.fen}]\\par `; // TODO check if the diagram was at the last move
@@ -61,8 +52,8 @@ class Pgn2Tex {
     }
   }
 
-  private variations(move) {
-    const writeVariations = (currentMove, index) => {
+  private variations(move: PgnMove) {
+    const writeVariations = (currentMove: PgnMove, index: number) => {
       let result = '';
       if (currentMove.turn === 'b' && index === 0) result += '...';
       if (currentMove.turn === 'w') result += `${currentMove.moveNumber}.`;
@@ -106,19 +97,20 @@ class Pgn2Tex {
     }
   }
 
-  private movesToText(moves) {
-    moves.forEach((move, index: number) => {
+  private format() {
+    this.moveStr += `\\textbf{${this.header?.Result}}`;
+    this.moveStr.replaceAll(/#/g, '\\#');
+  }
+
+  public toTex() {
+    this.moves.forEach((move, index) => {
       this.sideToMove(move);
       this.commentsAfter(move);
       this.diagram(move, index);
       this.variations(move);
-      this.formatString();
     });
-  }
-
-  public toTex() {
+    this.format();
     return `${this.texStart}${this.moveStr}${this.texEnd}`;
-    // TODO reduce/remove or call init() because this method should now start the conversion
   }
 }
 
