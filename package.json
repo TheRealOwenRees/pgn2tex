@@ -9,6 +9,9 @@
     "latex"
   ],
   "main": "pgn2tex.js",
+  "engines": {
+    "node": "18.17.1"
+  },
   "scripts": {
     "start": "node dist/pgn2tex.js",
     "lint": "eslint . --ext .js --fix",
