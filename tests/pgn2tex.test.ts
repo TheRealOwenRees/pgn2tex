@@ -1,5 +1,5 @@
 import { pgn, diagrams } from './pgn2tex_helper';
-import Pgn2Tex from '../pgn2tex';
+import Pgn2Tex from '../src/pgn2tex';
 
 describe('Pgn2Tex Class', () => {
   test('should create Pgn2Tex instance', () => {

@@ -33,16 +33,13 @@ In order to render the output in a LaTeX based program, you need to have the `xs
 
 # Limitations
 At present the following limitations / issues exist:
-- nested variations have a maximum depth of 3. This is currently written in nested hell, but will be rewritten recusively once I can figure out how to correctly place the variation parenthesis
 - comments are only shown if they are after the move
 - variation comments are not shown
 
 These issues are a priority for future versions.
 
 ## Contributing
-Yes please. Contributions are always welcome. Please work from the `develop` branch.
-
-Please open an issue to discuss.
+Contributions are always welcome. Please see the [contribution guidelines](https://github.com/TheRealOwenRees/pgn2tex/blob/main/CONTRIBUTING.md).
 
 ## License
 [GPL-3.0](https://choosealicense.com/licenses/gpl-3.0/)
