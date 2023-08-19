@@ -42,4 +42,4 @@ These issues are a priority for future versions.
 Contributions are always welcome. Please see the [contribution guidelines](https://github.com/TheRealOwenRees/pgn2tex/blob/main/CONTRIBUTING.md).
 
 ## License
-[GPL-3.0](https://choosealicense.com/licenses/gpl-3.0/)
+[Apache Licence 2.0](https://choosealicense.com/licenses/apache-2.0/)
