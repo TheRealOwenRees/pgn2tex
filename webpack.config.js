@@ -1,4 +1,6 @@
-// Generated using webpack-cli https://github.com/webpack/webpack-cli
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const path = require('path');
 
@@ -9,7 +11,7 @@ const config = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     chunkFilename: '[name].js',
-    filename: '[name].js',
+    filename: 'pgn2tex.js',
   },
   devServer: {
     open: true,
@@ -17,8 +19,13 @@ const config = {
   },
   devtool: 'source-map',
   plugins: [
-    // Add your plugins here
-    // Learn more about plugins from https://webpack.js.org/configuration/plugins/
+    new CleanWebpackPlugin(),
+    new CopyWebpackPlugin({
+      patterns: [
+        { from: './src/package.json', to: '../dist/package.json' },
+        { from: './src/pgn2tex.d.ts', to: '../dist/pgn2tex.d.ts' },
+      ],
+    }),
   ],
   module: {
     rules: [

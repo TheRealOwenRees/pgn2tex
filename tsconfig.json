@@ -6,7 +6,8 @@
     "target": "es5",
     "lib": ["es2021"],
     "allowJs": false,
-    "moduleResolution": "NodeNext"
+    "moduleResolution": "NodeNext",
+    "declaration": true
   },
-  "files": ["src/pgn2tex.ts"]
+  "files": ["src/pgn2tex.ts"],
 }

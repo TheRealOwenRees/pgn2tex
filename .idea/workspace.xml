@@ -5,17 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0670ff51-0caf-4565-b19a-4f74931eabb6" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/lib/pgn2tex.d.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/CHANGELOG.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/pgn2tex.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/pgn2tex.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/main.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/main.js.map" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/pgn2tex.d.ts" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pgn2tex.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/pgn2tex.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/pgn2tex.test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/tests/pgn2tex.test.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webpack.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.config.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,7 +97,7 @@
     "git-widget-placeholder": "release/v0.2.1",
     "go.import.settings.migrated": "true",
     "js.linters.configure.manually.selectedeslint": "true",
-    "last_opened_file_path": "/home/owen/Dropbox/Coding Projects/JS/pgn2tex",
+    "last_opened_file_path": "/media/owen/Mint Data/Projects/pgn2tex/src",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.standard": "true",
     "node.js.detected.package.tslint": "true",
@@ -114,6 +113,9 @@
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src" />
       <recent name="$PROJECT_DIR$" />
@@ -210,7 +212,7 @@
       <workItem from="1692514482307" duration="1323000" />
       <workItem from="1692520993882" duration="509000" />
       <workItem from="1692521644867" duration="775000" />
-      <workItem from="1692522509769" duration="508000" />
+      <workItem from="1692522509769" duration="2866000" />
     </task>
     <servers />
   </component>
@@ -222,6 +224,8 @@
         <option value="$PROJECT_DIR$/tests/pgn2tex.test.js" />
         <option value="$PROJECT_DIR$/tests/pgn2tex_helper.js.map" />
         <option value="$PROJECT_DIR$/tests/pgn2tex_helper.js" />
+        <option value="$PROJECT_DIR$/src/pgn2tex.d.ts" />
+        <option value="$PROJECT_DIR$/src/pgn2tex.d.ts" />
       </list>
     </option>
   </component>
