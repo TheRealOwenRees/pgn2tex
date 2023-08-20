@@ -5,11 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0670ff51-0caf-4565-b19a-4f74931eabb6" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.npmignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webpack.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.config.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,6 +27,41 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitToolBoxStore">
+    <option name="branchesCleanupHistory">
+      <BranchesCleanupHistory>
+        <option name="history">
+          <list>
+            <BranchCleanupEntry>
+              <option name="deletions">
+                <list>
+                  <BranchDeletion>
+                    <option name="hash" value="f153b380f666fe90b1a546ade1adfcb68fc4d539" />
+                    <option name="name" value="hotfix/license" />
+                  </BranchDeletion>
+                  <BranchDeletion>
+                    <option name="hash" value="02ba797c6f5bae990002e9bfc2c8e16a028ce1b4" />
+                    <option name="name" value="release/v0.2.1" />
+                  </BranchDeletion>
+                  <BranchDeletion>
+                    <option name="hash" value="a344c7d03eb81735f73d1db2a1b9953cdac3a256" />
+                    <option name="name" value="hotfix/readme" />
+                  </BranchDeletion>
+                  <BranchDeletion>
+                    <option name="hash" value="761dc816e4582632d6fe1ed738802a4b083aa172" />
+                    <option name="name" value="v0.2.1" />
+                  </BranchDeletion>
+                  <BranchDeletion>
+                    <option name="hash" value="e20e3d81ed250dff7bd68ce25238fa9569e99935" />
+                    <option name="name" value="rewrite" />
+                  </BranchDeletion>
+                </list>
+              </option>
+              <option name="timestamp" value="1692567406921" />
+            </BranchCleanupEntry>
+          </list>
+        </option>
+      </BranchesCleanupHistory>
+    </option>
     <option name="recentBranches">
       <RecentBranches>
         <option name="branchesForRepo">
