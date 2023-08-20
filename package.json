@@ -2,6 +2,9 @@
   "name": "pgn2tex",
   "version": "0.2.0",
   "description": "PGN to TeX converter",
+  "author": "Owen Rees <owenrees@tutanota.com>",
+  "license": "Apache-2.0",
+  "main": "pgn2tex.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/TheRealOwenRees/pgn2tex.git"
@@ -12,9 +15,11 @@
     "tex",
     "latex"
   ],
-  "main": "pgn2tex.js",
   "engines": {
     "node": "^18.0.0"
+  },
+  "np": {
+    "contents": "dist"
   },
   "scripts": {
     "start": "node dist/index.js",
@@ -26,8 +31,6 @@
     "watch": "webpack --watch",
     "serve": "webpack serve"
   },
-  "author": "Owen Rees <owenrees@tutanota.com>",
-  "license": "Apache-2.0",
   "dependencies": {
     "@mliebelt/pgn-parser": "^1.4.5"
   },
