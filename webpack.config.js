@@ -23,6 +23,7 @@ const config = {
       patterns: [
         { from: './src/package.json', to: '../dist/package.json' },
         { from: './src/index.d.ts', to: '../dist/index.d.ts' },
+        { from: './README.md', to: '../dist/README.md' },
       ],
     }),
   ],
