@@ -1,6 +1,10 @@
 import { parseGame, ParseTree } from '@mliebelt/pgn-parser';
 import type { PgnMove, Tags } from '@mliebelt/pgn-parser';
-import type { Diagram } from './lib/pgn2tex';
+
+interface Diagram {
+  ply: number;
+  fen: string;
+}
 
 class Pgn2tex {
   private readonly pgn: string;
