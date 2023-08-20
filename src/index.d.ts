@@ -2,7 +2,7 @@ interface Diagram {
     ply: number;
     fen: string;
 }
-declare class Pgn2tex {
+declare class Index {
     private readonly pgn;
     private diagrams;
     private readonly game;
@@ -20,4 +20,4 @@ declare class Pgn2tex {
     private format;
     toTex(): string;
 }
-export default Pgn2tex;
+export default Index;

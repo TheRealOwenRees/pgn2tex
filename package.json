@@ -10,13 +10,13 @@
   ],
   "main": "pgn2tex.js",
   "engines": {
-    "node": "18.17.1"
+    "node": "^18.0.0"
   },
   "scripts": {
-    "start": "node dist/pgn2tex.js",
+    "start": "node dist/index.js",
     "lint": "eslint . --ext .js --fix",
     "test": "jest",
-    "build": "webpack --mode=production --node-env=production",
+    "build": "npx tsc && webpack --mode=production --node-env=production",
     "build:dev": "webpack --mode=development",
     "build:prod": "webpack --mode=production --node-env=production",
     "watch": "webpack --watch",

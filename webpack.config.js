@@ -7,11 +7,10 @@ const path = require('path');
 const isProduction = process.env.NODE_ENV == 'production';
 
 const config = {
-  entry: './src/pgn2tex.ts',
+  entry: './src/index.ts',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    chunkFilename: '[name].js',
-    filename: 'pgn2tex.js',
+    filename: 'index.js',
   },
   devServer: {
     open: true,
@@ -23,7 +22,7 @@ const config = {
     new CopyWebpackPlugin({
       patterns: [
         { from: './src/package.json', to: '../dist/package.json' },
-        { from: './src/pgn2tex.d.ts', to: '../dist/pgn2tex.d.ts' },
+        { from: './src/index.d.ts', to: '../dist/index.d.ts' },
       ],
     }),
   ],
