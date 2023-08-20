@@ -5,8 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0670ff51-0caf-4565-b19a-4f74931eabb6" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/lib/pgn2tex.d.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/CHANGELOG.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/pgn2tex.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/pgn2tex.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pgn2tex.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/pgn2tex.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/pgn2tex.test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/tests/pgn2tex.test.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,8 +43,16 @@
               <option name="branches">
                 <list>
                   <RecentBranch>
+                    <option name="branchName" value="release/v0.2.1" />
+                    <option name="lastUsedInstant" value="1692523001" />
+                  </RecentBranch>
+                  <RecentBranch>
                     <option name="branchName" value="main" />
-                    <option name="lastUsedInstant" value="1692477401" />
+                    <option name="lastUsedInstant" value="1692522970" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="v0.2.1" />
+                    <option name="lastUsedInstant" value="1692522952" />
                   </RecentBranch>
                   <RecentBranch>
                     <option name="branchName" value="hotfix/license" />
@@ -44,10 +61,6 @@
                   <RecentBranch>
                     <option name="branchName" value="hotfix/readme" />
                     <option name="lastUsedInstant" value="1692475282" />
-                  </RecentBranch>
-                  <RecentBranch>
-                    <option name="branchName" value="rewrite" />
-                    <option name="lastUsedInstant" value="1692381708" />
                   </RecentBranch>
                 </list>
               </option>
@@ -82,7 +95,7 @@
     "RunOnceActivity.go.formatter.settings.were.checked": "true",
     "RunOnceActivity.go.migrated.go.modules.settings": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "release/v0.2.1",
     "go.import.settings.migrated": "true",
     "js.linters.configure.manually.selectedeslint": "true",
     "last_opened_file_path": "/home/owen/Dropbox/Coding Projects/JS/pgn2tex",
@@ -96,14 +109,14 @@
     "nodejs_package_manager_path": "npm",
     "org.elm.workspace.PROJECT_DISCOVERY": "true",
     "settings.editor.selected.configurable": "settings.javascript.linters.eslint",
-    "ts.external.directory.path": "/home/owen/.local/share/JetBrains/Toolbox/apps/IDEA-U/ch-0/231.9225.16/plugins/javascript-impl/jsLanguageServicesImpl/external",
+    "ts.external.directory.path": "/media/owen/Mint Data/Projects/pgn2tex/node_modules/typescript/lib",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/src" />
+      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/tests" />
     </key>
   </component>
@@ -194,6 +207,10 @@
       <workItem from="1692381599591" duration="19046000" />
       <workItem from="1692467284278" duration="1253000" />
       <workItem from="1692468557432" duration="5571000" />
+      <workItem from="1692514482307" duration="1323000" />
+      <workItem from="1692520993882" duration="509000" />
+      <workItem from="1692521644867" duration="775000" />
+      <workItem from="1692522509769" duration="508000" />
     </task>
     <servers />
   </component>
