@@ -9,5 +9,5 @@
     "moduleResolution": "NodeNext",
     "declaration": true
   },
-  "files": ["src/pgn2tex.ts"],
+  "files": ["src/index.ts"],
 }

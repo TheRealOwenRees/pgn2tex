@@ -1,10 +1,10 @@
 import { pgn, diagrams } from './pgn2tex_helper';
-import Pgn2tex from '../src/pgn2tex';
+import Index from '../src/index';
 
 describe('Pgn2Tex Class', () => {
   test('should create Pgn2Tex instance', () => {
-    const pgn2Tex = new Pgn2tex(pgn, diagrams);
-    expect(pgn2Tex).toBeInstanceOf(Pgn2tex);
+    const pgn2Tex = new Index(pgn, diagrams);
+    expect(pgn2Tex).toBeInstanceOf(Index);
   });
 
   // Add more test class/instance tests here
@@ -12,7 +12,7 @@ describe('Pgn2Tex Class', () => {
 
 describe('Example game', () => {
   test('console.log tex', () => {
-    const pgn2tex = new Pgn2tex(pgn, diagrams);
+    const pgn2tex = new Index(pgn, diagrams);
     console.log(pgn2tex.toTex());
   });
 });

@@ -1,1 +1,0 @@
-{"version":3,"file":"pgn2tex_helper.js","sourceRoot":"","sources":["pgn2tex_helper.ts"],"names":[],"mappings":";;;AAAa,QAAA,GAAG,GAAG;;;;;;;;;;;;;;8iFAc2hF,CAAC;AAEliF,QAAA,QAAQ,GAAG;IACtB;QACE,GAAG,EAAE,CAAC;QACN,GAAG,EAAE,oEAAoE;KAC1E;IACD;QACE,GAAG,EAAE,EAAE;QACP,GAAG,EAAE,qEAAqE;KAC3E;CACF,CAAC"}

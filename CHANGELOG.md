@@ -3,7 +3,6 @@
 ## v0.2.1 (in progress)
 - pgn2tex.d.ts added
 - Minification of JavaScript on build
-- Updated README with better instructions
 
 ## v0.2.0
 - this changelog file was added

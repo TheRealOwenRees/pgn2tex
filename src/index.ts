@@ -6,7 +6,7 @@ interface Diagram {
   fen: string;
 }
 
-class Pgn2tex {
+class Index {
   private readonly pgn: string;
   private diagrams: Diagram[];
   private readonly game: ParseTree;
@@ -92,4 +92,4 @@ class Pgn2tex {
   }
 }
 
-export default Pgn2tex;
+export default Index;
