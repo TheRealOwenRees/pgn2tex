@@ -2,6 +2,10 @@
   "name": "pgn2tex",
   "version": "0.2.0",
   "description": "PGN to TeX converter",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TheRealOwenRees/pgn2tex.git"
+  },
   "keywords": [
     "chess",
     "pgn",
