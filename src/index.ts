@@ -1,12 +1,12 @@
 import { parseGame, ParseTree } from '@mliebelt/pgn-parser';
-import type { PgnMove, Tags } from '@mliebelt/pgn-parser';
+import type { PgnMove, Tags } from '@mliebelt/pgn-types';
 
-interface Diagram {
+export interface Diagram {
   ply: number;
   fen: string;
 }
 
-class Index {
+export default class Pgn2Tex {
   private readonly pgn: string;
   private diagrams: Diagram[];
   private readonly game: ParseTree;
@@ -55,7 +55,7 @@ class Index {
     let variationString = '';
 
     if (move.variations.length > 0) {
-      move.variations.forEach((variation) => {
+      move.variations.forEach((variation: PgnMove[]) => {
         variationString += '(';
         variation.forEach((varMove, varIndex) => {
           const dots = varMove.turn === 'b' && varIndex === 0 ? '...' : '';
@@ -77,7 +77,7 @@ class Index {
 
   private format() {
     this.moveStr += `\\textbf{${this.header?.Result}}`;
-    this.moveStr.replaceAll(/#/g, '\\#');
+    this.moveStr = this.moveStr.replaceAll(/#/g, '\\#');
   }
 
   public toTex() {
@@ -91,5 +91,3 @@ class Index {
     return `${this.texStart}${this.moveStr}${this.texEnd}`;
   }
 }
-
-export default Index;
