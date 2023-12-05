@@ -1,6 +1,7 @@
 import { parseGame, ParseTree } from '@mliebelt/pgn-parser';
 import type { PgnMove, Tags } from '@mliebelt/pgn-types';
 
+// TODO add error handling
 export interface Diagram {
   ply: number;
   fen: string;
