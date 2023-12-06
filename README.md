@@ -1,9 +1,21 @@
 # PGN to TeX
 
-This is the project that powers the PGN to TeX string conversion for [chess-pdf-api](https://github.com/TheRealOwenRees/chess-pdf-api).
-It is currently assimilated into that project and will be released as an NPM package in the near future.
+This is the project that powers the PGN to TeX string conversion for [chess-pdf-api](https://github.com/TheRealOwenRees/chess-pdf-api). It can be found on NPM as [owenrees/pgn2tex](https://www.npmjs.com/package/@owenrees/pgn2tex?activeTab=readme).
+
+## Install
+Install the NPM package as a dependency:
+```bash
+npm install owenrees/pgn2tex --save
+```
+
+Import it into your project:
+```js
+import Pgn2Tex from '@owenrees/pgn2tex';
+```
 
 ## Reference
+
+The Pgn2Tex class exposes a single method: `toTex()`. This method will convert the arguments provided to the constructor into a TeX string.
 
 #### Generate TeX String
 
@@ -73,7 +85,7 @@ On success, a TeX string is returned. Eg.
  \end{document}
 ```
 
-If you are using a custom TexLive server to generate a PDF from this string, you must ensure that the following packages are installed:
+If you are using a custom TexLive server to generate a PDF from a string, you must ensure that the following packages are installed:
 
 - parskip 
 - pgf 
