@@ -1,7 +1,6 @@
 import { parseGame, ParseTree } from '@mliebelt/pgn-parser';
 import type { PgnMove, Tags } from '@mliebelt/pgn-types';
 
-// TODO add error handling
 export interface Diagram {
   ply: number;
   fen: string;
@@ -16,8 +15,9 @@ export default class Pgn2Tex {
   private readonly texEnd: string;
   private readonly header: Tags | undefined;
   private moves: PgnMove[];
+  private readonly diagramClock: boolean;
 
-  constructor(pgn: string, diagrams: Diagram[]) {
+  constructor(pgn: string, diagrams: Diagram[], diagramClock: boolean = false) {
     this.pgn = pgn;
     this.diagrams = diagrams;
     this.game = parseGame(this.pgn);
@@ -26,6 +26,7 @@ export default class Pgn2Tex {
     this.texStart = `\\documentclass{article}\\usepackage{xskak}\\usepackage{multicol}\\usepackage[a4paper]{geometry}\\usepackage{parskip}\\geometry{left=1.25cm,right=1.25cm,top=1.5cm,bottom=1.5cm,columnsep=1.2cm}\\setlength{\\parindent}{0pt}\\title{${this.header?.White} (${this.header?.WhiteElo}) - ${this.header?.Black} (${this.header?.BlackElo})}\\date{${this.header?.Date.value}, ${this.header?.Site}}\\author{${this.header?.Event}}\\begin{document}\\begin{multicols}{2}\\maketitle\\newchessgame`;
     this.texEnd = '\n\\end{multicols}\\end{document}';
     this.moves = this.game.moves;
+    this.diagramClock = diagramClock;
   }
 
   private addThreeDots(move: PgnMove) {
@@ -44,9 +45,28 @@ export default class Pgn2Tex {
     }
   }
 
+  private moveTime(move: PgnMove) {
+    if (!this.diagramClock) return { whiteTime: null, blackTime: null };
+    try {
+      const { moveNumber } = move;
+      const moveClock = this.game.moves[moveNumber].commentDiag.clk;
+      const previousMoveClock = this.game.moves[moveNumber - 1].commentDiag.clk;
+      const whiteTime = move.turn === 'w' ? moveClock : previousMoveClock;
+      const blackTime = move.turn === 'b' ? moveClock : previousMoveClock;
+      return { whiteTime, blackTime };
+    } catch {
+      return { whiteTime: null, blackTime: null };
+    }
+  }
+
   private diagram(move: PgnMove, index: number) {
     const diagramExists = this.diagrams.find((x) => x.ply === index + 1);
-    if (diagramExists) {
+    const { whiteTime, blackTime } = this.moveTime(move);
+
+    if (whiteTime && blackTime && diagramExists) {
+      this.moveStr += `\\par\\nobreak\\textbf{${blackTime}}\\par\\nobreak\\chessboard[setfen=${diagramExists.fen}, vmargin=false]\\par\\nobreak\\vspace{1mm}\\nobreak\\textbf{${whiteTime}}\\par`;
+      this.addThreeDots(move);
+    } else if (diagramExists) {
       this.moveStr += `\\par\\chessboard[setfen=${diagramExists.fen}]\\par `;
       this.addThreeDots(move);
     }
