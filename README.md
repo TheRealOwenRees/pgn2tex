@@ -21,10 +21,11 @@ The Pgn2Tex class exposes a single method: `toTex()`. This method will convert t
 
 The Pgn2Tex class is used to generate a TeX string from a PGN file. It takes two arguments:
 
-| Parameter  | Type     | Description                                                                                                                                                                                          |
-|-----------|-----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `pgn`      | `string` | **Required**. A valid PGN of a chess game.                                                                                                                                                           |
-| `diagrams` | `array`  | An array of objects, containing:<br/> - `ply`(integer): The move ply for a chess diagram.<br/> - `fen`(string): A FEN of the board position, for rendering the correct diagram at the ply specified. |
+| Parameter      | Type      | Description                                                                                                                                                                                          |
+|----------------|-----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `pgn`          | `string`  | **Required**. A valid PGN of a chess game.                                                                                                                                                           |
+| `diagrams`     | `array`   | An array of objects, containing:<br/> - `ply`(integer): The move ply for a chess diagram.<br/> - `fen`(string): A FEN of the board position, for rendering the correct diagram at the ply specified. |
+| `diagramClock` | `boolean` | Display move times above and below the chessboard. Default is `false`.                                                                                                                               |
 
 The `diagrams` parameter is optional, and if not provided, the TeX string will not contain any diagrams.
 
