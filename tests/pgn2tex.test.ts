@@ -1,18 +1,25 @@
-import { pgn, diagrams } from './pgn2tex_helper';
-import Index from '../src/index';
+import { pgn, pgnMoveTimes, diagrams } from './pgn2tex_helper';
+import Pgn2Tex from '../src/index';
 
 describe('Pgn2Tex Class', () => {
   test('should create Pgn2Tex instance', () => {
-    const pgn2Tex = new Index(pgn, diagrams);
-    expect(pgn2Tex).toBeInstanceOf(Index);
+    const pgn2Tex = new Pgn2Tex(pgn, diagrams);
+    expect(pgn2Tex).toBeInstanceOf(Pgn2Tex);
   });
-
-  // Add more test class/instance tests here
 });
 
 describe('Example game', () => {
-  test('console.log tex', () => {
-    const pgn2tex = new Index(pgn, diagrams);
-    console.log(pgn2tex.toTex());
+  it('renders board without move times', () => {
+    const pgn2tex = new Pgn2Tex(pgnMoveTimes, diagrams);
+    const texString = pgn2tex.toTex();
+    expect(texString).not.toContain('\\par\\nobreak\\textbf');
+    expect(texString).toContain('\\par\\chessboard[setfen=');
+  });
+
+  it('renders board with move times', () => {
+    const pgn2tex = new Pgn2Tex(pgnMoveTimes, diagrams, true);
+    const texString = pgn2tex.toTex();
+    expect(texString).not.toContain('\\par\\chessboard[setfen=');
+    expect(texString).toContain('\\par\\nobreak\\textbf');
   });
 });

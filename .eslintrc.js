@@ -15,5 +15,7 @@ module.exports = {
   rules: {
     'prettier/prettier': 'error',
     'lines-between-class-members': 'off',
+    'import/extensions': 'off',
+    'import/no-unresolved': 'off',
   },
-}
+};
