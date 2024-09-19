@@ -1,3 +1,6 @@
+## v0.1.1
+
+
 ## v0.1.0
 - Move times displayed at the top and bottom of the chessboard, set with the boolean `diagramClock`
 - Typescript update from 5.1.6 to 5.3.3
