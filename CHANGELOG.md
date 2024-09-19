@@ -1,5 +1,5 @@
 ## v0.1.1
-
+- Sanitise PGN before passing onto the PGN parser. Removes the odd whitespace character '☒' found in one example, and removes comments inside of square brackets which are often square highlights from Chess.com or Lichess. Non-ASCII character removal is on the roadmap.  
 
 ## v0.1.0
 - Move times displayed at the top and bottom of the chessboard, set with the boolean `diagramClock`
