@@ -1,0 +1,18 @@
+[Event "Casual Rapid game"]
+[Site "https://lichess.org/9Z0taHcG"]
+[Date "2023.12.03"]
+[White "montillo2015"]
+[Black "reassessyourchess"]
+[Result "1-0"]
+[UTCDate "2023.12.03"]
+[UTCTime "19:57:32"]
+[WhiteElo "1919"]
+[BlackElo "1869"]
+[Variant "Standard"]
+[TimeControl "600+3"]
+[ECO "D05"]
+[Opening "Queen's Pawn Game: Colle System"]
+[Termination "Normal"]
+[Annotator "lichess.org"]
+
+1. d4 { [%clk 0:10:00] } 1... Nf6 { [%clk 0:10:00] } 2. Nf3 { [%clk 0:10:00] } 2... d5 { [%clk 0:10:01] } 3. e3 { [%clk 0:10:01] } 3... e6 { [%clk 0:10:02] } { D05 Queen's Pawn Game: Colle System } 4. a3 { [%clk 0:10:01] } 4... c5 { [%clk 0:10:02] } 5. c4 { [%clk 0:10:02] } 5... Nc6 { [%clk 0:10:04] } 6. dxc5 { [%clk 0:10:03] } 6... Bxc5 { [%clk 0:10:01] } 7. b4 { [%clk 0:10:03] } 7... Be7 { [%clk 0:10:00] } 8. Bb2 { [%clk 0:10:04] } 8... dxc4 { [%clk 0:09:56] } 9. Qxd8+ { [%clk 0:10:04] } 9... Nxd8 { [%clk 0:09:57] } 10. Bxc4 { [%clk 0:10:05] } 10... O-O { [%clk 0:09:56] } 11. O-O { [%clk 0:10:06] } 11... a6 { [%clk 0:09:55] } 12. Nc3 { [%clk 0:09:51] } 12... b5 { [%clk 0:09:52] } 13. Be2 { [%clk 0:09:42] } 13... Bb7 { [%clk 0:09:51] } 14. Nd4 { [%clk 0:09:27] } 14... Ne4 { [%clk 0:09:41] } 15. Nxe4 { [%clk 0:09:23] } 15... Bxe4 { [%clk 0:09:42] } 16. Bf3 { [%clk 0:09:24] } 16... Bxf3 { [%clk 0:09:37] } 17. Nxf3 { [%clk 0:09:24] } 17... Nc6 { [%clk 0:09:39] } 18. Rac1 { [%clk 0:09:18] } 18... Rac8 { [%clk 0:09:40] } 19. Rfd1 { [%clk 0:09:19] } 19... Rfd8 { [%clk 0:09:09] } 20. Rxd8+ { [%clk 0:09:14] } 20... Rxd8 { [%clk 0:09:10] } 21. g3 { [%clk 0:08:57] } 21... Nb8 { [%clk 0:09:03] } 22. Rc7 { [%clk 0:08:41] } 22... Bd6 { [%clk 0:08:32] } 23. Rc2 { [%clk 0:07:40] } 23... f6 { [%clk 0:07:52] } 24. Kg2 { [%clk 0:07:05] } 24... e5 { [%clk 0:07:41] } 25. h4 { [%clk 0:06:40] } 25... e4 { [%clk 0:07:41] } 26. Nd4 { [%clk 0:06:34] } 26... Kf7 { [%clk 0:07:26] } 27. Nf5 { [%clk 0:06:13] } 27... Nd7 { [%clk 0:06:42] } 28. Nxd6+ { [%clk 0:06:04] } { Black resigns. } 1-0
