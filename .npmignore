@@ -1,0 +1,11 @@
+# Ignore everything
+*
+
+# Except the dist folder
+!dist/
+
+# Allow specific files
+!README.md
+!CONTRIBUTING.md
+!LICENSE
+!package.json

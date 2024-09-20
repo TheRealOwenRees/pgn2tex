@@ -37,7 +37,9 @@ export default class Pgn2Tex {
    * @private
    */
   private static sanitiseGame(pgn: string) {
-    return pgn.replaceAll('☒', ' ').replaceAll(/(?<=\{)\[[\s\S]*?]\s?/g, '');
+    const whitespaceChars = '☒';
+    const squareBracketComments = /(?<=\{)\[[\s\S]*?]\s?/g;
+    return pgn.replaceAll(whitespaceChars, ' ').replaceAll(squareBracketComments, '');
   }
 
   private addThreeDots(move: PgnMove) {
@@ -112,7 +114,11 @@ export default class Pgn2Tex {
     this.moveStr = this.moveStr.replaceAll(/#/g, '\\#');
   }
 
-  public toTex() {
+  /**
+   * Convert PGN to LaTeX markdown
+   * @returns {string} LaTeX markdown
+   */
+  public toTex(): string {
     this.moves.forEach((move, index) => {
       this.sideToMove(move);
       this.commentsAfter(move);
