@@ -1,6 +1,6 @@
 {
   "name": "@owenrees/pgn2tex",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "PGN to TeX converter",
   "author": "Owen Rees <owenrees@tutanota.com>",
   "license": "Apache-2.0",
@@ -16,7 +16,7 @@
     "latex"
   ],
   "engines": {
-    "node": "^20.10.0"
+    "node": "^20.15.0"
   },
   "dependencies": {
     "@mliebelt/pgn-parser": "^1.4.13"
