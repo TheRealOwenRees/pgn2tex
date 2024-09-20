@@ -1,6 +1,6 @@
 {
   "name": "@owenrees/pgn2tex",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "PGN to TeX converter",
   "author": "Owen Rees <owenrees@tutanota.com>",
   "license": "Apache-2.0",
