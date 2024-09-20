@@ -1,5 +1,4 @@
-
-## v0.1.2
+## v0.1.3
 - Sanitise PGN before passing onto the PGN parser. Removes the odd whitespace character '☒' found in one example, and removes comments inside of square brackets which are often square highlights from Chess.com or Lichess. Non-ASCII character removal is on the roadmap.
 - TSDoc comments added to the public `toTex` method.
 
