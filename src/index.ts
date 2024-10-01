@@ -94,9 +94,17 @@ export default class Pgn2Tex {
         variation.forEach((varMove, varIndex) => {
           const dots = varMove.turn === 'b' && varIndex === 0 ? '...' : '';
           const moveNumber = varMove.turn === 'w' ? `${varMove.moveNumber}.` : '';
+
           variationString += `${dots}${moveNumber}${varMove.notation.notation} `;
+          variationString += varMove.commentAfter ? `\\textit{${varMove.commentAfter.trim()}} ` : '';
           variationString += this.variations(varMove, depth + 1);
         });
+
+        // if the variation starts with a move number, add a space after the closing bracket
+        if (/\)\w/.test(variationString)) {
+          variationString = variationString.replaceAll(/\)(\w)/g, ') $1');
+        }
+
         variationString = `${variationString.trim()}) `;
       });
 
@@ -110,8 +118,9 @@ export default class Pgn2Tex {
   }
 
   private format() {
-    this.moveStr += `\\textbf{${this.header?.Result}}`;
-    this.moveStr = this.moveStr.replaceAll(/#/g, '\\#');
+    this.moveStr += `\\textbf{${this.header?.Result}}`; // add result
+    this.moveStr = this.moveStr.replaceAll(/#/g, '\\#'); // remove TeX special characters
+    this.moveStr = this.moveStr.replace(/ {2,}/g, ' '); // remove double spaces
   }
 
   /**

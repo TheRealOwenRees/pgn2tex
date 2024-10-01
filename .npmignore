@@ -2,7 +2,7 @@
 *
 
 # Except the dist folder
-!dist/
+!dist/*
 
 # Allow specific files
 !README.md
