@@ -90,11 +90,14 @@ export default class Pgn2Tex {
 
     if (move.variations.length > 0) {
       move.variations.forEach((variation: PgnMove[]) => {
+        // console.log(variation);
         variationString += '(';
         variation.forEach((varMove, varIndex) => {
+          // console.log(varMove.commentAfter);
           const dots = varMove.turn === 'b' && varIndex === 0 ? '...' : '';
           const moveNumber = varMove.turn === 'w' ? `${varMove.moveNumber}.` : '';
           variationString += `${dots}${moveNumber}${varMove.notation.notation} `;
+          variationString += varMove.commentAfter ? `\\textit{${varMove.commentAfter.trim()}} ` : '';
           variationString += this.variations(varMove, depth + 1);
         });
         variationString = `${variationString.trim()}) `;

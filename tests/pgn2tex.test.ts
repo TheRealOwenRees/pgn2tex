@@ -16,6 +16,7 @@ describe('Example PGNs', () => {
     const texString = pgn2Tex.toTex();
     expect(texString).not.toContain('\\par\\nobreak\\textbf');
     expect(texString).toContain('\\par\\chessboard[setfen=');
+    console.log(texString);
   });
 
   test('Game 2 - renders board with move times', () => {
