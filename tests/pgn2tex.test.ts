@@ -38,6 +38,7 @@ describe('Example PGNs', () => {
     const pgn = pgnReader('tests/pgn_examples/4.pgn');
     const pgn2Tex = new Pgn2Tex(pgn, diagrams1);
     const texString = pgn2Tex.toTex();
-    console.log(texString);
+    expect(texString).not.toContain('\\par\\nobreak\\textbf');
+    expect(texString).toContain('\\par\\chessboard[setfen=');
   });
 });
