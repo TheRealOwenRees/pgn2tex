@@ -1,0 +1,120 @@
+[Event "Obert Barad 2024"]
+[Site "Terrassa"]
+[Date ""]
+[Round "1"]
+[White "Alejandro Fernandez Cardenete"]
+[Black "Joan Amat Iglesis"]
+[Result "0-1"]
+[ECO ""]
+[WhiteElo "1873"]
+[BlackElo "1700"]
+[PlyCount ""]
+[EventDate ""]
+[Source ""]
+
+1. d4 c5 2. d5 Nf6 3. c4 e6 4. Nc3 exd5 5. cxd5 d6 6. e4 g6 7. Nf3 Bg7 8. Be2
+O-O 9. O-O Bg4 {ULTIMA JUGADA DE MESTRE, BG4 392 VEGADES 35/31/34\%} 10. Be3
+{Aquí acaba la meva preparació. Be3 no és habitual però no és dolent. Segueixo
+amb mainline Re8. STOCKFISH (d50) DONA 0.24 ELS MESTRES JUGUEN BF4 ND2 H3 BG5
+RE1. ELS MESTRES HAN JUGAT BE3 8 VEGADES} 10... Re8 {ULTIMA JUGADA LICHESS >100
+VEGADES 43/3/54\%} 11. Qc2 {No és bona però no veig com explotar-ho. Dubto entre
+Na6 i a6. Trio a6 perquè em sembla que Nb5o n té objectius (però Ne5 tampoc !).
+STOCKFISH (d40) DONA 0.0 I DEMANA NBD7 (0.08), A6 (0.08), QE7 (0.04) O NA6
+(0.28), TOTES TEMÀTIQUES} 11... a6 12. a4 Nbd7 13. h3 {La meva preparació diu
+que l'alfil ha vingut a morir per ralentitzar l'atac de costat de Rei} 13...
+Bxf3! {[%c_effect
+f3;square;f3;type;GreatFind;path;null;size;100%2525252525252525252525;persistent;true]}
+14. Bxf3 {No tinc idea de què fer perquè Ne5 no té objectius ! Sabia per
+preparació que que Qc7 és habitual, permet c4 (però no té objectius !) i unir
+torres. Descarto Ne5 perquè després de Be2 ve f4 i guanya molta iniciativa.
+Considero Qe7 però em sembla que després de Re1 quedarà mal colocada. Considero
+Rb8 però em sembla que obrir queenside em perjudica perquè hi té més peces.
+STOCKFISH (D=40) VOL QE7 (0.08) C4 (0.11) O RC8 (0.13).} 14... Qc7 {STOCKFISH
+(D=35) DONA A5 (0.46) NO ESTAMOS TAN MAL. TRANSPOSEM A LICHESS 40 VEGADES
+35/12/53\%} 15. Be2 {Efectivament, volia fer Be2 igualment i així no l'he
+ajudat, em guardo c4 per més endavant i preparo les torres, anticipant f3 Nh5
+amb idees a Ng3 i amb Bfosc. STOCKFISH (D=35) DONA C4 (0.0)} 15... Re7?!
+{[%c_effect
+e7;square;e7;type;Inaccuracy;path;null;size;100%2525252525252525252525;persistent;true]
+\"?!\" STOCKFISH (D=35) DONA G4 (0.44). POC HUMÀ. 3 PARTIDES DE GM HAN ARRIBAT
+AQUÍ JUGANT F3 (2) RFE1 (1)} 16. f3 {Tinc la iniciativa, calculo Re8 Nh5...
+STOCKFISH (D=30) DONA NH5 (0.0) VS ALTRES (0.4-0.5)} 16... Rae8 {STOCKFISH
+(D=30) NOMÉS DONA G4 (0.45) VS ALTRES (0.0)} 17. Bf4? {[%c_effect
+f4;square;f4;type;Mistake;path;null;size;100%2525252525252525252525;persistent;true]
+No me la esperava, em sembla dolenta. Calculo Nh5 Bh2 Bxc3/Bd4+/Be5 i veig que
+totes tenen possibilitats. STOCKFISH DONA \" ?\" (D=40) NH5 (-0.21 !) VS ALTRES
+(0.3+)} 17... Nh5 18. Bh2 {Intermezzo Bd4+ obre possibilitats futures de Ng3, f4
+és impossible perquè Bxc3 Rxe5. STOCKFISH DONA (D=40) BD4 (-0.21) I F5 (-0.19)
+VS ALTRES (0.45+)} 18... Bd4+ (18... f5 19. exf5 (19. g4 Bd4+ 20. Kh1 Nhf6 21.
+gxf5 gxf5 {STOCKFISH (D=30) = -0.23}) (19. Qd2 Bd4+ 20. Kh1 f4 21. Bxf4 Nxf4 22.
+Qxf4 Nf6 {STOCKFISH (D=30) = -0.52}) 19... Bxc3 {STOCKFISH (D=30) -3.58}) 19.
+Kh1 {Penso que Be5 f4 seria un gran error, que farà Be5 Bxe5 Nxe5 Kh2 ? f4 i no
+sabré per on continuar, però no veig per on progressar. STOCKFISH (D=30) DONA F5
+(-0.16), BE5 (0.39) VS ALTRES (0.54+)} 19... Be5?! {[%c_effect
+e5;square;e5;type;Inaccuracy;persistent;true] STOCKFISH DONA \"?!\" (D=30) =
+-0.40 BXE5} (19... f5 20. g4 (20. Bd3 c4 {STOCKFISH (D=20) = -0.38}) (20. exf5
+Bxc3 {STOCKFISH (D=20) = -2.32}) 20... Nhf6 21. gxf5 gxf5 {STOCKFISH (D=25) =
+-0.21}) 20. f4 {Blunder ? Guanyo peó però no calculo Bxh5 al final de la
+seqüència !! STOCKFISH DONA (D=20) = 0.06} (20. Bxe5 Nxe5 21. Kh2 Nf4 22. Qd2
+Nxe2 23. Nxe2 {STOCKFISH (D=30) = 0.26}) 20... Bxc3! {[%c_effect
+c3;square;c3;type;GreatFind;persistent;true] STOCKFISH (D=35) DONA QXC3 (0.0) I
+BXC3 (0.0)} 21. Qxc3 Rxe4 22. Bxh5! {[%c_effect
+h5;square;h5;type;GreatFind;persistent;true]} 22... gxh5 {STOCKFISH (D=40) DONA
+QG3+ (0.0 PERPETU) F5 (0.0) I RF3 (-0.01)} 23. Rf3?! {[%c_effect
+f3;square;f3;type;Inaccuracy;persistent;true] L'atac que ve fa por però crec que
+trobo la millor defensa. STOCKFISDH DONA \"?!\" (D=35) H4 (-0.04), QB6 (0.0), F6
+(-0.08) I A5 (0.0)} (23. Qg3+ Kh8 24. Qc3+ Kg8 {PERPETU}) (23. f5 f6 24. Qg3+
+Kh8 25. Rae1 Rxe1 26. Rxe1 Rxe1+ 27. Qxe1 Ne5 28. Bxe5 dxe5 {CANVIA TOT I DONA
+FINAL DE REINES 0.0}) 23... f6?! {[%c_effect
+f6;square;f6;type;Inaccuracy;persistent;true] STOCKFISH \"?!\" (D=30) A5 (-0.06)
+B4 (-0.25) VS ALTRES (-0.37+)} 24. g4? {[%c_effect
+g4;square;g4;type;Mistake;persistent;true] Considero Kf7 però veig que controlar
+g4 és clau STOKFISH \"?\" DONA (D=30) KF7 (-1.68) I H4 (-1.61)} 24... h4 25. g5?
+{[%c_effect g5;square;g5;type;Mistake;persistent;true] Considero f5 per tancar
+Bfosc però Qd8 ens acosta a cambiar reines i anar a un final ventantjós. Qd8
+permet Qe7 i fer Alekhine Gun a e1 per canviar-ho tot. STOCKFISH DONA (D=30) F5
+(-3.00) QD8 (-2.32)} 25... Qd8?! {[%c_effect
+d8;square;d8;type;Inaccuracy;persistent;true]} 26. Rg1?! {[%c_effect
+g1;square;g1;type;Inaccuracy;persistent;true] L'atac sembla controlat. STOCKFISH
+\"?!\" (D=30) DONA F5 (-2.92) KF7 (-1.2)} 26... Kf7? {[%c_effect
+f7;square;f7;type;Mistake;persistent;true]} 27. Qc2 ☒ {Immobilitza la torre però
+f5 ho arregla tot i guanya la partida. STOFKFISH DONA (D=30) F5 (-2.80) QE7
+(-1.87) VS ALTRES (-.38+)} (27. Rg4 {-1.36} 27... Re1+ {-1.53} 28. Bg1 {-1.54}
+28... Qe7 {-1.50}) 27... f5! {[%c_effect
+f5;square;f5;type;GreatFind;persistent;true]} 28. b3?! {[%c_effect
+b3;square;b3;type;Inaccuracy;persistent;true] Crec que ho té perdut i aquest
+moviment no fa res (només controla c4), necessito convertir canviant reines.
+STOCKFISH DONA (D=30) -3.2+ A TOT PER SEMPRE MÉS} 28... Kg6?! {[%c_effect
+g6;square;g6;type;Inaccuracy;persistent;true]} 29. Rd3?! {[%c_effect
+d3;square;d3;type;Inaccuracy;persistent;true] Ell només calcula Nb6 però jo
+tenia calculat Qe7 també} 29... Qe7 30. Qf2 {El seu pla és Qxh3 Qh6. Kh5 Qf3
+repeteix moviments. Vull canviar-ho tot a e1 però considero Re2 Qxh4 Rxh2+ Kxh2
+Qe2+ Kh1 Qxd3 Qh6+ Kf7 Qxh7+ Kf8 Qxd7 i no veig Qxh3#  !! ! ME CAGO  N
+TOOOOOOOOOOT (però quedava calcular un possible g7+ i g8=Q i un possible perpetu
+amb la reina). Decideixo canviar a e1 esperant Qxh4 però em quedaria un final
+millor perquè tindria la torre infiltrada, millor estructura de peons i cavall
+bo contra alfil dolent} 30... Re1 {Espero Qxh4, crec que s'equivoca molt fent
+Rxe1} (30... Re2 31. Qxh4 (31. Qf3 Qe4 {AIXÒ IMPEDIA EL M3 PERO PERD IGUAL})
+31... Qe4+ (31... Rxh2+ 32. Kxh2 Qe2+ 33. Kh1 Qxd3 34. Qh6+ Kf7 35. Qxh7+ Kf8
+36. Qxd7 (36. Qh8+ Ke7 37. Re1+ Kd8 {AIXÍ ES PERDIA LA PARTIDA} (37... Ne5 {AIXÒ
+MANTENIA L'AVANTATGE})) 36... Qxh3# {AQUESTA SEQÜÈNCIA DE MAT NO LA VEIG}) 32.
+Rf3 Qxf3+ 33. Rg2 Qxg2# {VALE DONCS QXH4 NO ERA POSSIBLE PERQUÈ JO TENIA M3})
+31. Rxe1 Qxe1+ 32. Bg1 {Troba una defensa creativa per a intentar guanyar h4, ho
+evito} 32... Qe4+ {Espero Rf3 Qxd5 i guanyar avantage a canvi de no simplificar}
+33. Qf3 Qxf3+ 34. Rxf3 {Considero Re1/Re2 primer i crec que m'equivoco movent
+els peons} 34... b5?! {[%c_effect b5;square;b5;type;Inaccuracy;persistent;true]
+NO ÉS UN ERROR TOCKFISH DONA (D=30) AXB5 (-4.10) KG2 (-4.41)} 35. a5?!
+{[%c_effect a5;square;a5;type;Inaccuracy;persistent;true] El cavall ja no és
+tant bo, però és sol·lucionable, considero Re2 però Re1 em sembla que força Rg2
+i és més previsible} 35... Re1?! {[%c_effect
+e1;square;e1;type;Inaccuracy;persistent;true]} 36. Re3?! {[%c_effect
+e3;square;e3;type;Inaccuracy;persistent;true] No m'esperava que em forcés ell el
+canvi !, calculo que d5 caurá i que guanyaré un 4 vs 2 a costat de reina} 36...
+Rxe3 37. Bxe3 {A PARTIR D'AQUÍ STOCKFISH VEU MOLTES JUGADES GUANYADORES (-5)}
+37... h6 38. gxh6 Kxh6 39. Kg2 Nf6 40. Kf3 Nxd5 41. Bf2 {No m'agrada gens tirar
+Kh5, però considero que cavall + 4 poden amb rei + 2 i mig alfil} 41... Kh5 42.
+Be1 {Veig molt fàcil separar els peons, controlar l'alfil i parar la infiltració
+del rei} 42... b4 43. Bd2 Ne7 44. Ke2 Nc6 45. Kd3 Nxa5 46. Kc2 Nc6 47. Kd3 {Veig
+que cal anar enrrere per controlar la infiltració del rei i poder tirar d5.
+STOCKFISH VEU TOT GUANYADOR} 47... Na5 48. Kc2 d5 {Gràcies a que concedeix
+perquè no tinc un pla concret per avançar, el meu rei està lligat !} 0-1
