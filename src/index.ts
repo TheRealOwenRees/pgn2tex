@@ -25,7 +25,11 @@ export default class Pgn2Tex {
     this.game = parseGame(this.sanitisedGame);
     this.moveStr = '';
     this.header = this.game.tags;
-    this.texStart = `\\documentclass{article}\\usepackage{xskak}\\usepackage{multicol}\\usepackage[a4paper]{geometry}\\usepackage{parskip}\\geometry{left=1.25cm,right=1.25cm,top=1.5cm,bottom=1.5cm,columnsep=1.2cm}\\setlength{\\parindent}{0pt}\\title{${this.header?.White} (${this.header?.WhiteElo}) - ${this.header?.Black} (${this.header?.BlackElo})}\\date{${this.header?.Date.value}, ${this.header?.Site}}\\author{${this.header?.Event}}\\begin{document}\\begin{multicols}{2}\\maketitle\\newchessgame`;
+    this.texStart = `\\documentclass{article}\\usepackage{xskak}\\usepackage{multicol}\\usepackage[a4paper]{geometry}\\usepackage{parskip}\\geometry{left=1.25cm,right=1.25cm,top=1.5cm,bottom=1.5cm,columnsep=1.2cm}\\setlength{\\parindent}{0pt}\\title{${this
+      .header?.White} (${this.header?.WhiteElo}) - ${this.header?.Black} (${this.header?.BlackElo})}\\date{${
+      !this.header?.Date.value ? '' : this.header?.Date.value
+    }${this.header?.Date.value && this.header?.Site ? ', ' : ''}${this.header?.Site}}\\author{${this.header
+      ?.Event}}\\begin{document}\\begin{multicols}{2}\\maketitle\\newchessgame`;
     this.texEnd = '\n\\end{multicols}\\end{document}';
     this.moves = this.game.moves;
     this.diagramClock = diagramClock;

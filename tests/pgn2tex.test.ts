@@ -48,4 +48,12 @@ describe('Example PGNs', () => {
     const texString = pgn2Tex.toTex();
     expect(texString).not.toContain('\\date{undefined, }');
   });
+
+  test('Game 6 - same as game 5 but with a place name', () => {
+    const pgn = pgnReader('tests/pgn_examples/6.pgn');
+    const pgn2Tex = new Pgn2Tex(pgn, diagrams1);
+    const texString = pgn2Tex.toTex();
+    expect(texString).not.toContain('\\date{undefined, }');
+    expect(texString).toContain('\\date{Terrassa}');
+  });
 });

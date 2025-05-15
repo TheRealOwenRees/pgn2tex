@@ -1,3 +1,6 @@
+## v0.1.7
+- Fixed bug where no date in the PGN header was being rendered as `undefined`
+
 ## v0.1.6
 - Variation comments now displayed.
 - Additional TeX sanitisation: removing double spaces, adding a space after a move number if preceded by parenthesis.
