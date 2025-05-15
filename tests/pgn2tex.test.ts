@@ -41,4 +41,11 @@ describe('Example PGNs', () => {
     expect(texString).not.toContain('\\par\\nobreak\\textbf');
     expect(texString).toContain('\\par\\chessboard[setfen=');
   });
+
+  test('Game 5 - No Date, do not render as undefined', () => {
+    const pgn = pgnReader('tests/pgn_examples/5.pgn');
+    const pgn2Tex = new Pgn2Tex(pgn, diagrams1);
+    const texString = pgn2Tex.toTex();
+    expect(texString).not.toContain('\\date{undefined, }');
+  });
 });
