@@ -1,8 +1,11 @@
+## 0.2.0
+- Added support for customer headers `title` and `subtitle, allowing the overriding of standard PGN headers in the PDF.
+
 ## v0.1.7
 - Fixed bug where no date in the PGN header was being rendered as `undefined`
 
 ## v0.1.6
-- Variation comments now displayed.
+- Variation comments are now displayed.
 - Additional TeX sanitisation: removing double spaces, adding a space after a move number if preceded by parenthesis.
 
 ## v0.1.5

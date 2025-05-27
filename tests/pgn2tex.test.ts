@@ -56,4 +56,10 @@ describe('Example PGNs', () => {
     expect(texString).not.toContain('\\date{undefined, }');
     expect(texString).toContain('\\date{Terrassa}');
   });
+
+  test('Game 7 - same as game 6 but with customer title and subtitle headers', () => {
+    const pgn = pgnReader('tests/pgn_examples/7.pgn');
+    const pgn2Tex = new Pgn2Tex(pgn, diagrams1);
+    console.log(pgn2Tex.toTex());
+  });
 });
