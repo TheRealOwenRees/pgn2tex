@@ -3,12 +3,15 @@
 This is the project that powers the PGN to TeX string conversion for [chess-pdf-api](https://github.com/TheRealOwenRees/chess-pdf-api). It can be found on NPM as [owenrees/pgn2tex](https://www.npmjs.com/package/@owenrees/pgn2tex?activeTab=readme).
 
 ## Install
+
 Install the NPM package as a dependency:
+
 ```bash
 npm install owenrees/pgn2tex --save
 ```
 
 Import it into your project:
+
 ```js
 import Pgn2Tex from '@owenrees/pgn2tex';
 ```
@@ -22,7 +25,7 @@ The Pgn2Tex class exposes a single method: `toTex()`. This method will convert t
 The Pgn2Tex class is used to generate a TeX string from a PGN file. It takes two arguments:
 
 | Parameter      | Type      | Description                                                                                                                                                                                          |
-|----------------|-----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| -------------- | --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `pgn`          | `string`  | **Required**. A valid PGN of a chess game.                                                                                                                                                           |
 | `diagrams`     | `array`   | An array of objects, containing:<br/> - `ply`(integer): The move ply for a chess diagram.<br/> - `fen`(string): A FEN of the board position, for rendering the correct diagram at the ply specified. |
 | `diagramClock` | `boolean` | Display move times above and below the chessboard. Default is `false`.                                                                                                                               |
@@ -32,10 +35,11 @@ The `diagrams` parameter is optional, and if not provided, the TeX string will n
 #### Example Usage
 
 ```javascript
-const gameTex = new Pgn2Tex(pgn, diagrams).toTex()
-````
+const gameTex = new Pgn2Tex(pgn, diagrams).toTex();
+```
 
 Example `pgn` and `diagram` arguments are defined as follows:
+
 ```javascript
 const pgn = `[Event "URS-chJ"]
 [Site "Kherson"]
@@ -66,6 +70,7 @@ const diagrams = [
 ```
 
 On success, a TeX string is returned. Eg.
+
 ```tex
  \documentclass{article}
  \usepackage{xskak}
@@ -88,17 +93,17 @@ On success, a TeX string is returned. Eg.
 
 If you are using a custom TexLive server to generate a PDF from a string, you must ensure that the following packages are installed:
 
-- parskip 
-- pgf 
-- chessboard 
-- etoolbox 
-- ifmtarg 
-- xifthen 
-- skaknew 
-- lambda-lists 
-- xkeyval 
-- chessfss 
-- skak 
+- parskip
+- pgf
+- chessboard
+- etoolbox
+- ifmtarg
+- xifthen
+- skaknew
+- lambda-lists
+- xkeyval
+- chessfss
+- skak
 - xskak
 
 A custom Docker image of a TexLive with these packages installed is available [here](https://hub.docker.com/repository/docker/owenrees/node-xskak/general).

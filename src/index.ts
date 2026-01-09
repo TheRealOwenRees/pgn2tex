@@ -6,6 +6,13 @@ export interface Diagram {
   fen: string;
 }
 
+interface ExtendedTags extends Partial<Tags> {
+  Title?: string;
+  Subtitle?: string;
+  Author?: string;
+  DateString?: string;
+}
+
 export default class Pgn2Tex {
   private readonly pgn: string;
   private diagrams: Diagram[];
@@ -13,7 +20,7 @@ export default class Pgn2Tex {
   private moveStr: string;
   private readonly texStart: string;
   private readonly texEnd: string;
-  private readonly header: Tags | undefined;
+  private readonly header: ExtendedTags | undefined;
   private moves: PgnMove[];
   private readonly diagramClock: boolean;
   private readonly sanitisedGame: string;
@@ -24,12 +31,36 @@ export default class Pgn2Tex {
     this.sanitisedGame = Pgn2Tex.sanitiseGame(this.pgn);
     this.game = parseGame(this.sanitisedGame);
     this.moveStr = '';
-    this.header = this.game.tags;
-    this.texStart = `\\documentclass{article}\\usepackage{xskak}\\usepackage{multicol}\\usepackage[a4paper]{geometry}\\usepackage{parskip}\\geometry{left=1.25cm,right=1.25cm,top=1.5cm,bottom=1.5cm,columnsep=1.2cm}\\setlength{\\parindent}{0pt}\\title{${this
-      .header?.White} (${this.header?.WhiteElo}) - ${this.header?.Black} (${this.header?.BlackElo})}\\date{${
-      !this.header?.Date.value ? '' : this.header?.Date.value
-    }${this.header?.Date.value && this.header?.Site ? ', ' : ''}${this.header?.Site}}\\author{${this.header
-      ?.Event}}\\begin{document}\\begin{multicols}{2}\\maketitle\\newchessgame`;
+
+    const headerComponent = pgn?.split(/\n\n/g)[0];
+    const titleMatch = headerComponent.match(/\[Title "([^"]+)"\]/);
+    const subtitleMatch = headerComponent.match(/\[Subtitle "([^"]+)"\]/);
+    const dateMatch = headerComponent.match(/\[Date "([^"]+)"\]/);
+    const authorMatch = headerComponent.match(/\[Author "([^"]+)"\]/);
+
+    if (titleMatch?.[1] || subtitleMatch?.[1]) {
+      this.header = {
+        Title: titleMatch?.[1],
+        Subtitle: subtitleMatch?.[1],
+        Author: authorMatch?.[1],
+        DateString: dateMatch?.[1],
+      };
+
+      this.texStart = `\\documentclass{article}\\usepackage{xskak}\\usepackage{multicol}\\usepackage[a4paper]{geometry}\\usepackage{parskip}\\geometry{left=1.25cm,right=1.25cm,top=1.5cm,bottom=1.5cm,columnsep=1.2cm}\\setlength{\\parindent}{0pt}\\title{${
+        this.header.Title
+      }\\\\[2ex]\\large{${this.header.Subtitle || ''}}}\\date{${this.header?.DateString || ''}}\\author{${
+        this.header?.Author || ''
+      }}\\begin{document}\\begin{multicols}{2}\\maketitle\\newchessgame`;
+    } else {
+      this.header = this.game.tags;
+
+      this.texStart = `\\documentclass{article}\\usepackage{xskak}\\usepackage{multicol}\\usepackage[a4paper]{geometry}\\usepackage{parskip}\\geometry{left=1.25cm,right=1.25cm,top=1.5cm,bottom=1.5cm,columnsep=1.2cm}\\setlength{\\parindent}{0pt}\\title{${this
+        .header?.White} (${this.header?.WhiteElo}) - ${this.header?.Black} (${this.header?.BlackElo})}\\date{${
+        !this.header?.Date?.value ? '' : this.header?.Date?.value
+      }${this.header?.Date?.value && this.header?.Site ? ', ' : ''}${this.header?.Site}}\\author{${this.header
+        ?.Event}}\\begin{document}\\begin{multicols}{2}\\maketitle\\newchessgame`;
+    }
+
     this.texEnd = '\n\\end{multicols}\\end{document}';
     this.moves = this.game.moves;
     this.diagramClock = diagramClock;

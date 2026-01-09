@@ -1,6 +1,6 @@
 {
   "name": "@owenrees/pgn2tex",
-  "version": "0.1.7",
+  "version": "0.2.0",
   "description": "PGN to TeX converter",
   "author": "Owen Rees <owenrees@tutanota.com>",
   "license": "Apache-2.0",
@@ -18,10 +18,17 @@
     "node": "^20.15.0"
   },
   "scripts": {
-    "start": "node dist/index.js",
+    "prettier": "prettier --check .",
+    "prettier:fix": "prettier --write .",
     "lint": "eslint . --ext .ts",
-    "test": "jest --watch",
-    "build": "tsc -p tsconfig.json"
+    "lint:quiet": "eslint . --quiet",
+    "lint:strict": "eslint . --max-warnings=0",
+    "lint:fix": "eslint . --ext .ts --fix",
+    "start": "node dist/index.js",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "build": "tsc -p tsconfig.json",
+    "check": "npm run prettier && npm run lint && npm run test && npm run build"
   },
   "dependencies": {
     "@mliebelt/pgn-parser": "^1.4.15"
