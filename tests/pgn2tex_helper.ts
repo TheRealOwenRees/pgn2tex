@@ -4,6 +4,7 @@ export const pgnReader = (file: string) => {
   try {
     return readFileSync(file, 'utf8');
   } catch (err) {
+    // eslint-disable-next-line no-console
     console.error(err);
     return '';
   }
