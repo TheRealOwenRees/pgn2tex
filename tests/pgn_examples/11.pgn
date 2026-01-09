@@ -1,0 +1,18 @@
+[Event "Grob: Introduction."]
+[Result "*"]
+[Variant "Standard"]
+[ECO "A00"]
+[Opening "Grob Opening: Grob Gambit, Fritz Gambit"]
+[StudyName "Grob"]
+[ChapterName "Introduction."]
+[ChapterURL "https://lichess.org/study/UEerNKLR/35Ir8bOE"]
+[Annotator "https://lichess.org/@/Billy_Sprinkle"]
+[UTCDate "2025.04.26"]
+[UTCTime "14:44:02"]
+
+{ Basman, Bloodgood }
+1. g4 { This is where white has to make a decision between 2.Bg2 (the tactical Grob) or 2.h3 (the positional Grob). Bishop g2 is the move which will be presented through out this course, for the desire is to gambit the g4 in order to distract blacks queens bishop from the defence of the queenside. Moves c4 Qb3 is the general plan. Where as h3 will lead to its own type of game, known as the positional Grob. Too which, I would highly recommond U Cannot Be Serious! by Basman & Welling, and The Killer Grob by Basman. Its most persistent practitioner was IM Mike Basman (this maybe better in the intro) } 1... d5 { [%cal Gh2h3] } 2. Bg2 Bxg4 { [%csl Gg4] } 3. c4 c6 (3... d4) 4. cxd5 { [%csl Gg4] } (4. Qb3 Qc7 5. cxd5 cxd5 (5... e6 6. h3 Bh5 7. e4 Bg6 8. dxe6 fxe6 9. Qxe6+) 6. Nc3 d4 (6... e6 7. Qa4+ { [%cal Ga4g4,Ga4e8] }) (6... Nc6 7. Nxd5 Qd7 8. Qa4 Rc8 9. d3 { [%csl Ge7] } 9... e5 (9... e6 10. Qxg4 exd5 11. Qxd7+ Kxd7 12. Bh3+) 10. Bd2 Nd4 11. Qxd7+ Bxd7 12. Kd1) 7. Qxb7 (7. Nb5 Qb6 8. Bxb7 { [%cal Gb6b7,Gb5d6] } 8... Qxb7 (8... Be6 9. Qf3 Qxb5 10. Bxa8 Nf6 11. Qb7) 9. Nd6+ exd6 10. Qxb7) 7... Qxb7 8. Bxb7 dxc3 9. dxc3 a5 10. Bxa8) 4... Nf6 (4... Qc7 5. Nc3 Nf6 6. h3 (6. Qb3 e6 7. h3 Bh5 8. dxe6) 6... Bd7 7. e4 e6 8. dxe6 Bxe6 9. d4 Nbd7 10. Nge2 g6 11. Be3 Bg7 12. O-O O-O 13. Rb1) (4... cxd5 5. Qb3 e6 (5... Nf6) 6. Qa4+ Nc6 7. Qxg4) 5. Qb3 Qc7 { [%csl Gg4] } 6. Nc3 e6 7. h3 Bh5 8. dxe6 fxe6 9. Qxe6+ { Refrences: unorthodoxchessopenings.com
+The Tactical Grob- Cluade Bloodgood
+The killer Grob- Michael Basman
+Basman's folly-
+U cannot be serious } *

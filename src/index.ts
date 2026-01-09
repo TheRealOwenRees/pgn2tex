@@ -37,6 +37,7 @@ export default class Pgn2Tex {
     const subtitleMatch = headerComponent.match(/\[Subtitle "([^"]+)"\]/);
     const dateMatch = headerComponent.match(/\[Date "([^"]+)"\]/);
     const authorMatch = headerComponent.match(/\[Author "([^"]+)"\]/);
+    const resultMatch = headerComponent.match(/\[Result "([^"]+)"\]/);
 
     if (titleMatch?.[1] || subtitleMatch?.[1]) {
       this.header = {
@@ -44,6 +45,7 @@ export default class Pgn2Tex {
         Subtitle: subtitleMatch?.[1],
         Author: authorMatch?.[1],
         DateString: dateMatch?.[1],
+        Result: resultMatch?.[1],
       };
 
       this.texStart = `\\documentclass{article}\\usepackage{xskak}\\usepackage{multicol}\\usepackage[a4paper]{geometry}\\usepackage{parskip}\\geometry{left=1.25cm,right=1.25cm,top=1.5cm,bottom=1.5cm,columnsep=1.2cm}\\setlength{\\parindent}{0pt}\\title{${
@@ -153,7 +155,11 @@ export default class Pgn2Tex {
   }
 
   private format() {
-    this.moveStr += `\\textbf{${this.header?.Result}}`; // add result
+    // add result if present in header
+    if (this.header?.Result) {
+      this.moveStr += `\\textbf{${this.header?.Result}}`;
+    }
+
     this.moveStr = this.moveStr.replaceAll(/#/g, '\\#'); // remove TeX special characters
     this.moveStr = this.moveStr.replace(/ {2,}/g, ' '); // remove double spaces
   }

@@ -1,3 +1,7 @@
+## v0.2.1
+- Fixed 'undefined' appearing in PDF when custom headers are used but some are left blank.
+- Sanitise `%` character from imported PGNs.
+
 ## v0.2.0
 
 - Added support for customer headers `title` and `subtitle`, allowing the overriding of standard PGN headers in the PDF.
