@@ -1,6 +1,7 @@
 ## v0.2.0
 
 - Added support for customer headers `title` and `subtitle`, allowing the overriding of standard PGN headers in the PDF.
+- Added scripts and GH Actions to check linting and build on branch push and PR creation.
 
 ## v0.1.7
 
