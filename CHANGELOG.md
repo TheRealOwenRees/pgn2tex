@@ -1,5 +1,5 @@
-## 0.2.0
-- Added support for customer headers `title` and `subtitle, allowing the overriding of standard PGN headers in the PDF.
+## v0.2.0
+- Added support for customer headers `title` and `subtitle`, allowing the overriding of standard PGN headers in the PDF.
 
 ## v0.1.7
 - Fixed bug where no date in the PGN header was being rendered as `undefined`
@@ -14,7 +14,7 @@
 
 ## v0.1.0
 - Move times displayed at the top and bottom of the chessboard, set with the boolean `diagramClock`.
-- Typescript update from 5.1.6 to 5.3.3.
+- TypeScript update from 5.1.6 to 5.3.3.
 
 ## v0.0.1
 - Initial release
