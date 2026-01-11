@@ -7,7 +7,7 @@ module.exports = {
   },
   extends: ['airbnb-base', 'plugin:@typescript-eslint/recommended'],
   plugins: ['@typescript-eslint', 'prettier'],
-  overrides: [],
+  overrides: ['operator-linebreak'],
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module',
