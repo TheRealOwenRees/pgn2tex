@@ -1,6 +1,6 @@
 import { parseGame, ParseTree } from '@mliebelt/pgn-parser';
 import type { PgnMove, Tags } from '@mliebelt/pgn-types';
-import { beginDocument, documentSetup, endDocument } from './config';
+import { beginDocument, documentSetup, endDocument } from './documentConfig';
 
 export interface Diagram {
   ply: number;
