@@ -49,9 +49,11 @@ export default class Pgn2Tex {
         Result: resultMatch?.[1],
       };
 
-      this.texStart = `${documentSetup}\\title{${this.header.Title}\\\\[2ex]\\large{${
-        this.header.Subtitle || ''
-      }}}\\date{${this.header?.DateString}}\\author{${this.header?.Author || ''}}${beginDocument}`;
+      this.texStart =
+        `${documentSetup}\\title{${this.header.Title}\\\\[2ex]\\large{${this.header.Subtitle || ''}}}` +
+        `${this.header?.DateString && `\\date{${this.header?.DateString}}`}` +
+        `${this.header?.Author && `\\author{${this.header?.Author}}`}` +
+        `${beginDocument}`;
     } else {
       this.header = this.game.tags;
 

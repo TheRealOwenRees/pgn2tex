@@ -79,7 +79,7 @@ describe('Example PGNs', () => {
     const pgn = pgnReader('tests/pgn_examples/9.pgn');
     const pgn2Tex = new Pgn2Tex(pgn, diagrams1);
     const texString = pgn2Tex.toTex();
-    expect(texString).toContain('\\date{}');
+    expect(texString).not.toContain('\\date{}');
   });
 
   test('Game 10 - contains % symbol', () => {
