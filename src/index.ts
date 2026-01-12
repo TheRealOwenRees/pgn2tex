@@ -51,19 +51,29 @@ export default class Pgn2Tex {
 
       this.texStart = `${documentSetup}\\title{${this.header.Title}\\\\[2ex]\\large{${
         this.header.Subtitle || ''
-      }}}\\date{${this.header?.DateString || ''}}\\author{${this.header?.Author || ''}}${beginDocument}`;
+      }}}\\date{${this.header?.DateString}}\\author{${this.header?.Author || ''}}${beginDocument}`;
     } else {
       this.header = this.game.tags;
 
-      this.texStart = `${documentSetup}\\title{${this.generatePlayersTitle()}}\\date{${
-        !this.header?.Date?.value ? '' : this.header?.Date?.value
-      }${this.header?.Date?.value && this.header?.Site ? ', ' : ''}${this.header?.Site}}\\author{${this.header
-        ?.Event}}${beginDocument}`;
+      this.texStart = `${documentSetup}\\title{${this.generatePlayersTitle()}}\\date{${this.generateDateSiteTitle()}}\\author{${this
+        .header?.Event}}${beginDocument}`;
     }
 
     this.texEnd = `\n${endDocument}`;
     this.moves = this.game.moves;
     this.diagramClock = diagramClock;
+  }
+
+  private generateDateSiteTitle() {
+    if (!this.header) return '';
+
+    const dateComponent = this.header.Date?.value ? this.header.Date.value : '';
+    const siteComponent = this.header.Site ? this.header.Site : '';
+
+    if (dateComponent && siteComponent) return `${dateComponent}, ${siteComponent}`;
+    if (dateComponent) return `${dateComponent}`;
+    if (siteComponent) return `${siteComponent}`;
+    return '';
   }
 
   private generatePlayersTitle() {
