@@ -82,13 +82,14 @@ describe('Example PGNs', () => {
     expect(texString).toContain('\\date{}');
   });
 
-  // test('Game 10 - contains % symbol', () => {
-  //   const pgn = pgnReader('tests/pgn_examples/10.pgn');
-  //   const pgn2Tex = new Pgn2Tex(pgn, diagrams1);
-  //   const texString = pgn2Tex.toTex();
-  //   console.log(texString);
-  // });
-  //
+  test('Game 10 - contains % symbol', () => {
+    const pgn = pgnReader('tests/pgn_examples/10.pgn');
+    const pgn2Tex = new Pgn2Tex(pgn, diagrams1);
+    const texString = pgn2Tex.toTex();
+    // expect(texString).not.toContain('undefined');
+    console.log(texString);
+  });
+
   // test('Game 11 - contains % symbol', () => {
   //   const pgn = pgnReader('tests/pgn_examples/11.pgn');
   //   const pgn2Tex = new Pgn2Tex(pgn, diagrams1);
