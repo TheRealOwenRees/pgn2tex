@@ -1,4 +1,5 @@
 ## v0.2.1
+
 - Fixed 'undefined' appearing in PDF when custom headers are used but some are left blank.
 - Sanitise `%` character from imported PGNs.
 
