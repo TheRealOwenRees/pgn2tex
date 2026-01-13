@@ -63,5 +63,36 @@ describe('Example PGNs', () => {
     const texString = pgn2Tex.toTex();
     expect(texString).toContain('\\title{Title Goes Here');
     expect(texString).toContain('\\large{Subtitle Goes Here');
+    expect(texString).toContain('\\textbf{0-1}');
+  });
+
+  test('Game 8 - same as game 7 but without result, subtitle and author headers', () => {
+    const pgn = pgnReader('tests/pgn_examples/8.pgn');
+    const pgn2Tex = new Pgn2Tex(pgn, diagrams1);
+    const texString = pgn2Tex.toTex();
+    expect(texString).toContain('\\title{Title Goes Here');
+    expect(texString).not.toContain('\\large{undefined');
+    expect(texString).not.toContain('\\textbf{undefined}');
+  });
+
+  test('Game 9 - same as game 8 but without date', () => {
+    const pgn = pgnReader('tests/pgn_examples/9.pgn');
+    const pgn2Tex = new Pgn2Tex(pgn, diagrams1);
+    const texString = pgn2Tex.toTex();
+    expect(texString).not.toContain('\\date{}');
+  });
+
+  test('Game 10 - contains % symbol', () => {
+    const pgn = pgnReader('tests/pgn_examples/10.pgn');
+    const pgn2Tex = new Pgn2Tex(pgn, diagrams1);
+    const texString = pgn2Tex.toTex();
+    expect(texString).not.toContain('undefined');
+  });
+
+  test('Game 11 - contains % symbol', () => {
+    const pgn = pgnReader('tests/pgn_examples/11.pgn');
+    const pgn2Tex = new Pgn2Tex(pgn, diagrams1);
+    const texString = pgn2Tex.toTex();
+    expect(texString).not.toContain('undefined');
   });
 });

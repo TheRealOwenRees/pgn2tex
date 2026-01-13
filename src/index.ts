@@ -1,5 +1,6 @@
 import { parseGame, ParseTree } from '@mliebelt/pgn-parser';
 import type { PgnMove, Tags } from '@mliebelt/pgn-types';
+import { beginDocument, documentSetup, endDocument } from './documentConfig';
 
 export interface Diagram {
   ply: number;
@@ -37,6 +38,7 @@ export default class Pgn2Tex {
     const subtitleMatch = headerComponent.match(/\[Subtitle "([^"]+)"\]/);
     const dateMatch = headerComponent.match(/\[Date "([^"]+)"\]/);
     const authorMatch = headerComponent.match(/\[Author "([^"]+)"\]/);
+    const resultMatch = headerComponent.match(/\[Result "([^"]+)"\]/);
 
     if (titleMatch?.[1] || subtitleMatch?.[1]) {
       this.header = {
@@ -44,26 +46,53 @@ export default class Pgn2Tex {
         Subtitle: subtitleMatch?.[1],
         Author: authorMatch?.[1],
         DateString: dateMatch?.[1],
+        Result: resultMatch?.[1],
       };
 
-      this.texStart = `\\documentclass{article}\\usepackage{xskak}\\usepackage{multicol}\\usepackage[a4paper]{geometry}\\usepackage{parskip}\\geometry{left=1.25cm,right=1.25cm,top=1.5cm,bottom=1.5cm,columnsep=1.2cm}\\setlength{\\parindent}{0pt}\\title{${
-        this.header.Title
-      }\\\\[2ex]\\large{${this.header.Subtitle || ''}}}\\date{${this.header?.DateString || ''}}\\author{${
-        this.header?.Author || ''
-      }}\\begin{document}\\begin{multicols}{2}\\maketitle\\newchessgame`;
+      this.texStart =
+        `${documentSetup}\\title{${this.header.Title}\\\\[2ex]\\large{${this.header.Subtitle || ''}}}` +
+        `${this.header?.DateString && `\\date{${this.header?.DateString}}`}` +
+        `${this.header?.Author && `\\author{${this.header?.Author}}`}` +
+        `${beginDocument}`;
     } else {
       this.header = this.game.tags;
 
-      this.texStart = `\\documentclass{article}\\usepackage{xskak}\\usepackage{multicol}\\usepackage[a4paper]{geometry}\\usepackage{parskip}\\geometry{left=1.25cm,right=1.25cm,top=1.5cm,bottom=1.5cm,columnsep=1.2cm}\\setlength{\\parindent}{0pt}\\title{${this
-        .header?.White} (${this.header?.WhiteElo}) - ${this.header?.Black} (${this.header?.BlackElo})}\\date{${
-        !this.header?.Date?.value ? '' : this.header?.Date?.value
-      }${this.header?.Date?.value && this.header?.Site ? ', ' : ''}${this.header?.Site}}\\author{${this.header
-        ?.Event}}\\begin{document}\\begin{multicols}{2}\\maketitle\\newchessgame`;
+      this.texStart = `${documentSetup}\\title{${this.generatePlayersTitle()}}\\date{${this.generateDateSiteTitle()}}\\author{${this
+        .header?.Event}}${beginDocument}`;
     }
 
-    this.texEnd = '\n\\end{multicols}\\end{document}';
+    this.texEnd = `\n${endDocument}`;
     this.moves = this.game.moves;
     this.diagramClock = diagramClock;
+  }
+
+  private generateDateSiteTitle() {
+    if (!this.header) return '';
+
+    const dateComponent = this.header.Date?.value ? this.header.Date.value : '';
+    const siteComponent = this.header.Site ? this.header.Site : '';
+
+    if (dateComponent && siteComponent) return `${dateComponent}, ${siteComponent}`;
+    if (dateComponent) return `${dateComponent}`;
+    if (siteComponent) return `${siteComponent}`;
+    return '';
+  }
+
+  private generatePlayersTitle() {
+    if (!this.header) return '';
+
+    const whiteComponent = `${this.header.White ? this.header.White : ''}${
+      this.header.WhiteElo ? ` ${this.header.WhiteElo}` : ''
+    }`;
+
+    const blackComponent = `${this.header.Black ? this.header.Black : ''}${
+      this.header.BlackElo ? ` ${this.header.BlackElo}` : ''
+    }`;
+
+    if (whiteComponent.length > 0 && blackComponent.length > 0) return `${whiteComponent} - ${blackComponent}`;
+    if (whiteComponent.length > 0) return whiteComponent;
+    if (blackComponent.length > 0) return blackComponent;
+    return '';
   }
 
   /**
@@ -153,7 +182,11 @@ export default class Pgn2Tex {
   }
 
   private format() {
-    this.moveStr += `\\textbf{${this.header?.Result}}`; // add result
+    // add result if present in header
+    if (this.header?.Result) {
+      this.moveStr += `\\textbf{${this.header?.Result}}`;
+    }
+
     this.moveStr = this.moveStr.replaceAll(/#/g, '\\#'); // remove TeX special characters
     this.moveStr = this.moveStr.replace(/ {2,}/g, ' '); // remove double spaces
   }
