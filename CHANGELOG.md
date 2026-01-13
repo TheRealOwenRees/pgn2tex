@@ -1,6 +1,6 @@
 ## v0.2.1
 
-- Fixed 'undefined' appearing in PDF when custom headers are used but some are left blank.
+- Fixed 'undefined' appearing in PDF when custom headers are used, but where some are left blank.
 - Change the way TEX tags are written, conditionally rendering them where needed to help prevent `undefined`.
 
 ## v0.2.0
