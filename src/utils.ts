@@ -1,7 +1,7 @@
 export const sanitiseString = (str: string) => {
   const escapeChars = {
     '&': '\\&',
-    ':': '\\:',
+    _: '\\_',
   };
 
   const regex = new RegExp(Object.keys(escapeChars).join('|'), 'g');

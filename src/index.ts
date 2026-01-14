@@ -51,9 +51,11 @@ export default class Pgn2Tex {
       };
 
       this.texStart =
-        `${documentSetup}\\title{${this.header.Title}\\\\[2ex]\\large{${this.header.Subtitle || ''}}}` +
-        `${this.header?.DateString && `\\date{${this.header?.DateString}}`}` +
-        `${this.header?.Author && `\\author{${this.header?.Author}}`}` +
+        `${documentSetup}` +
+        `${this.header.Title ? `\\title{${this.header.Title}\\\\[2ex]` : ''}` +
+        `${this.header.Subtitle ? `\\large{${this.header.Subtitle}}` : ''}` +
+        `${this.header.DateString ? `\\date{${this.header.DateString}}` : '\\date{}'}` +
+        `${this.header.Author ? `\\author{${this.header.Author}}` : ''}` +
         `${beginDocument}`;
     } else {
       this.header = this.game.tags;
@@ -63,9 +65,9 @@ export default class Pgn2Tex {
 
       this.texStart =
         `${documentSetup}` +
-        `${title && `\\title{${sanitiseString(title)}}`}` +
-        `${dateSiteTitle && `\\date{${sanitiseString(dateSiteTitle)}}`}` +
-        `${this.header?.Event && `\\author{${sanitiseString(this.header.Event)}`}` +
+        `${title ? `\\title{${title}}\\\\[2ex]` : ''}` +
+        `${dateSiteTitle ? `\\date{${dateSiteTitle}}` : '\\date{}'}` +
+        `${this.header?.Event ? `\\author{${this.header.Event}}` : ''}` +
         `${beginDocument}`;
     }
 
@@ -83,24 +85,27 @@ export default class Pgn2Tex {
     if (dateComponent && siteComponent) return `${dateComponent}, ${siteComponent}`;
     if (dateComponent) return `${dateComponent}`;
     if (siteComponent) return `${siteComponent}`;
-    return false;
+    return '';
   }
 
   private generatePlayersTitle() {
     if (!this.header) return '';
 
-    const whiteComponent = `${this.header.White ? this.header.White : ''}${
-      this.header.WhiteElo ? ` ${this.header.WhiteElo}` : ''
+    const whiteComponent = `${this.header.White ? sanitiseString(this.header.White) : ''} ${
+      this.header.WhiteElo ? `(${this.header.WhiteElo})` : ''
     }`;
 
-    const blackComponent = `${this.header.Black ? this.header.Black : ''}${
-      this.header.BlackElo ? ` ${this.header.BlackElo}` : ''
+    const blackComponent = `${this.header.Black ? this.header.Black : ''} ${
+      this.header.BlackElo ? `(${this.header.BlackElo})` : ''
     }`;
 
-    if (whiteComponent.length > 0 && blackComponent.length > 0) return `${whiteComponent} - ${blackComponent}`;
+    if (whiteComponent.length > 0 && blackComponent.length > 0) {
+      return `${whiteComponent} - ${blackComponent}`;
+    }
+
     if (whiteComponent.length > 0) return whiteComponent;
     if (blackComponent.length > 0) return blackComponent;
-    return false;
+    return '';
   }
 
   /**
