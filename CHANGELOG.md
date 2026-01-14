@@ -1,6 +1,6 @@
 ## v0.2.2
 
-- Sanitise `&` as `\&` in TeX output.
+- Sanitise `&` and `:` as escape charcters in TeX output.
 
 ## v0.2.1
 
