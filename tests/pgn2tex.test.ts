@@ -89,10 +89,12 @@ describe('Example PGNs', () => {
     expect(texString).not.toContain('undefined');
   });
 
-  test('Game 11 - contains % symbol', () => {
+  test('Game 11 - contains % symbol and needs escape characters for & and :', () => {
     const pgn = pgnReader('tests/pgn_examples/11.pgn');
     const pgn2Tex = new Pgn2Tex(pgn, diagrams1);
     const texString = pgn2Tex.toTex();
     expect(texString).not.toContain('undefined');
+    expect(texString).toContain('\\&');
+    expect(texString).toContain('\\:');
   });
 });

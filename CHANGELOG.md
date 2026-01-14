@@ -1,3 +1,7 @@
+## v0.2.2
+
+- Sanitise `&` as `\&` in TeX output.
+
 ## v0.2.1
 
 - Fixed 'undefined' appearing in PDF when custom headers are used, but where some are left blank.

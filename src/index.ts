@@ -1,6 +1,7 @@
 import { parseGame, ParseTree } from '@mliebelt/pgn-parser';
 import type { PgnMove, Tags } from '@mliebelt/pgn-types';
 import { beginDocument, documentSetup, endDocument } from './documentConfig';
+import { sanitiseString } from './utils';
 
 export interface Diagram {
   ply: number;
@@ -117,7 +118,7 @@ export default class Pgn2Tex {
 
   private commentsAfter(move: PgnMove) {
     if (move.commentAfter) {
-      this.moveStr += `\\newline ${move.commentAfter.trim()} \\par `;
+      this.moveStr += `\\newline ${sanitiseString(move.commentAfter)} \\par `;
       this.addThreeDots(move);
     }
   }
