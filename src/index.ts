@@ -63,9 +63,9 @@ export default class Pgn2Tex {
 
       this.texStart =
         `${documentSetup}` +
-        `${title && `\\title{${title}}`}` +
-        `${dateSiteTitle && `\\date{${dateSiteTitle}}`}` +
-        `${this.header?.Event && `\\author{${this.header.Event}`}` +
+        `${title && `\\title{${sanitiseString(title)}}`}` +
+        `${dateSiteTitle && `\\date{${sanitiseString(dateSiteTitle)}}`}` +
+        `${this.header?.Event && `\\author{${sanitiseString(this.header.Event)}`}` +
         `${beginDocument}`;
     }
 
@@ -83,7 +83,7 @@ export default class Pgn2Tex {
     if (dateComponent && siteComponent) return `${dateComponent}, ${siteComponent}`;
     if (dateComponent) return `${dateComponent}`;
     if (siteComponent) return `${siteComponent}`;
-    return '';
+    return false;
   }
 
   private generatePlayersTitle() {
@@ -100,7 +100,7 @@ export default class Pgn2Tex {
     if (whiteComponent.length > 0 && blackComponent.length > 0) return `${whiteComponent} - ${blackComponent}`;
     if (whiteComponent.length > 0) return whiteComponent;
     if (blackComponent.length > 0) return blackComponent;
-    return '';
+    return false;
   }
 
   /**
