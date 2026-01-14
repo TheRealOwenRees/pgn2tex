@@ -58,8 +58,15 @@ export default class Pgn2Tex {
     } else {
       this.header = this.game.tags;
 
-      this.texStart = `${documentSetup}\\title{${this.generatePlayersTitle()}}\\date{${this.generateDateSiteTitle()}}\\author{${this
-        .header?.Event}}${beginDocument}`;
+      const title = this.generatePlayersTitle();
+      const dateSiteTitle = this.generateDateSiteTitle();
+
+      this.texStart =
+        `${documentSetup}` +
+        `${title && `\\title{${title}}`}` +
+        `${dateSiteTitle && `\\date{${dateSiteTitle}}`}` +
+        `${this.header?.Event && `\\author{${this.header.Event}`}` +
+        `${beginDocument}`;
     }
 
     this.texEnd = `\n${endDocument}`;
