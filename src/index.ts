@@ -91,21 +91,19 @@ export default class Pgn2Tex {
   private generatePlayersTitle() {
     if (!this.header) return '';
 
-    const whiteComponent = `${this.header.White ? sanitiseString(this.header.White) : ''} ${
-      this.header.WhiteElo ? `(${this.header.WhiteElo})` : ''
-    }`;
+    const whiteName = this.header.White ? sanitiseString(this.header.White) : '';
+    const whiteElo = this.header.WhiteElo ? `(${this.header.WhiteElo})` : '';
+    const whiteComponent = `${whiteName} ${whiteElo}`.trim();
 
-    const blackComponent = `${this.header.Black ? this.header.Black : ''} ${
-      this.header.BlackElo ? `(${this.header.BlackElo})` : ''
-    }`;
+    const blackName = this.header.Black ? sanitiseString(this.header.Black) : '';
+    const blackElo = this.header.BlackElo ? `(${this.header.BlackElo})` : '';
+    const blackComponent = `${blackName} ${blackElo}`.trim();
 
-    if (whiteComponent.length > 0 && blackComponent.length > 0) {
+    if (whiteComponent && blackComponent) {
       return `${whiteComponent} - ${blackComponent}`;
     }
 
-    if (whiteComponent.length > 0) return whiteComponent;
-    if (blackComponent.length > 0) return blackComponent;
-    return '';
+    return whiteComponent || blackComponent || '';
   }
 
   /**

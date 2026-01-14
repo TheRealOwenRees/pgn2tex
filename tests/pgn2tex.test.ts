@@ -22,6 +22,7 @@ describe('Example PGNs', () => {
     const pgn = pgnReader('tests/pgn_examples/2.pgn');
     const pgn2Tex = new Pgn2Tex(pgn, diagrams1, true);
     const texString = pgn2Tex.toTex();
+    console.log(texString);
     expect(texString).not.toContain('\\par\\chessboard[setfen=');
     expect(texString).toContain('\\par\\nobreak\\textbf');
   });
