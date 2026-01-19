@@ -79,7 +79,7 @@ describe('Example PGNs', () => {
     const pgn = pgnReader('tests/pgn_examples/9.pgn');
     const pgn2Tex = new Pgn2Tex(pgn, diagrams1);
     const texString = pgn2Tex.toTex();
-    expect(texString).not.toContain('\\date{}');
+    expect(texString).toContain('\\date{}');
   });
 
   test('Game 10 - contains % symbol', () => {
@@ -89,10 +89,21 @@ describe('Example PGNs', () => {
     expect(texString).not.toContain('undefined');
   });
 
-  test('Game 11 - contains % symbol', () => {
+  test('Game 11 - contains % symbol and needs escape characters for & and :', () => {
     const pgn = pgnReader('tests/pgn_examples/11.pgn');
     const pgn2Tex = new Pgn2Tex(pgn, diagrams1);
     const texString = pgn2Tex.toTex();
     expect(texString).not.toContain('undefined');
+    expect(texString).toContain('\\&');
+  });
+
+  test('Game 12 - same as game 9 but without title', () => {
+    const pgn = pgnReader('tests/pgn_examples/12.pgn');
+    const pgn2Tex = new Pgn2Tex(pgn, diagrams1);
+    const texString = pgn2Tex.toTex();
+    expect(texString).not.toContain('\\title{}');
+    expect(texString).toContain('\\date{}');
+    expect(texString).not.toContain('undefined');
+    expect(texString).not.toContain('false');
   });
 });

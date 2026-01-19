@@ -1,13 +1,14 @@
 import { parseGame, ParseTree } from '@mliebelt/pgn-parser';
 import type { PgnMove, Tags } from '@mliebelt/pgn-types';
 import { beginDocument, documentSetup, endDocument } from './documentConfig';
+import { sanitiseString } from './utils';
 
 export interface Diagram {
   ply: number;
   fen: string;
 }
 
-interface ExtendedTags extends Partial<Tags> {
+export interface ExtendedTags extends Partial<Tags> {
   Title?: string;
   Subtitle?: string;
   Author?: string;
@@ -50,15 +51,24 @@ export default class Pgn2Tex {
       };
 
       this.texStart =
-        `${documentSetup}\\title{${this.header.Title}\\\\[2ex]\\large{${this.header.Subtitle || ''}}}` +
-        `${this.header?.DateString && `\\date{${this.header?.DateString}}`}` +
-        `${this.header?.Author && `\\author{${this.header?.Author}}`}` +
-        `${beginDocument}`;
+        `${documentSetup}` +
+        `${this.header.Title ? `\\title{${this.header.Title}\\\\[2ex]` : ''}` +
+        `${this.header.Subtitle ? `\\large{${this.header.Subtitle}}` : ''}` +
+        `${this.header.DateString ? `\\date{${this.header.DateString}}` : '\\date{}'}` +
+        `${this.header.Author ? `\\author{${this.header.Author}}` : ''}` +
+        `${beginDocument(this.header)}`;
     } else {
       this.header = this.game.tags;
 
-      this.texStart = `${documentSetup}\\title{${this.generatePlayersTitle()}}\\date{${this.generateDateSiteTitle()}}\\author{${this
-        .header?.Event}}${beginDocument}`;
+      const title = this.generatePlayersTitle();
+      const dateSiteTitle = this.generateDateSiteTitle();
+
+      this.texStart =
+        `${documentSetup}` +
+        `${title ? `\\title{${title}}\\\\[2ex]` : ''}` +
+        `${dateSiteTitle ? `\\date{${dateSiteTitle}}` : '\\date{}'}` +
+        `${this.header?.Event ? `\\author{${this.header.Event}}` : ''}` +
+        `${beginDocument(this.header)}`;
     }
 
     this.texEnd = `\n${endDocument}`;
@@ -81,18 +91,19 @@ export default class Pgn2Tex {
   private generatePlayersTitle() {
     if (!this.header) return '';
 
-    const whiteComponent = `${this.header.White ? this.header.White : ''}${
-      this.header.WhiteElo ? ` ${this.header.WhiteElo}` : ''
-    }`;
+    const whiteName = this.header.White ? sanitiseString(this.header.White) : '';
+    const whiteElo = this.header.WhiteElo ? `(${this.header.WhiteElo})` : '';
+    const whiteComponent = `${whiteName} ${whiteElo}`.trim();
 
-    const blackComponent = `${this.header.Black ? this.header.Black : ''}${
-      this.header.BlackElo ? ` ${this.header.BlackElo}` : ''
-    }`;
+    const blackName = this.header.Black ? sanitiseString(this.header.Black) : '';
+    const blackElo = this.header.BlackElo ? `(${this.header.BlackElo})` : '';
+    const blackComponent = `${blackName} ${blackElo}`.trim();
 
-    if (whiteComponent.length > 0 && blackComponent.length > 0) return `${whiteComponent} - ${blackComponent}`;
-    if (whiteComponent.length > 0) return whiteComponent;
-    if (blackComponent.length > 0) return blackComponent;
-    return '';
+    if (whiteComponent && blackComponent) {
+      return `${whiteComponent} - ${blackComponent}`;
+    }
+
+    return whiteComponent || blackComponent || '';
   }
 
   /**
@@ -117,7 +128,7 @@ export default class Pgn2Tex {
 
   private commentsAfter(move: PgnMove) {
     if (move.commentAfter) {
-      this.moveStr += `\\newline ${move.commentAfter.trim()} \\par `;
+      this.moveStr += `\\newline ${sanitiseString(move.commentAfter)} \\par `;
       this.addThreeDots(move);
     }
   }
