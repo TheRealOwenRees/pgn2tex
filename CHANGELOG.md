@@ -1,6 +1,7 @@
 ## v0.2.2
 
 - Sanitise `&` and `:` as escape charcters in TeX output.
+- Remove space for the title if no title information is present. Game moves will start at the top of the page.
 
 ## v0.2.1
 
