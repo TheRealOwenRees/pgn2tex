@@ -8,7 +8,7 @@ export interface Diagram {
   fen: string;
 }
 
-interface ExtendedTags extends Partial<Tags> {
+export interface ExtendedTags extends Partial<Tags> {
   Title?: string;
   Subtitle?: string;
   Author?: string;
@@ -56,7 +56,7 @@ export default class Pgn2Tex {
         `${this.header.Subtitle ? `\\large{${this.header.Subtitle}}` : ''}` +
         `${this.header.DateString ? `\\date{${this.header.DateString}}` : '\\date{}'}` +
         `${this.header.Author ? `\\author{${this.header.Author}}` : ''}` +
-        `${beginDocument}`;
+        `${beginDocument(this.header)}`;
     } else {
       this.header = this.game.tags;
 
@@ -68,7 +68,7 @@ export default class Pgn2Tex {
         `${title ? `\\title{${title}}\\\\[2ex]` : ''}` +
         `${dateSiteTitle ? `\\date{${dateSiteTitle}}` : '\\date{}'}` +
         `${this.header?.Event ? `\\author{${this.header.Event}}` : ''}` +
-        `${beginDocument}`;
+        `${beginDocument(this.header)}`;
     }
 
     this.texEnd = `\n${endDocument}`;
