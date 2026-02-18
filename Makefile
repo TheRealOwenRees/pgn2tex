@@ -10,7 +10,7 @@ run:
 	dune exec bin/main.exe
 
 test:
-	dune test
+	dune runtest
 
 install-deps:
 	opam install dune sedlex js_of_ocaml-compiler ounit2 ocaml-lsp-server ocamlformat

@@ -1,3 +1,4 @@
 (test
- (name test_pgn2tex)
- (libraries ounit2 sedlex pgn_logic))
+ (name test_suite)
+ (modules (:standard))
+ (libraries ounit2 sedlex sedlex.ppx pgn_logic))
