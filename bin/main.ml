@@ -15,6 +15,7 @@ let rec run_lexer is_header lexbuf =
   | Lexer.MOVE s -> Printf.printf "MOVE: %s\n" s
   | Lexer.NUMBER s -> Printf.printf "NUMBER: %s\n" s
   | Lexer.COMMENT s -> Printf.printf "COMMENT: %s\n" s
+  | Lexer.NAG s -> Printf.printf "NAG: %s\n" s
   | Lexer.EOF -> print_endline "EOF");
 
   (* Update state and loop *)

@@ -16,6 +16,7 @@ type token =
   | MOVE of string
   | NUMBER of string
   | COMMENT of string
+  | NAG of string
   | EOF
 
 let rec tokenize_header buf =
@@ -32,6 +33,7 @@ and tokenize_game buf =
   | Plus white_space -> tokenize_game buf
   | '[' -> TAG_OPEN
   | '{' -> read_comment (Buffer.create 32) buf
+  | '$', Plus digit -> NAG (Utf8.lexeme buf)
   | Plus digit, Plus '.' -> NUMBER (Utf8.lexeme buf)
   | "O-O" | "O-O-O" -> MOVE (Utf8.lexeme buf)
   | ('K' | 'Q' | 'R' | 'B' | 'N' | 'a' .. 'h'), Star move_char ->
