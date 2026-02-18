@@ -30,7 +30,7 @@ let rec run_lexer is_header lexbuf =
   | _ -> run_lexer is_header lexbuf
 
 let () =
-  let filename = "test/pgn_examples/2.pgn" in
+  let filename = "test/pgn_examples/7.pgn" in
   try
     let ic = In_channel.open_text filename in
     let lexbuf = Sedlexing.Utf8.from_channel ic in

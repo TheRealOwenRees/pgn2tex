@@ -49,6 +49,7 @@ and tokenize_game buf =
   | ('K' | 'Q' | 'R' | 'B' | 'N' | 'a' .. 'h'), Star move_char ->
       MOVE (Utf8.lexeme buf)
   | eof -> EOF
+  | any -> tokenize_game buf
   | _ -> failwith "Unexpected character in game"
 
 and read_string b buf =
