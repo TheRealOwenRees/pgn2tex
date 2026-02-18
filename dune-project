@@ -5,11 +5,11 @@
 (generate_opam_files true)
 
 (source
- (github username/reponame))
+ (github therealowenrees/pgn2tex))
 
-(authors "Author Name <author@example.com>")
+(authors "Owen Rees <owenrees.dev@gmail.com>")
 
-(maintainers "Maintainer Name <maintainer@example.com>")
+(maintainers "Owen Rees <owenrees.dev@gmail.com>")
 
 (license LICENSE)
 
