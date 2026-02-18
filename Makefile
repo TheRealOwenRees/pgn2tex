@@ -13,7 +13,7 @@ test:
 	dune runtest
 
 install-deps:
-	opam install dune sedlex js_of_ocaml-compiler ounit2 ocaml-lsp-server ocamlformat
+	opam install dune sedlex menhir js_of_ocaml-compiler ounit2 ocaml-lsp-server ocamlformat
 
 build-js:
 	dune build bin/main.bc.js --profile release
