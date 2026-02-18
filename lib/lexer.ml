@@ -19,6 +19,7 @@ type token =
   | NUMBER of string
   | COMMENT of string
   | NAG of string
+  | RESULT of string
   | EOF
 
 let rec tokenize_header buf =
@@ -39,6 +40,7 @@ and tokenize_game buf =
   | '{' -> read_comment (Buffer.create 32) buf
   | '$', Plus digit -> NAG (Utf8.lexeme buf)
   | Plus digit, Plus '.' -> NUMBER (Utf8.lexeme buf)
+  | "1-0" | "0-1" | "1/2-1/2" | "*" -> RESULT (Utf8.lexeme buf)
   | "O-O" | "O-O-O" -> MOVE (Utf8.lexeme buf)
   | ('K' | 'Q' | 'R' | 'B' | 'N' | 'a' .. 'h'), Star move_char ->
       MOVE (Utf8.lexeme buf)
