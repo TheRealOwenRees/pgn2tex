@@ -1,24 +1,51 @@
 open Sedlexing
 
-(* let digit = [%sedlex.regexp? '0'..'9']
-let whitespace = [%sedlex.regexp? Plus (white_space | '\n' | '\r')]
-let nag = [%sedlex.regexp? '$', Plus digit]
-let comment = [%sedlex.regexp? '{', Star (any - '}'), '}']
+let digit = [%sedlex.regexp? '0' .. '9']
+let letter = [%sedlex.regexp? 'a' .. 'z' | 'A' .. 'Z']
+let alphabetic = [%sedlex.regexp? letter]
+let move_char = [%sedlex.regexp? letter | digit | '+' | '#' | '=' | '-' | 'x']
+
+let piece_square_char =
+  [%sedlex.regexp? 'K' | 'Q' | 'R' | 'B' | 'N' | 'O' | 'a' .. 'h']
 
 type token =
-  | TAG_OPEN | TAG_CLOSE
+  | TAG_OPEN
+  | TAG_CLOSE
+  | HEADER of string
   | STRING of string
   | MOVE of string
-  | COMMENT of string
-  | NAG of string
-  | EOF *)
+  | NUMBER of string
+  | EOF
 
-type token = TAG_OPEN | TAG_CLOSE | EOF
-
-let rec tokenize buf =
+let rec tokenize_header buf =
   match%sedlex buf with
-  | '[' -> TAG_OPEN
+  | Plus white_space -> tokenize_header buf
   | ']' -> TAG_CLOSE
+  | '"' -> read_string (Buffer.create 16) buf
+  (* Inside a tag, any word is an IDENT, period. *)
+  | letter, Star (letter | digit | '_') -> HEADER (Utf8.lexeme buf)
   | eof -> EOF
-  | any -> tokenize buf
-  | _ -> failwith "Lexing error"
+  | _ -> failwith "Unexpected character in header"
+
+and tokenize_game buf =
+  match%sedlex buf with
+  | Plus white_space -> tokenize_game buf
+  | '[' -> TAG_OPEN
+  | Plus digit, Plus '.' -> NUMBER (Utf8.lexeme buf)
+  (* Movetext moves (starts with Piece or Square) *)
+  | "O-O" | "O-O-O" -> MOVE (Utf8.lexeme buf)
+  | ('K' | 'Q' | 'R' | 'B' | 'N' | 'a' .. 'h'), Star move_char ->
+      MOVE (Utf8.lexeme buf)
+  | eof -> EOF
+  | _ -> failwith "Unexpected character in game"
+
+and read_string b buf =
+  match%sedlex buf with
+  | '"' -> STRING (Buffer.contents b)
+  | '\\', '"' ->
+      Buffer.add_char b '"';
+      read_string b buf
+  | any ->
+      Buffer.add_string b (Utf8.lexeme buf);
+      read_string b buf
+  | _ -> failwith "Unterminated string"
