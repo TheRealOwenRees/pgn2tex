@@ -29,3 +29,5 @@
   | 146 -> "N" (* Novelty *)
   (* Fallback for others: just print the $ number as a comment or ignore *)
   | n -> Printf.sprintf "%% NAG $%d" n *)
+
+(* If you use the chessfss package in LaTeX, you get access to specific glyphs like \wbetter ($14), \bbetter ($15), and \unclear ($13) which look much more professional than standard math symbols. *)
