@@ -19,6 +19,7 @@ let rec run_lexer is_header lexbuf =
   | Lexer.COMMENT s -> Printf.printf "COMMENT: %s\n" s
   | Lexer.NAG s -> Printf.printf "NAG: %s\n" s
   | Lexer.RESULT s -> Printf.printf "RESULT: %s\n" s
+  | Lexer.CLOCK s -> Printf.printf "CLOCK: %s\n" s
   | Lexer.EOF -> print_endline "EOF");
 
   (* Update state and loop *)
@@ -29,7 +30,7 @@ let rec run_lexer is_header lexbuf =
   | _ -> run_lexer is_header lexbuf
 
 let () =
-  let filename = "test/pgn_examples/1.pgn" in
+  let filename = "test/pgn_examples/2.pgn" in
   try
     let ic = In_channel.open_text filename in
     let lexbuf = Sedlexing.Utf8.from_channel ic in
