@@ -24,8 +24,12 @@ let rec run_lexer is_header lexbuf =
   | _ -> run_lexer is_header lexbuf
 
 let () =
-  let input =
-    "[Event \"Example\"] [Site \"GitHub\"] [Round \"1\"] 1. e4 e5 2. Nf3"
-  in
-  let lexbuf = Sedlexing.Utf8.from_string input in
-  run_lexer false lexbuf
+  let filename = "test/pgn_examples/1.pgn" in
+  try
+    let ic = In_channel.open_text filename in
+    let lexbuf = Sedlexing.Utf8.from_channel ic in
+    print_endline ("--- Lexing: " ^ filename ^ " ---");
+    run_lexer false lexbuf;
+    close_in ic
+  with Sys_error msg ->
+    Printf.eprintf "Error: Could not find or read file: %s\n" msg

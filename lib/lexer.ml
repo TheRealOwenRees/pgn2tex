@@ -22,7 +22,6 @@ let rec tokenize_header buf =
   | Plus white_space -> tokenize_header buf
   | ']' -> TAG_CLOSE
   | '"' -> read_string (Buffer.create 16) buf
-  (* Inside a tag, any word is an IDENT, period. *)
   | letter, Star (letter | digit | '_') -> HEADER (Utf8.lexeme buf)
   | eof -> EOF
   | _ -> failwith "Unexpected character in header"
@@ -32,7 +31,6 @@ and tokenize_game buf =
   | Plus white_space -> tokenize_game buf
   | '[' -> TAG_OPEN
   | Plus digit, Plus '.' -> NUMBER (Utf8.lexeme buf)
-  (* Movetext moves (starts with Piece or Square) *)
   | "O-O" | "O-O-O" -> MOVE (Utf8.lexeme buf)
   | ('K' | 'Q' | 'R' | 'B' | 'N' | 'a' .. 'h'), Star move_char ->
       MOVE (Utf8.lexeme buf)
