@@ -1,4 +1,5 @@
 open Sedlexing
+open Parser
 
 let digit = [%sedlex.regexp? '0' .. '9']
 let letter = [%sedlex.regexp? 'a' .. 'z' | 'A' .. 'Z']
@@ -10,7 +11,7 @@ let piece_square_char =
 
 let clock_val = [%sedlex.regexp? Plus (digit | ':'), Opt ('.', Plus digit)]
 
-type token =
+(* type token =
   | TAG_OPEN
   | TAG_CLOSE
   | LPAREN
@@ -23,7 +24,7 @@ type token =
   | NAG of string
   | RESULT of string
   | CLOCK of string
-  | EOF
+  | EOF *)
 
 let rec tokenize_header buf =
   match%sedlex buf with

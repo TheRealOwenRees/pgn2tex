@@ -1,11 +1,13 @@
 open OUnit2
-open Pgn_logic.Lexer
+open Pgn_logic
+open Parser
 
 let lex_all ?(is_header = false) s =
   let lexbuf = Sedlexing.Utf8.from_string s in
   let rec loop acc =
     let tok =
-      if is_header then tokenize_header lexbuf else tokenize_game lexbuf
+      if is_header then Lexer.tokenize_header lexbuf
+      else Lexer.tokenize_game lexbuf
     in
     match tok with EOF -> List.rev (EOF :: acc) | t -> loop (t :: acc)
   in
@@ -112,9 +114,9 @@ let test_unterminated_comment_raises _ctxt =
   let lexbuf = Sedlexing.Utf8.from_string input in
   let exn_opt =
     try
-      ignore (tokenize_game lexbuf);
-      ignore (tokenize_game lexbuf);
-      ignore (tokenize_game lexbuf);
+      ignore (Lexer.tokenize_game lexbuf);
+      ignore (Lexer.tokenize_game lexbuf);
+      ignore (Lexer.tokenize_game lexbuf);
       (* this should try to read comment *)
       None
     with exn -> Some exn

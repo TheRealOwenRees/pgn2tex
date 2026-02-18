@@ -1,5 +1,7 @@
 (lang dune 3.21)
 
+(using menhir 3.0)
+
 (name pgn2tex)
 
 (generate_opam_files true)
