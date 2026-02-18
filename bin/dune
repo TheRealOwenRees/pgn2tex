@@ -1,0 +1,4 @@
+(executable
+ (public_name pgn2tex)
+ (name main)
+ (libraries sedlex pgn_logic))
