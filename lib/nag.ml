@@ -1,4 +1,4 @@
-(* let nag_to_latex = function
+(* let nag_to_tex = function
   (* Move Assessments *)
   | 1 -> "!" (* Good move *)
   | 2 -> "?" (* Poor move *)
