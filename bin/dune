@@ -1,4 +1,5 @@
 (executable
- (public_name pgn2tex)
  (name main)
+ (public_name pgn2tex)
+ (modes exe js)
  (libraries sedlex pgn_logic))
