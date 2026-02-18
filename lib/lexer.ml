@@ -15,6 +15,7 @@ type token =
   | STRING of string
   | MOVE of string
   | NUMBER of string
+  | COMMENT of string
   | EOF
 
 let rec tokenize_header buf =
@@ -30,6 +31,7 @@ and tokenize_game buf =
   match%sedlex buf with
   | Plus white_space -> tokenize_game buf
   | '[' -> TAG_OPEN
+  | '{' -> read_comment (Buffer.create 32) buf
   | Plus digit, Plus '.' -> NUMBER (Utf8.lexeme buf)
   | "O-O" | "O-O-O" -> MOVE (Utf8.lexeme buf)
   | ('K' | 'Q' | 'R' | 'B' | 'N' | 'a' .. 'h'), Star move_char ->
@@ -47,3 +49,12 @@ and read_string b buf =
       Buffer.add_string b (Utf8.lexeme buf);
       read_string b buf
   | _ -> failwith "Unterminated string"
+
+and read_comment b buf =
+  match%sedlex buf with
+  | '}' -> COMMENT (Buffer.contents b)
+  | eof -> failwith "Unterminated comment"
+  | any ->
+      Buffer.add_string b (Utf8.lexeme buf);
+      read_comment b buf
+  | _ -> failwith "Lexing error in comment"
