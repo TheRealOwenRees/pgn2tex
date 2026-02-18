@@ -11,6 +11,8 @@ let piece_square_char =
 type token =
   | TAG_OPEN
   | TAG_CLOSE
+  | LPAREN
+  | RPAREN
   | HEADER of string
   | STRING of string
   | MOVE of string
@@ -32,6 +34,8 @@ and tokenize_game buf =
   match%sedlex buf with
   | Plus white_space -> tokenize_game buf
   | '[' -> TAG_OPEN
+  | '(' -> LPAREN
+  | ')' -> RPAREN
   | '{' -> read_comment (Buffer.create 32) buf
   | '$', Plus digit -> NAG (Utf8.lexeme buf)
   | Plus digit, Plus '.' -> NUMBER (Utf8.lexeme buf)

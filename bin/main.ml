@@ -10,6 +10,8 @@ let rec run_lexer is_header lexbuf =
   (match token with
   | Lexer.TAG_OPEN -> print_endline "TAG_OPEN ["
   | Lexer.TAG_CLOSE -> print_endline "TAG_CLOSE ]"
+  | Lexer.LPAREN -> print_endline "LPAREN ( "
+  | Lexer.RPAREN -> print_endline "RPAREN ) "
   | Lexer.HEADER s -> Printf.printf "HEADER: %s\n" s
   | Lexer.STRING s -> Printf.printf "STRING: \"%s\"\n" s
   | Lexer.MOVE s -> Printf.printf "MOVE: %s\n" s
