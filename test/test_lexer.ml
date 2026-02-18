@@ -1,4 +1,3 @@
-(* ocaml *)
 open OUnit2
 open Pgn_logic.Lexer
 
@@ -104,7 +103,6 @@ let test_move_syntax_variants _ctxt =
   assert_tokens ~ctxt:_ctxt ~input ~is_header:false ~expected
 
 let test_king_side_zero_letter_o _ctxt =
-  (* Current lexer matches 'O-O' with capital letter 'O' specifically. *)
   let input = "1. O-O *" in
   let expected = [ NUMBER "1."; MOVE "O-O"; RESULT "*"; EOF ] in
   assert_tokens ~ctxt:_ctxt ~input ~is_header:false ~expected
