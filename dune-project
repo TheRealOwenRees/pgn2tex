@@ -17,7 +17,7 @@
 
 (package
  (name pgn2tex)
- (synopsis "A short synopsis")
+ (synopsis "A chess PGN to TeX conversion tool")
  (description "A longer description")
  (depends ocaml)
  (tags
