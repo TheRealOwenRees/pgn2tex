@@ -1,7 +1,7 @@
 (library
  (name pgn_logic)
  (libraries sedlex menhirLib)
- (modules ast parser lexer parsing)
+ (modules ast parser lexer parsing latex)
  (preprocess
   (pps sedlex.ppx)))
 
