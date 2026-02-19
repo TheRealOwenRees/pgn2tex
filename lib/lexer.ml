@@ -11,21 +11,6 @@ let piece_square_char =
 
 let clock_val = [%sedlex.regexp? Plus (digit | ':'), Opt ('.', Plus digit)]
 
-(* type token =
-  | TAG_OPEN
-  | TAG_CLOSE
-  | LPAREN
-  | RPAREN
-  | HEADER of string
-  | STRING of string
-  | MOVE of string
-  | NUMBER of string
-  | COMMENT of string
-  | NAG of string
-  | RESULT of string
-  | CLOCK of string
-  | EOF *)
-
 let rec tokenize_header buf =
   match%sedlex buf with
   | Plus white_space -> tokenize_header buf
