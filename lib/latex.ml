@@ -3,7 +3,7 @@ open Ast
 let rec item_to_tex = function
   | Number n -> "\\textbf{" ^ n ^ "}"
   | Move m -> "\\textbf{" ^ m ^ "}"
-  | Comment s -> "\\newline " ^ s ^ " \\par"
+  | Comment s -> s
   | Result r -> "\\textbf{" ^ r ^ "}"
   | _ -> ""
 
@@ -20,6 +20,9 @@ let render_game items =
     | Move m :: Number n :: rest ->
         (* Space before the next move number *)
         item_to_tex (Move m) ^ " " ^ aux (Number n :: rest)
+    | Comment c :: rest ->
+        (* Comment on newline - need to change when dealing with comments before / after*)
+        "\\newline" ^ " " ^ item_to_tex (Comment c) ^ "\\par" ^ aux rest
     | head :: tail -> item_to_tex head ^ aux tail
   in
   aux items
