@@ -22,7 +22,7 @@ let rec item_to_tex = function
   | Move m -> "\\textbf{" ^ escape_tex m ^ "}"
   | Comment c -> "\\newline " ^ escape_tex c ^ "\\par"
   | Result r -> "\\textbf{" ^ r ^ "}"
-  | Variation vs -> "( " ^ render_game vs ^ " )"
+  | Variation v -> "( " ^ render_game v ^ " )"
   | _ -> ""
 
 and render_game items =
@@ -35,23 +35,3 @@ and render_game items =
         if rendered_head = "" then aux tail else rendered_head ^ " " ^ aux tail
   in
   String.trim (aux items)
-
-(* and render_game items =
-  let rec aux = function
-    | [] -> ""
-    | [ last ] -> item_to_tex last
-    | Number n :: Move m :: rest ->
-        (* Space between "1." and "e4" *)
-        item_to_tex (Number n) ^ " " ^ aux (Move m :: rest)
-    | Move m1 :: Move m2 :: rest ->
-        (* Space between "e4" and "e5" *)
-        item_to_tex (Move m1) ^ " " ^ aux (Move m2 :: rest)
-    | Move m :: Number n :: rest ->
-        (* Space before the next move number *)
-        item_to_tex (Move m) ^ " " ^ aux (Number n :: rest)
-    | Comment c :: rest ->
-        (* Comment on newline - need to change when dealing with comments before / after*)
-        "\\newline" ^ " " ^ item_to_tex (Comment c) ^ "\\par" ^ aux rest
-    | head :: tail -> item_to_tex head ^ aux tail
-  in
-  aux items *)
