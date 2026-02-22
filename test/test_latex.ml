@@ -21,7 +21,7 @@ let test_move_to_latex_direct _ctxt =
 let test_comment_to_latex_direct _ctxt =
   let comment = "some comment here" in
   let item = Comment comment in
-  let expected = comment in
+  let expected = "\\newline " ^ comment ^ "\\par" in
   let actual = Latex.item_to_tex item in
 
   assert_equal ~printer:(fun x -> x) expected actual
