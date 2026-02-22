@@ -3,7 +3,8 @@ open Ast
 let rec item_to_tex = function
   | Number n -> "\\textbf{" ^ n ^ "}"
   | Move m -> "\\textbf{" ^ m ^ "}"
-  | Comment s -> s
+  | Comment s -> "\\newline " ^ s ^ " \\par"
+  | Result r -> "\\textbf{" ^ r ^ "}"
   | _ -> ""
 
 let render_game items =

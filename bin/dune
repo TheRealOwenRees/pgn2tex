@@ -1,5 +1,8 @@
 (executable
  (name main)
  (public_name pgn2tex)
+ (libraries sedlex pgn_logic)
  (modes exe js)
- (libraries sedlex pgn_logic))
+ (js_of_ocaml
+  (flags
+   (:standard --opt 3))))

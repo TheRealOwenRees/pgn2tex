@@ -21,7 +21,7 @@ let test_move_to_latex_direct _ctxt =
 let test_comment_to_latex_direct _ctxt =
   let comment = "some comment here" in
   let item = Comment comment in
-  let expected = comment in
+  let expected = "\\newline " ^ comment ^ " \\par" in
   let actual = Latex.item_to_tex item in
 
   assert_equal ~printer:(fun x -> x) expected actual
@@ -49,6 +49,20 @@ let test_basic_longer_pgn _ctxt =
       let actual = Latex.render_game items in
       assert_equal ~printer:(fun x -> x) expected actual
 
+let test_basic_pgn_file_with_comments _ctxt =
+  let filename = "pgn_examples/1.pgn" in
+  try
+    let ic = In_channel.open_text filename in
+    let pgn = In_channel.input_all ic in
+    let parsed_game = Parsing.parse_pgn pgn in
+
+    match parsed_game.content with
+    | items ->
+        let expected = "\\textbf{}" in
+        let actual = Latex.render_game items in
+        assert_equal ~printer:(fun x -> x) expected actual
+  with Sys_error _ -> assert_failure "Could not open file"
+
 let suite =
   "latex tests"
   >::: [
@@ -57,6 +71,9 @@ let suite =
          "comment_to_latex_direct" >:: test_comment_to_latex_direct;
          "basic_pgn" >:: test_basic_pgn;
          "basic_longer_pgn" >:: test_basic_longer_pgn;
+         "basic_pgn_file_with_comments" >:: test_basic_pgn_file_with_comments;
        ]
 
-let () = run_test_tt_main suite
+let () =
+  Printf.printf "Current Directory: %s\n" (Sys.getcwd ());
+  run_test_tt_main suite

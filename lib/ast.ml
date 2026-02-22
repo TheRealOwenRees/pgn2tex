@@ -6,6 +6,7 @@ type item =
   | Clock of string
   | Nag of string
   | Comment of string
+  | Result of string
   | Variation of item list
 
 type game = { tags : tag list; content : item list; result : string option }

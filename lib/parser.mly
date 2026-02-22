@@ -31,4 +31,5 @@ item:
   | c = CLOCK  { Clock c }
   | g = NAG    { Nag g }
   | c = COMMENT { Comment c }
+  | r = RESULT  { Result r }
   | LPAREN; v = content; RPAREN { Variation v }
