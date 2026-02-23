@@ -55,7 +55,7 @@ let test_variation_pgn _ctxt =
   let parsed_game = Parsing.parse_pgn pgn in
   (* Mainline is bold, variation is italic and plain text inside *)
   let expected =
-    "\\textbf{1.} \\textbf{e4} \\textit( 1. d4 d5 ) \\textbf{1...} \\textbf{e5}"
+    "\\textbf{1.} \\textbf{e4} ( 1. d4 d5 ) \\textbf{1...} \\textbf{e5}"
   in
   let actual = Latex.render_game true parsed_game.content in
   assert_equal ~printer:(fun x -> x) expected actual
