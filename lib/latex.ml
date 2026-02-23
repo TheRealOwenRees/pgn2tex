@@ -21,7 +21,9 @@ let rec item_to_tex is_mainline = function
   | Number n -> if is_mainline then "\\textbf{" ^ n ^ "}" else n
   | Move m ->
       if is_mainline then "\\textbf{" ^ escape_tex m ^ "}" else escape_tex m
-  | Comment c -> "\\newline " ^ escape_tex c ^ "\\par"
+  | Comment c ->
+      if is_mainline then "\\newline " ^ escape_tex c ^ "\\par"
+      else escape_tex c
   | Result r -> "\\textbf{" ^ r ^ "}"
   | Variation v -> "( " ^ render_game false v ^ " )"
   | _ -> ""
