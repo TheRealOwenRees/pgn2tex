@@ -7,7 +7,6 @@ let rec run_lexer is_header lexbuf =
     else Lexer.tokenize_game lexbuf
   in
 
-  (* Update state and loop *)
   match token with
   | EOF -> ()
   | TAG_OPEN -> run_lexer true lexbuf (* Enter header mode *)
