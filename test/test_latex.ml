@@ -2,9 +2,6 @@ open OUnit2
 open Pgn_logic
 open Ast
 
-(* let render_game items =
-  String.concat "" (List.map Latex.item_to_tex is_mainline items) *)
-
 let test_number_to_latex_direct _ctxt =
   let item = Number "1." in
   let expected = "\\textbf{1.}" in
@@ -53,7 +50,6 @@ let test_basic_longer_pgn _ctxt =
 let test_variation_pgn _ctxt =
   let pgn = "1. e4 (1. d4 d5) 1... e5" in
   let parsed_game = Parsing.parse_pgn pgn in
-  (* Mainline is bold, variation is italic and plain text inside *)
   let expected =
     "\\textbf{1.} \\textbf{e4} ( 1. d4 d5 ) \\textbf{1...} \\textbf{e5}"
   in
@@ -64,14 +60,14 @@ let test_basic_pgn_file_with_comments _ctxt =
   let filename = "pgn_examples/1.pgn" in
   try
     let ic = In_channel.open_text filename in
-    let pgn = In_channel.input_all ic in
-    let parsed_game = Parsing.parse_pgn pgn in
+    let parsed_game = ic |> In_channel.input_all |> Parsing.parse_pgn in
 
     match parsed_game.content with
     | items ->
         let expected = "\\textbf{}" in
         let actual = Latex.render_game true items in
-        assert_equal ~printer:(fun x -> x) expected actual
+        assert_equal ~printer:(fun x -> x) expected actual;
+        close_in ic
   with Sys_error _ -> assert_failure "Could not open file"
 
 let suite =

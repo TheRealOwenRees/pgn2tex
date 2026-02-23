@@ -1,7 +1,5 @@
 open Ast
 
-(* Helper to safely escape LaTeX special characters.
-   Crucial for checkmate moves like a1=R# which must become a1=R\# *)
 let escape_tex s =
   let b = Buffer.create (String.length s) in
   String.iter
@@ -16,6 +14,28 @@ let escape_tex s =
       | _ -> Buffer.add_char b c)
     s;
   Buffer.contents b
+
+let get_tag_value key tags ~default =
+  match List.find_opt (fun t -> t.key = key) tags with
+  | Some t -> t.value
+  | None -> default
+
+let tags_to_tex tags =
+  let white = get_tag_value "White" tags ~default:"Unknown" in
+  let black = get_tag_value "Black" tags ~default:"Unknown" in
+  let event = get_tag_value "Event" tags ~default:"Chess Game" in
+  let date = get_tag_value "Date" tags ~default:"" in
+
+  let title_tex = "\\title{" ^ escape_tex event ^ "}" in
+  let author_tex =
+    "\\author{" ^ escape_tex white ^ " vs. " ^ escape_tex black ^ "}"
+  in
+
+  let date_tex =
+    if date = "" || date = "????.??.??" then ""
+    else "\\date{" ^ escape_tex date ^ "}\n"
+  in
+  title_tex ^ "\n" ^ author_tex ^ "\n" ^ date_tex ^ "\\maketitle\n"
 
 let rec item_to_tex is_mainline = function
   | Number n -> if is_mainline then "\\textbf{" ^ n ^ "}" else n
@@ -34,7 +54,16 @@ and render_game is_mainline items =
     | [ last ] -> item_to_tex is_mainline last
     | head :: tail ->
         let rendered_head = item_to_tex is_mainline head in
-        (* If an item renders as empty (like Clock), don't add an extra space *)
         if rendered_head = "" then aux tail else rendered_head ^ " " ^ aux tail
   in
   String.trim (aux items)
+
+let game_to_tex game =
+  let header_tex = tags_to_tex game.tags in
+  let content_tex = render_game true game.content in
+
+  let result_tex =
+    match game.result with Some r -> " \\textbf{" ^ r ^ "}" | None -> ""
+  in
+
+  header_tex ^ "\n" ^ content_tex ^ result_tex
