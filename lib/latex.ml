@@ -54,40 +54,56 @@ and render_game is_mainline ?(diagram_data = MoveMap.empty) items =
   let get_diagram ply =
     match MoveMap.find_opt ply diagram_data with
     | Some fen ->
-        "\n\\par\\nobreak\\medskip\\chessboard[setfen=" ^ fen
-        ^ ", vmargin=false]\\par\\medskip\n"
-    | None -> ""
+        Some
+          ("\n\\par\\nobreak\\medskip\\chessboard[setfen=" ^ fen
+         ^ ", vmargin=false]\\par\\medskip\n")
+    | None -> None
   in
-  let rec aux ply = function
+
+  let rec aux ply interrupted = function
     | [] -> ""
     | Comment c :: Move m :: tail when is_mainline && ply mod 2 != 0 ->
         let next_ply = ply + 1 in
-        (* let move_num = next_ply / 2 in *)
         let rendered_comment = "\\newline " ^ escape_tex c ^ "\\par" in
         let rendered_move = "\\textbf{..." ^ escape_tex m ^ "}" in
-        let diagram = get_diagram next_ply in
-        rendered_comment ^ " " ^ rendered_move ^ diagram ^ " "
-        ^ aux next_ply tail
+        let diag_str =
+          match get_diagram next_ply with Some s -> s | None -> ""
+        in
+        let has_diag = diag_str <> "" in
+        rendered_comment ^ " " ^ rendered_move ^ diag_str ^ " "
+        ^ aux next_ply has_diag tail
     | head :: tail ->
         let is_move = match head with Move _ -> true | _ -> false in
         let next_ply =
           match head with Move _ when is_mainline -> ply + 1 | _ -> ply
         in
 
+        let prefix =
+          if is_move && is_mainline && next_ply mod 2 == 0 && interrupted then
+            "..."
+          else ""
+        in
+
         let rendered_head =
-          item_to_tex is_mainline next_ply ~diagram_data head
+          let raw_head = item_to_tex is_mainline next_ply ~diagram_data head in
+          if prefix <> "" && raw_head <> "" then
+            "\\textbf{" ^ prefix ^ "}" ^ raw_head
+          else raw_head
         in
 
-        let diagram =
-          if is_move && is_mainline then get_diagram next_ply else ""
+        let diag_str =
+          if is_move && is_mainline then get_diagram next_ply else None
         in
 
-        let rest = aux next_ply tail in
+        let diag_output = match diag_str with Some s -> s | None -> "" in
+        let is_comment = match head with Comment _ -> true | _ -> false in
+        let next_interrupted = diag_output <> "" || is_comment in
+        let rest = aux next_ply next_interrupted tail in
 
         if rendered_head = "" then rest
-        else rendered_head ^ diagram ^ if rest = "" then "" else " " ^ rest
+        else rendered_head ^ diag_output ^ if rest = "" then "" else " " ^ rest
   in
-  String.trim (aux 0 items)
+  String.trim (aux 0 false items)
 
 let game_to_tex game =
   let diagram_data =
