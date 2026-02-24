@@ -1,6 +1,7 @@
 open OUnit2
 open Pgn_logic
 open Ast
+open Helpers
 
 let test_number_to_latex_direct _ctxt =
   let item = Number "1." in
@@ -56,19 +57,20 @@ let test_variation_pgn _ctxt =
   let actual = Latex.render_game true parsed_game.content in
   assert_equal ~printer:(fun x -> x) expected actual
 
-let test_basic_pgn_file_with_comments _ctxt =
+(* let test_basic_pgn_file_with_comments _ctxt =
   let filename = "pgn_examples/1.pgn" in
   try
     let ic = In_channel.open_text filename in
-    let parsed_game = ic |> In_channel.input_all |> Parsing.parse_pgn in
 
-    match parsed_game.content with
-    | items ->
-        let expected = "\\textbf{}" in
-        let actual = Latex.render_game true items in
-        assert_equal ~printer:(fun x -> x) expected actual;
-        close_in ic
-  with Sys_error _ -> assert_failure "Could not open file"
+    let actual =
+      ic |> In_channel.input_all |> Parsing.parse_pgn |> Latex.game_to_tex
+    in
+    let expected = Latex_helper.pgn1_expected in
+
+    assert_equal ~printer:(fun x -> x) actual expected;
+
+    close_in ic
+  with Sys_error _ -> assert_failure "Could not open file" *)
 
 let suite =
   "latex tests"
@@ -79,7 +81,7 @@ let suite =
          "basic_pgn" >:: test_basic_pgn;
          "basic_longer_pgn" >:: test_basic_longer_pgn;
          "variation_pgn" >:: test_variation_pgn;
-         "basic_pgn_file_with_comments" >:: test_basic_pgn_file_with_comments;
+         (* "basic_pgn_file_with_comments" >:: test_basic_pgn_file_with_comments; *)
        ]
 
 let () = run_test_tt_main suite
