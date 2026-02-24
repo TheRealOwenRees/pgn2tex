@@ -60,12 +60,10 @@ and render_game is_mainline ?(diagram_data = MoveMap.empty) items =
   in
   let rec aux ply = function
     | [] -> ""
-    (* Case: Black move after a comment *)
     | Comment c :: Move m :: tail when is_mainline && ply mod 2 != 0 ->
         let next_ply = ply + 1 in
         let move_num = next_ply / 2 in
         let rendered_comment = "\\newline " ^ escape_tex c ^ "\\par" in
-        (* Re-insert move number for black: e.g. 3... e5 *)
         let rendered_move =
           "\\textbf{" ^ string_of_int move_num ^ "... " ^ escape_tex m ^ "}"
         in
@@ -82,7 +80,6 @@ and render_game is_mainline ?(diagram_data = MoveMap.empty) items =
           item_to_tex is_mainline next_ply ~diagram_data head
         in
 
-        (* Only append diagram if we actually just processed a move *)
         let diagram =
           if is_move && is_mainline then get_diagram next_ply else ""
         in
@@ -112,9 +109,5 @@ let game_to_tex game =
   let result_tex =
     match game.result with Some r -> " \\textbf{" ^ r ^ "}" | None -> ""
   in
-
-  MoveMap.iter
-    (fun ply fen -> Printf.printf "Ply %d: %s\n" ply fen)
-    diagram_data;
 
   header_tex ^ "\n" ^ content_tex ^ result_tex
