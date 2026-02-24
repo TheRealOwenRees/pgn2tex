@@ -67,18 +67,19 @@ let test_black_move_after_comment _ctxt =
   assert_equal ~printer:(fun x -> x) expected actual
 
 let test_diagram_placement _ctxt =
-  let pgn = "1. e4 e5 2. Nf3 Nc6 3. Bb5 a3 4. Ba4 Nf6 5. O-O O-O 6. d4 exd5" in
+  let pgn = "1.e4 e5 2.Nf3 Nc6 3.Bb5 a3" in
   let parsed_game = Parsing.parse_pgn pgn in
-  let expected =
-    "\\textbf{1.} \\textbf{e4} \\textbf{e5} \\textbf{2.} \\textbf{Nf3} \
-     \\textbf{Nc6} \\textbf{3.} \\textbf{Bb5} \\textbf{a3} \\textbf{4.} \
-     \\textbf{Ba4} \\textbf{Nf6} \\textbf{5.} \\textbf{O-O} \\textbf{O-O} \
-     \\textbf{6.} \\textbf{d4} \\textbf{exd5}"
+  let rendered_game =
+    Latex.render_game true ~diagram_data:Helpers.Latex_helper.diagram_data
+      parsed_game.content
   in
-  assert_equal
-    ~printer:(fun x -> x)
-    expected
-    (Latex.render_game true parsed_game.content)
+  let expected =
+    {|\textbf{1.} \textbf{e4} \textbf{e5} \textbf{2.} \textbf{Nf3} \textbf{Nc6} \textbf{3.} \textbf{Bb5}
+\par\nobreak\medskip\chessboard[setfen=rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR w KQkq c6 0 3, vmargin=false]\par\medskip
+ \textbf{...}\textbf{a3}
+\par\nobreak\medskip\chessboard[setfen=rnbqkbnr/pp1ppppp/8/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R b KQkq - 1 3, vmargin=false]\par\medskip|}
+  in
+  assert_equal ~printer:(fun x -> x) expected rendered_game
 
 let suite =
   "latex tests"
