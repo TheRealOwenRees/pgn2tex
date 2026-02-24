@@ -57,20 +57,28 @@ let test_variation_pgn _ctxt =
   let actual = Latex.render_game true parsed_game.content in
   assert_equal ~printer:(fun x -> x) expected actual
 
-(* let test_basic_pgn_file_with_comments _ctxt =
-  let filename = "pgn_examples/1.pgn" in
-  try
-    let ic = In_channel.open_text filename in
+let test_black_move_after_comment _ctxt =
+  let pgn = "1. e4 {some comment} e5" in
+  let parsed_game = Parsing.parse_pgn pgn in
+  let expected =
+    "\\textbf{1.} \\textbf{e4} \\newline some comment\\par \\textbf{...e5}"
+  in
+  let actual = Latex.render_game true parsed_game.content in
+  assert_equal ~printer:(fun x -> x) expected actual
 
-    let actual =
-      ic |> In_channel.input_all |> Parsing.parse_pgn |> Latex.game_to_tex
-    in
-    let expected = Latex_helper.pgn1_expected in
-
-    assert_equal ~printer:(fun x -> x) actual expected;
-
-    close_in ic
-  with Sys_error _ -> assert_failure "Could not open file" *)
+let test_diagram_placement _ctxt =
+  let pgn = "1. e4 e5 2. Nf3 Nc6 3. Bb5 a3 4. Ba4 Nf6 5. O-O O-O 6. d4 exd5" in
+  let parsed_game = Parsing.parse_pgn pgn in
+  let expected =
+    "\\textbf{1.} \\textbf{e4} \\textbf{e5} \\textbf{2.} \\textbf{Nf3} \
+     \\textbf{Nc6} \\textbf{3.} \\textbf{Bb5} \\textbf{a3} \\textbf{4.} \
+     \\textbf{Ba4} \\textbf{Nf6} \\textbf{5.} \\textbf{O-O} \\textbf{O-O} \
+     \\textbf{6.} \\textbf{d4} \\textbf{exd5}"
+  in
+  assert_equal
+    ~printer:(fun x -> x)
+    expected
+    (Latex.render_game true parsed_game.content)
 
 let suite =
   "latex tests"
@@ -81,7 +89,8 @@ let suite =
          "basic_pgn" >:: test_basic_pgn;
          "basic_longer_pgn" >:: test_basic_longer_pgn;
          "variation_pgn" >:: test_variation_pgn;
-         (* "basic_pgn_file_with_comments" >:: test_basic_pgn_file_with_comments; *)
+         "black_move_after_comment" >:: test_black_move_after_comment;
+         "diagram_placement" >:: test_diagram_placement;
        ]
 
 let () = run_test_tt_main suite

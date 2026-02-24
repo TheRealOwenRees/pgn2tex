@@ -8,7 +8,7 @@ let pgn1_expected =
 
 module MoveMap = Map.Make (Int)
 
-let move_data =
+let diagram_data =
   MoveMap.empty
   |> MoveMap.add 5
        "rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR w KQkq c6 0 3"

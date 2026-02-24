@@ -1,5 +1,6 @@
 open Pgn_logic
 open Parser
+module MoveMap = Map.Make (Int)
 
 let rec run_lexer is_header lexbuf =
   let token =
@@ -13,7 +14,7 @@ let rec run_lexer is_header lexbuf =
   | TAG_CLOSE -> run_lexer false lexbuf (* Enter game mode *)
   | _ -> run_lexer is_header lexbuf
 
-let to_tex game = game |> Parsing.parse_pgn |> Latex.game_to_tex
+let to_tex pgn = pgn |> Parsing.parse_pgn |> Latex.game_to_tex
 
 let () =
   let filename = "test/pgn_examples/1.pgn" in

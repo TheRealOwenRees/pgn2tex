@@ -1,4 +1,5 @@
 open Ast
+module MoveMap = Map.Make (Int)
 
 let escape_tex s =
   let b = Buffer.create (String.length s) in
@@ -38,7 +39,7 @@ let tags_to_tex tags =
   title_tex ^ "\n" ^ author_tex ^ "\n" ^ date_tex
   ^ "\\maketitle\n\\newchessgame"
 
-let rec item_to_tex is_mainline ply = function
+let rec item_to_tex is_mainline ply ?(diagram_data = MoveMap.empty) = function
   | Number n -> if is_mainline then "\\textbf{" ^ n ^ "}" else n
   | Move m ->
       if is_mainline then "\\textbf{" ^ escape_tex m ^ "}" else escape_tex m
@@ -46,35 +47,57 @@ let rec item_to_tex is_mainline ply = function
       if is_mainline then "\\newline " ^ escape_tex c ^ "\\par"
       else escape_tex c
   | Result r -> "\\textbf{" ^ r ^ "}"
-  | Variation v -> "( " ^ render_game false v ^ " )"
+  | Variation v -> "( " ^ render_game false ~diagram_data v ^ " )"
   | _ -> ""
 
-and render_game is_mainline items =
+and render_game is_mainline ?(diagram_data = MoveMap.empty) items =
+  let get_diagram ply =
+    match MoveMap.find_opt ply diagram_data with
+    | Some fen ->
+        "\\par\\nobreak\\chessboard[setfen=" ^ fen ^ ", vmargin=false]\\par"
+    | None -> ""
+  in
   let rec aux ply = function
     | [] -> ""
-    (* | [ last ] -> item_to_tex is_mainline last *)
     | Comment c :: Move m :: tail when is_mainline && ply mod 2 != 0 ->
         let rendered_comment = "\\newline " ^ escape_tex c ^ "\\par" in
         let rendered_move = "\\textbf{..." ^ escape_tex m ^ "}" in
-        rendered_comment ^ " " ^ rendered_move ^ " " ^ aux (ply + 1) tail
+        let diagram = get_diagram (ply + 1) in
+        rendered_comment ^ " " ^ rendered_move ^ diagram ^ " "
+        ^ aux (ply + 1) tail
     | head :: tail ->
         let next_ply =
           match head with Move _ when is_mainline -> ply + 1 | _ -> ply
         in
-
-        let rendered_head = item_to_tex is_mainline next_ply head in
+        let rendered_head =
+          item_to_tex is_mainline next_ply ~diagram_data head ^ get_diagram ply
+        in
         let rest = aux next_ply tail in
-
         if rendered_head = "" then rest else rendered_head ^ " " ^ rest
   in
   String.trim (aux 0 items)
 
 let game_to_tex game =
+  let diagram_data =
+    MoveMap.empty
+    |> MoveMap.add 5
+         "rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR w KQkq c6 0 3"
+    |> MoveMap.add 6
+         "rnbqkbnr/pp1ppppp/8/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R b KQkq - 1 3"
+    |> MoveMap.add 10
+         "r1bqkbnr/pp1ppppp/2n5/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 3 5"
+    |> MoveMap.add 15
+         "r1bqkb1r/pp1ppppp/2n5/2p5/4P3/2N2N2/PPPP1PPP/R1BQKB1R b KQkq - 5 7"
+  in
   let header_tex = tags_to_tex game.tags in
-  let content_tex = render_game true game.content in
+  let content_tex = render_game true ~diagram_data game.content in
 
   let result_tex =
     match game.result with Some r -> " \\textbf{" ^ r ^ "}" | None -> ""
   in
+
+  MoveMap.iter
+    (fun ply fen -> Printf.printf "Ply %d: %s\n" ply fen)
+    diagram_data;
 
   header_tex ^ "\n" ^ content_tex ^ result_tex
