@@ -53,6 +53,10 @@ and render_game is_mainline items =
   let rec aux ply = function
     | [] -> ""
     (* | [ last ] -> item_to_tex is_mainline last *)
+    | Comment c :: Move m :: tail when is_mainline && ply mod 2 != 0 ->
+        let rendered_comment = "\\newline " ^ escape_tex c ^ "\\par" in
+        let rendered_move = "\\textbf{..." ^ escape_tex m ^ "}" in
+        rendered_comment ^ " " ^ rendered_move ^ " " ^ aux (ply + 1) tail
     | head :: tail ->
         let next_ply =
           match head with Move _ when is_mainline -> ply + 1 | _ -> ply
