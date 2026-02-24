@@ -35,9 +35,10 @@ let tags_to_tex tags =
     if date = "" || date = "????.??.??" then ""
     else "\\date{" ^ escape_tex date ^ "}\n"
   in
-  title_tex ^ "\n" ^ author_tex ^ "\n" ^ date_tex ^ "\\maketitle\n"
+  title_tex ^ "\n" ^ author_tex ^ "\n" ^ date_tex
+  ^ "\\maketitle\n\\newchessgame"
 
-let rec item_to_tex is_mainline = function
+let rec item_to_tex is_mainline ply = function
   | Number n -> if is_mainline then "\\textbf{" ^ n ^ "}" else n
   | Move m ->
       if is_mainline then "\\textbf{" ^ escape_tex m ^ "}" else escape_tex m
@@ -49,14 +50,20 @@ let rec item_to_tex is_mainline = function
   | _ -> ""
 
 and render_game is_mainline items =
-  let rec aux = function
+  let rec aux ply = function
     | [] -> ""
-    | [ last ] -> item_to_tex is_mainline last
+    (* | [ last ] -> item_to_tex is_mainline last *)
     | head :: tail ->
-        let rendered_head = item_to_tex is_mainline head in
-        if rendered_head = "" then aux tail else rendered_head ^ " " ^ aux tail
+        let next_ply =
+          match head with Move _ when is_mainline -> ply + 1 | _ -> ply
+        in
+
+        let rendered_head = item_to_tex is_mainline next_ply head in
+        let rest = aux next_ply tail in
+
+        if rendered_head = "" then rest else rendered_head ^ " " ^ rest
   in
-  String.trim (aux items)
+  String.trim (aux 0 items)
 
 let game_to_tex game =
   let header_tex = tags_to_tex game.tags in
