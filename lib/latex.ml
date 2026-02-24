@@ -62,11 +62,9 @@ and render_game is_mainline ?(diagram_data = MoveMap.empty) items =
     | [] -> ""
     | Comment c :: Move m :: tail when is_mainline && ply mod 2 != 0 ->
         let next_ply = ply + 1 in
-        let move_num = next_ply / 2 in
+        (* let move_num = next_ply / 2 in *)
         let rendered_comment = "\\newline " ^ escape_tex c ^ "\\par" in
-        let rendered_move =
-          "\\textbf{" ^ string_of_int move_num ^ "... " ^ escape_tex m ^ "}"
-        in
+        let rendered_move = "\\textbf{..." ^ escape_tex m ^ "}" in
         let diagram = get_diagram next_ply in
         rendered_comment ^ " " ^ rendered_move ^ diagram ^ " "
         ^ aux next_ply tail
