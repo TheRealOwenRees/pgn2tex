@@ -1,5 +1,3 @@
-open Pgn_logic
-open Parser
 module MoveMap = Map.Make (Int)
 
 let rec run_lexer is_header lexbuf =

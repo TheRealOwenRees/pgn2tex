@@ -6,3 +6,5 @@
  (js_of_ocaml
   (flags
    (:standard --opt 3))))
+
+(include_subdirs unqualified)
