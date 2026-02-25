@@ -23,6 +23,13 @@ let get_tag_value key tags ~default =
 
 let get_elo_text elo = if String.length elo > 0 then "(" ^ elo ^ ")" else ""
 
+let get_date_site date site =
+  match (date, site) with
+  | "", "" -> ""
+  | "", s -> s
+  | d, "" -> d
+  | d, s -> d ^ ", " ^ s
+
 let tags_to_tex tags =
   let white = get_tag_value "White" tags ~default:"" in
   let black = get_tag_value "Black" tags ~default:"" in
@@ -30,6 +37,7 @@ let tags_to_tex tags =
   let date = get_tag_value "Date" tags ~default:"" in
   let white_elo = get_tag_value "WhiteElo" tags ~default:"" in
   let black_elo = get_tag_value "BlackElo" tags ~default:"" in
+  let site = get_tag_value "Site" tags ~default:"" in
 
   let title_tex = "\\title{" ^ escape_tex event ^ "}" in
 
@@ -38,11 +46,11 @@ let tags_to_tex tags =
     ^ escape_tex black ^ " " ^ get_elo_text black_elo ^ "}"
   in
 
-  let date_tex =
-    if date = "" || date = "????.??.??" then ""
-    else "\\date{" ^ escape_tex date ^ "}\n"
+  let date_site_tex =
+    match get_date_site date site with "" -> "" | s -> "\\date{" ^ s ^ "}"
   in
-  title_tex ^ "\n" ^ author_tex ^ "\n" ^ date_tex
+
+  title_tex ^ "\n" ^ author_tex ^ "\n" ^ date_site_tex
   ^ "\\maketitle\n\\newchessgame"
 
 let rec item_to_tex is_mainline ply ?(diagram_data = MoveMap.empty) = function

@@ -87,6 +87,17 @@ let test_player_elo =
     ("Empty ELO" >:: fun _ -> ae "" (Latex.get_elo_text ""));
   ]
 
+let test_date_site =
+  [
+    ( "Date and Site" >:: fun _ ->
+      ae "1991.01.01, Kherson" (Latex.get_date_site "1991.01.01" "Kherson") );
+    ( "Date and no site" >:: fun _ ->
+      ae "1991.01.01" (Latex.get_date_site "1991.01.01" "") );
+    ( "No date but site" >:: fun _ ->
+      ae "Kherson" (Latex.get_date_site "" "Kherson") );
+    ("No date and no site" >:: fun _ -> ae "" (Latex.get_date_site "" ""));
+  ]
+
 let suite =
   "latex tests"
   >::: [
@@ -98,7 +109,8 @@ let suite =
          "variation_pgn" >:: test_variation_pgn;
          "black_move_after_comment" >:: test_black_move_after_comment;
          "diagram_placement" >:: test_diagram_placement;
-         "ELO tests" >::: test_player_elo;
+         "elo tests" >::: test_player_elo;
+         "date & site tests" >::: test_date_site;
        ]
 
 let () = run_test_tt_main suite
