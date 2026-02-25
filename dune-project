@@ -21,7 +21,17 @@
  (name pgn2tex)
  (synopsis "A chess PGN to TeX conversion tool")
  (description "A longer description")
- (depends ocaml)
+ (depends
+  (ocaml
+   (>= 5.4))
+  (sedlex
+   (>= 3.7))
+  (menhir
+   (>= 20260209))
+  (ounit2
+   (and
+    :with-test
+    (>= 2.2.7))))
  (tags
   ("add topics" "to describe" your project)))
 
