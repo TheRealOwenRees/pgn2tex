@@ -3,6 +3,8 @@ open Pgn_logic
 open Ast
 open Helpers
 
+let ae expected actual = assert_equal ~printer:(fun x -> x) expected actual
+
 let test_number_to_latex_direct _ctxt =
   let item = Number "1." in
   let expected = "\\textbf{1.}" in
@@ -81,6 +83,13 @@ let test_diagram_placement _ctxt =
   in
   assert_equal ~printer:(fun x -> x) expected rendered_game
 
+let test_player_elo =
+  [
+    ("White ELO" >:: fun _ -> ae "(1432)" (Latex.get_elo_text "1432"));
+    ("Black ELO" >:: fun _ -> ae "(1233)" (Latex.get_elo_text "1233"));
+    ("Empty ELO" >:: fun _ -> ae "" (Latex.get_elo_text ""));
+  ]
+
 let suite =
   "latex tests"
   >::: [
@@ -92,6 +101,7 @@ let suite =
          "variation_pgn" >:: test_variation_pgn;
          "black_move_after_comment" >:: test_black_move_after_comment;
          "diagram_placement" >:: test_diagram_placement;
+         "ELO tests" >::: test_player_elo;
        ]
 
 let () = run_test_tt_main suite

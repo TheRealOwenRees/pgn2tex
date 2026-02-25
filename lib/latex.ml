@@ -21,15 +21,21 @@ let get_tag_value key tags ~default =
   | Some t -> t.value
   | None -> default
 
+let get_elo_text elo = if String.length elo > 0 then "(" ^ elo ^ ")" else ""
+
 let tags_to_tex tags =
-  let white = get_tag_value "White" tags ~default:"Unknown" in
-  let black = get_tag_value "Black" tags ~default:"Unknown" in
-  let event = get_tag_value "Event" tags ~default:"Chess Game" in
+  let white = get_tag_value "White" tags ~default:"" in
+  let black = get_tag_value "Black" tags ~default:"" in
+  let event = get_tag_value "Event" tags ~default:"" in
   let date = get_tag_value "Date" tags ~default:"" in
+  let white_elo = get_tag_value "WhiteElo" tags ~default:"" in
+  let black_elo = get_tag_value "BlackElo" tags ~default:"" in
 
   let title_tex = "\\title{" ^ escape_tex event ^ "}" in
+
   let author_tex =
-    "\\author{" ^ escape_tex white ^ " vs. " ^ escape_tex black ^ "}"
+    "\\author{" ^ escape_tex white ^ " " ^ get_elo_text white_elo ^ " vs. "
+    ^ escape_tex black ^ " " ^ get_elo_text black_elo ^ "}"
   in
 
   let date_tex =
