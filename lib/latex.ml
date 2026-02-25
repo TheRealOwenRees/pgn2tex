@@ -65,7 +65,7 @@ and render_game is_mainline ?(diagram_data = MoveMap.empty) items =
     | Comment c :: Move m :: tail when is_mainline && ply mod 2 != 0 ->
         let next_ply = ply + 1 in
         let rendered_comment = "\\newline " ^ escape_tex c ^ "\\par" in
-        let rendered_move = "\\textbf{..." ^ escape_tex m ^ "}" in
+        let rendered_move = "\\textbf{\\ldots" ^ escape_tex m ^ "}" in
         let diag_str =
           match get_diagram next_ply with Some s -> s | None -> ""
         in
@@ -80,7 +80,7 @@ and render_game is_mainline ?(diagram_data = MoveMap.empty) items =
 
         let prefix =
           if is_move && is_mainline && next_ply mod 2 == 0 && interrupted then
-            "..."
+            "\\ldots"
           else ""
         in
 

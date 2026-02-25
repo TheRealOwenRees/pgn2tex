@@ -61,7 +61,7 @@ let test_black_move_after_comment _ctxt =
   let pgn = "1. e4 {some comment} e5" in
   let parsed_game = Parsing.parse_pgn pgn in
   let expected =
-    "\\textbf{1.} \\textbf{e4} \\newline some comment\\par \\textbf{...e5}"
+    "\\textbf{1.} \\textbf{e4} \\newline some comment\\par \\textbf{\\ldotse5}"
   in
   let actual = Latex.render_game true parsed_game.content in
   assert_equal ~printer:(fun x -> x) expected actual
@@ -76,7 +76,7 @@ let test_diagram_placement _ctxt =
   let expected =
     {|\textbf{1.} \textbf{e4} \textbf{e5} \textbf{2.} \textbf{Nf3} \textbf{Nc6} \textbf{3.} \textbf{Bb5}
 \par\nobreak\medskip\chessboard[setfen=rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR w KQkq c6 0 3, vmargin=false]\par\medskip
- \textbf{...}\textbf{a3}
+ \textbf{\ldots}\textbf{a3}
 \par\nobreak\medskip\chessboard[setfen=rnbqkbnr/pp1ppppp/8/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R b KQkq - 1 3, vmargin=false]\par\medskip|}
   in
   assert_equal ~printer:(fun x -> x) expected rendered_game
