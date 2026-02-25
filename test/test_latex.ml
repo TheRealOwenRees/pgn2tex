@@ -9,23 +9,20 @@ let test_number_to_latex_direct _ctxt =
   let item = Number "1." in
   let expected = "\\textbf{1.}" in
   let actual = Latex.item_to_tex true 0 item in
-
-  assert_equal ~printer:(fun x -> x) expected actual
+  ae expected actual
 
 let test_move_to_latex_direct _ctxt =
   let item = Move "e4" in
   let expected = "\\textbf{e4}" in
   let actual = Latex.item_to_tex true 0 item in
-
-  assert_equal ~printer:(fun x -> x) expected actual
+  ae expected actual
 
 let test_comment_to_latex_direct _ctxt =
   let comment = "some comment here" in
   let item = Comment comment in
   let expected = "\\newline " ^ comment ^ "\\par" in
   let actual = Latex.item_to_tex true 0 item in
-
-  assert_equal ~printer:(fun x -> x) expected actual
+  ae expected actual
 
 let test_basic_pgn _ctxt =
   let pgn = "1. e4 e5" in
@@ -35,7 +32,7 @@ let test_basic_pgn _ctxt =
   | items ->
       let expected = "\\textbf{1.} \\textbf{e4} \\textbf{e5}" in
       let actual = Latex.render_game true items in
-      assert_equal ~printer:(fun x -> x) expected actual
+      ae expected actual
 
 let test_basic_longer_pgn _ctxt =
   let pgn = "1. e4 e5 2. Nf3 Nf6 3. Bb5" in
@@ -48,7 +45,7 @@ let test_basic_longer_pgn _ctxt =
          \\textbf{Nf6} \\textbf{3.} \\textbf{Bb5}"
       in
       let actual = Latex.render_game true items in
-      assert_equal ~printer:(fun x -> x) expected actual
+      ae expected actual
 
 let test_variation_pgn _ctxt =
   let pgn = "1. e4 (1. d4 d5) 1... e5" in
@@ -57,7 +54,7 @@ let test_variation_pgn _ctxt =
     "\\textbf{1.} \\textbf{e4} ( 1. d4 d5 ) \\textbf{1...} \\textbf{e5}"
   in
   let actual = Latex.render_game true parsed_game.content in
-  assert_equal ~printer:(fun x -> x) expected actual
+  ae expected actual
 
 let test_black_move_after_comment _ctxt =
   let pgn = "1. e4 {some comment} e5" in
@@ -66,7 +63,7 @@ let test_black_move_after_comment _ctxt =
     "\\textbf{1.} \\textbf{e4} \\newline some comment\\par \\textbf{\\ldotse5}"
   in
   let actual = Latex.render_game true parsed_game.content in
-  assert_equal ~printer:(fun x -> x) expected actual
+  ae expected actual
 
 let test_diagram_placement _ctxt =
   let pgn = "1.e4 e5 2.Nf3 Nc6 3.Bb5 a3" in
@@ -81,7 +78,7 @@ let test_diagram_placement _ctxt =
  \textbf{\ldots}\textbf{a3}
 \par\nobreak\medskip\chessboard[setfen=rnbqkbnr/pp1ppppp/8/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R b KQkq - 1 3, vmargin=false]\par\medskip|}
   in
-  assert_equal ~printer:(fun x -> x) expected rendered_game
+  ae expected rendered_game
 
 let test_player_elo =
   [
