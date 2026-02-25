@@ -30,6 +30,21 @@ let get_date_site date site =
   | d, "" -> d
   | d, s -> d ^ ", " ^ s
 
+let get_title_text event title subtitle =
+  match (event, title, subtitle) with
+  | event, "", "" -> "\\title{" ^ escape_tex event ^ "}"
+  | _event, title, subtitle ->
+      "\\title{" ^ title ^ "}\\\\[2ex]\\large{" ^ subtitle ^ "}"
+
+let get_author_text author white black white_elo black_elo =
+  match (author, white, black) with
+  | "", "", "" -> "\\author{}"
+  | "", white, black ->
+      "\\author{" ^ escape_tex white ^ " " ^ get_elo_text white_elo ^ " vs. "
+      ^ escape_tex black ^ " " ^ get_elo_text black_elo ^ "}"
+  | author, "", "" -> "\\author{" ^ escape_tex author ^ "}"
+  | _ -> ""
+
 let tags_to_tex tags =
   let white = get_tag_value "White" tags ~default:"" in
   let black = get_tag_value "Black" tags ~default:"" in
@@ -38,13 +53,12 @@ let tags_to_tex tags =
   let white_elo = get_tag_value "WhiteElo" tags ~default:"" in
   let black_elo = get_tag_value "BlackElo" tags ~default:"" in
   let site = get_tag_value "Site" tags ~default:"" in
+  let title = get_tag_value "Title" tags ~default:"" in
+  let subtitle = get_tag_value "Subtitle" tags ~default:"" in
+  let author = get_tag_value "Author" tags ~default:"" in
 
-  let title_tex = "\\title{" ^ escape_tex event ^ "}" in
-
-  let author_tex =
-    "\\author{" ^ escape_tex white ^ " " ^ get_elo_text white_elo ^ " vs. "
-    ^ escape_tex black ^ " " ^ get_elo_text black_elo ^ "}"
-  in
+  let title_tex = get_title_text event title subtitle in
+  let author_tex = get_author_text author white black white_elo black_elo in
 
   let date_site_tex =
     match get_date_site date site with "" -> "" | s -> "\\date{" ^ s ^ "}"

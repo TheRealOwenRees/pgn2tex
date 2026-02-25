@@ -98,6 +98,24 @@ let test_date_site =
     ("No date and no site" >:: fun _ -> ae "" (Latex.get_date_site "" ""));
   ]
 
+let test_title =
+  [
+    ( "Event only" >:: fun _ ->
+      ae "\\title{some event}" (Latex.get_title_text "some event" "" "") );
+    ( "Title and subtitle" >:: fun _ ->
+      ae "\\title{Some title}\\\\[2ex]\\large{Some subtitle}"
+        (Latex.get_title_text "irrelevant" "Some title" "Some subtitle") );
+  ]
+
+let test_author =
+  [
+    ( "Author only" >:: fun _ ->
+      ae "\\author{Some author}"
+        (Latex.get_author_text "Some author" "" "" "" "") );
+    ( "Nothing" >:: fun _ ->
+      ae "\\author{}" (Latex.get_author_text "" "" "" "" "") );
+  ]
+
 let suite =
   "latex tests"
   >::: [
@@ -111,6 +129,8 @@ let suite =
          "diagram_placement" >:: test_diagram_placement;
          "elo tests" >::: test_player_elo;
          "date & site tests" >::: test_date_site;
+         "title tests" >::: test_title;
+         "author tests" >::: test_author;
        ]
 
 let () = run_test_tt_main suite
