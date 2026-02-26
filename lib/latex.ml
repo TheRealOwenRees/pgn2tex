@@ -76,6 +76,8 @@ let rec item_to_tex is_mainline ply ?(diagram_data = MoveMap.empty) = function
       else escape_tex c
   | Result r -> "\\textbf{" ^ r ^ "}"
   | Variation v -> "( " ^ render_game false ~diagram_data v ^ " )"
+  (* | Nag g -> Nag.nag_to_tex g *)
+  | Nag g -> " " ^ Nag.nag_to_tex g ^ "{}"
   | _ -> ""
 
 and render_game is_mainline ?(diagram_data = MoveMap.empty) items =
@@ -93,7 +95,7 @@ and render_game is_mainline ?(diagram_data = MoveMap.empty) items =
     | Comment c :: Move m :: tail when is_mainline && ply mod 2 != 0 ->
         let next_ply = ply + 1 in
         let rendered_comment = "\\newline " ^ escape_tex c ^ "\\par" in
-        let rendered_move = "\\textbf{\\ldots" ^ escape_tex m ^ "}" in
+        let rendered_move = "\\textbf{\\ldots{}" ^ escape_tex m ^ "}" in
         let diag_str =
           match get_diagram next_ply with Some s -> s | None -> ""
         in
@@ -108,7 +110,7 @@ and render_game is_mainline ?(diagram_data = MoveMap.empty) items =
 
         let prefix =
           if is_move && is_mainline && next_ply mod 2 == 0 && interrupted then
-            "\\ldots"
+            "\\ldots{}"
           else ""
         in
 
