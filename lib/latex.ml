@@ -76,7 +76,6 @@ let rec item_to_tex is_mainline ply ?(diagram_data = MoveMap.empty) = function
       else escape_tex c
   | Result r -> "\\textbf{" ^ r ^ "}"
   | Variation v -> "( " ^ render_game false ~diagram_data v ^ " )"
-  (* | Nag g -> Nag.nag_to_tex g *)
   | Nag g -> " " ^ Nag.nag_to_tex g ^ "{}"
   | _ -> ""
 
