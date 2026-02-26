@@ -1,5 +1,16 @@
-; (executable
-;  (name main)
-;  (modes js)
-;  (libraries pgn2tex js_of_ocaml)
-;  (preprocess (pps js_of_ocaml-ppx)))
+(executable
+ (name main)
+ (modes js)
+ (libraries pgn2tex js_of_ocaml)
+ (preprocess
+  (pps js_of_ocaml-ppx)))
+
+(rule
+ (targets pgn2tex.cjs)
+ (action
+  (copy main.bc.js %{targets})))
+
+(rule
+ (alias build-cjs)
+ (action
+  (diff? pgn2tex.cjs %{workspace_root}/pgn2tex.cjs)))

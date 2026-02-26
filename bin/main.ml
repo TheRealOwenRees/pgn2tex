@@ -1,19 +1,14 @@
-(* open Js_of_ocaml
+open Js_of_ocaml
 open Pgn_logic
 
-(* Converts a JSON string containing {"5": "fen...", "10": "fen..."} into a MoveMap *)
 let parse_diagram_json json_str =
   let js_json_str = Js.string json_str in
-  (* Call JS native JSON.parse *)
   let js_obj = Js._JSON##parse js_json_str in
-
-  (* Get all keys from the parsed JS object *)
   let keys = Js.object_keys js_obj |> Js.to_array |> Array.to_list in
 
   List.fold_left
     (fun acc js_key ->
       let key_str = Js.to_string js_key in
-      (* Dynamically get the value for each key *)
       let js_value = Js.Unsafe.get js_obj js_key in
       let value_str = Js.to_string js_value in
 
@@ -22,7 +17,6 @@ let parse_diagram_json json_str =
       | None -> acc)
     Pgn2tex.MoveMap.empty keys
 
-(* The wrapper function that JS will call *)
 let convert_js pgn_js diagram_json_js =
   let pgn = Js.to_string pgn_js in
   let json_str = Js.to_string diagram_json_js in
@@ -40,4 +34,4 @@ let () =
   Js.export "Pgn2tex"
     (object%js
        method convert pgn diagram_json = convert_js pgn diagram_json
-    end) *)
+    end)
