@@ -12,4 +12,8 @@ test:
 install-deps:
 	opam install dune sedlex menhir js_of_ocaml js_of_ocaml-ppx ounit2 ocaml-lsp-server ocamlformat
 
+# bench:
+# 	ocamlopt -o benchmarks/strings unix.cmxa benchmarks/strings.ml
+# 	benchmarks/strings
+
 .PHONY: clean test
