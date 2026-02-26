@@ -1,3 +1,8 @@
+## v1.0.0-rc.1
+
+- Full rewrite in OCaml.
+- NAGs, clocks, and variations are now rendered.
+
 ## v0.2.2
 
 - Sanitise `&` and `:` as escape charcters in TeX output.
