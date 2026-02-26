@@ -38,7 +38,6 @@ let test_basic_pgn_to_tex _ctxt =
   in
 
   ae expected actual;
-  print_endline actual;
   close_in ic
 
 let suite =
