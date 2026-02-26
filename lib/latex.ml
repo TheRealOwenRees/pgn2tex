@@ -67,13 +67,22 @@ let tags_to_tex tags =
   title_tex ^ "\n" ^ author_tex ^ "\n" ^ date_site_tex
   ^ "\\maketitle\n\\newchessgame"
 
-let get_diagram ply diagram_data =
+let get_diagram ?(clock = false) ?(white_time = "0:00") ?(black_time = "0:00")
+    ply diagram_data =
   match MoveMap.find_opt ply diagram_data with
-  | Some fen ->
-      Some
-        ("\n\\par\\nobreak\\medskip\\chessboard[setfen=" ^ fen
-       ^ ", vmargin=false]\\par\\medskip\n")
   | None -> None
+  | Some fen ->
+      if not clock then
+        Some
+          ("\n\\par\\nobreak\\medskip\\chessboard[setfen=" ^ fen
+         ^ ", vmargin=false]\\par\\medskip\n")
+      else
+        Some
+          ("\\par\\nobreak\\textbf{" ^ black_time
+         ^ "}\\par\\nobreak\\medskip\\chessboard[setfen=rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR \
+            w KQkq c6 0 3, \
+            vmargin=false]\\par\\medskip\\vspace{1mm}\\nobreak\\textbf{"
+         ^ white_time ^ "}\\par")
 
 let rec item_to_tex is_mainline ply ?(diagram_data = MoveMap.empty) = function
   | Number n -> if is_mainline then "\\textbf{" ^ n ^ "}" else n

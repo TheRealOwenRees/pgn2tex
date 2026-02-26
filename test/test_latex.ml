@@ -117,6 +117,38 @@ let test_author =
       ae "\\author{}" (Latex.get_author_text "" "" "" "" "") );
   ]
 
+let test_diagram _ctxt =
+  match Latex.get_diagram 5 Helpers.Latex_helper.diagram_data with
+  | Some actual ->
+      let expected =
+        "\n\\par\\nobreak\\medskip\\chessboard[setfen="
+        ^ "rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR w KQkq c6 0 3"
+        ^ ", vmargin=false]\\par\\medskip\n"
+      in
+      ae expected actual
+  | None -> assert_failure "Diagram for ply 5 was not found"
+
+let test_diagram_clock _ctxt =
+  match
+    Latex.get_diagram 5 Helpers.Latex_helper.diagram_data ~clock:true
+      ~white_time:"1:00" ~black_time:"0:21"
+  with
+  | Some actual ->
+      let expected =
+        {|\par\nobreak\textbf{0:21}\par\nobreak\medskip\chessboard[setfen=rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR w KQkq c6 0 3, vmargin=false]\par\medskip\vspace{1mm}\nobreak\textbf{1:00}\par|}
+      in
+      ae expected actual
+  | None -> assert_failure "Diagram for ply 5 was not found"
+
+let test_no_diagram _ctxt =
+  let result = Latex.get_diagram 99 Helpers.Latex_helper.diagram_data in
+
+  match result with
+  | None -> ()
+  | Some actual ->
+      assert_failure
+        ("Expected None for ply 99, but got a diagram string instead: " ^ actual)
+
 let suite =
   "latex tests"
   >::: [
@@ -132,6 +164,9 @@ let suite =
          "date & site tests" >::: test_date_site;
          "title tests" >::: test_title;
          "author tests" >::: test_author;
+         "diagram_test" >:: test_diagram;
+         "diagram_clock" >:: test_diagram_clock;
+         "no_diagram" >:: test_no_diagram;
        ]
 
 let () = run_test_tt_main suite
