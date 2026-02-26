@@ -17,8 +17,8 @@ let test_direct_nags =
     ("$13" >:: fun _ -> ae "\\infty" (nag_to_tex "$13"));
     ("$14" >:: fun _ -> ae "\\wbetter" (nag_to_tex "$14"));
     ("$15" >:: fun _ -> ae "\\bbetter" (nag_to_tex "$15"));
-    ("$16" >:: fun _ -> ae "\\pm" (nag_to_tex "$16"));
-    ("$17" >:: fun _ -> ae "\\mp" (nag_to_tex "$17"));
+    ("$16" >:: fun _ -> ae "\\ensuremath{\\pm}" (nag_to_tex "$16"));
+    ("$17" >:: fun _ -> ae "\\ensuremath{\\mp}" (nag_to_tex "$17"));
     ("$22" >:: fun _ -> ae "\\zugzwang" (nag_to_tex "$22"));
     ("$32" >:: fun _ -> ae "\\development" (nag_to_tex "$32"));
     ("$36" >:: fun _ -> ae "\\initiative" (nag_to_tex "$36"));
