@@ -2,7 +2,7 @@
  (name pgn_logic)
  (public_name pgn2tex)
  (libraries sedlex menhirLib)
- (modules ast parser lexer parsing latex pgn2tex)
+ (modules ast parser lexer parsing latex pgn2tex nag)
  (preprocess
   (pps sedlex.ppx)))
 

@@ -1,4 +1,4 @@
-(* let nag_to_tex = function
+let nag_to_tex = function
   (* Move Assessments *)
   | 1 -> "!" (* Good move *)
   | 2 -> "?" (* Poor move *)
@@ -6,15 +6,15 @@
   | 4 -> "??" (* Very poor move *)
   | 5 -> "!?" (* Speculative move *)
   | 6 -> "?!" (* Questionable move *)
-  | 7 -> "\\Box" (* Forced move *)
-  | 8 -> "{\\tiny \\textceltel}" (* Singular move *)
-  | 9 -> "{\\tiny !!}" (* Worst move *)
+  (* | 7 -> "\\Box"  Forced move *)
+  (* | 8 -> "{\\tiny \\textceltel}" Singular move *)
+  (* | 9 -> "{\\tiny !!}"  Worst move *)
   (* Positional Assessments *)
   | 10 -> "=" (* Drawish / Equal *)
-  | 11 -> "=" (* Equal/Quiet *)
+  (* | 11 -> "=" Equal/Quiet *)
   | 13 -> "\\infty" (* Unclear *)
-  | 14 -> "\\plusminus" (* White slight advantage *)
-  | 15 -> "\\minusplus" (* Black slight advantage *)
+  | 14 -> "\\wbetter" (* White slight advantage *)
+  | 15 -> "\\bbetter" (* Black slight advantage *)
   | 16 -> "\\pm" (* White moderate advantage *)
   | 17 -> "\\mp" (* Black moderate advantage *)
   | 18 -> "+-" (* White decisive advantage *)
@@ -26,8 +26,6 @@
   | 40 -> "\\attack"
   | 44 -> "\\compensation"
   | 132 -> "\\counterplay"
-  | 146 -> "N" (* Novelty *)
+  (* | 146 -> "N" Novelty *)
   (* Fallback for others: just print the $ number as a comment or ignore *)
-  | n -> Printf.sprintf "%% NAG $%d" n *)
-
-(* If you use the chessfss package in LaTeX, you get access to specific glyphs like \wbetter ($14), \bbetter ($15), and \unclear ($13) which look much more professional than standard math symbols. *)
+  | n -> "$" ^ string_of_int n
