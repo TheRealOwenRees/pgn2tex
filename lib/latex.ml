@@ -67,6 +67,14 @@ let tags_to_tex tags =
   title_tex ^ "\n" ^ author_tex ^ "\n" ^ date_site_tex
   ^ "\\maketitle\n\\newchessgame"
 
+let get_diagram ply diagram_data =
+  match MoveMap.find_opt ply diagram_data with
+  | Some fen ->
+      Some
+        ("\n\\par\\nobreak\\medskip\\chessboard[setfen=" ^ fen
+       ^ ", vmargin=false]\\par\\medskip\n")
+  | None -> None
+
 let rec item_to_tex is_mainline ply ?(diagram_data = MoveMap.empty) = function
   | Number n -> if is_mainline then "\\textbf{" ^ n ^ "}" else n
   | Move m ->
@@ -80,15 +88,6 @@ let rec item_to_tex is_mainline ply ?(diagram_data = MoveMap.empty) = function
   | _ -> ""
 
 and render_game is_mainline ?(diagram_data = MoveMap.empty) items =
-  let get_diagram ply =
-    match MoveMap.find_opt ply diagram_data with
-    | Some fen ->
-        Some
-          ("\n\\par\\nobreak\\medskip\\chessboard[setfen=" ^ fen
-         ^ ", vmargin=false]\\par\\medskip\n")
-    | None -> None
-  in
-
   let rec aux ply interrupted = function
     | [] -> ""
     | Comment c :: Move m :: tail when is_mainline && ply mod 2 != 0 ->
@@ -96,7 +95,9 @@ and render_game is_mainline ?(diagram_data = MoveMap.empty) items =
         let rendered_comment = "\\newline " ^ escape_tex c ^ "\\par" in
         let rendered_move = "\\textbf{\\ldots{}" ^ escape_tex m ^ "}" in
         let diag_str =
-          match get_diagram next_ply with Some s -> s | None -> ""
+          match get_diagram next_ply diagram_data with
+          | Some s -> s
+          | None -> ""
         in
         let has_diag = diag_str <> "" in
         rendered_comment ^ " " ^ rendered_move ^ diag_str ^ " "
@@ -121,7 +122,8 @@ and render_game is_mainline ?(diagram_data = MoveMap.empty) items =
         in
 
         let diag_str =
-          if is_move && is_mainline then get_diagram next_ply else None
+          if is_move && is_mainline then get_diagram next_ply diagram_data
+          else None
         in
 
         let diag_output = match diag_str with Some s -> s | None -> "" in
@@ -134,7 +136,7 @@ and render_game is_mainline ?(diagram_data = MoveMap.empty) items =
   in
   String.trim (aux 0 false items)
 
-let game_to_tex game diagram_data =
+let game_to_tex game ~diagram_data =
   let header_tex = tags_to_tex game.tags in
   let content_tex = render_game true ~diagram_data game.content in
 

@@ -33,5 +33,5 @@ let convert_js pgn_js diagram_json_js =
 let () =
   Js.export "Pgn2tex"
     (object%js
-       method convert pgn diagram_json = convert_js pgn diagram_json
+       method convert pgn diagram_json clock = convert_js pgn diagram_json
     end)
