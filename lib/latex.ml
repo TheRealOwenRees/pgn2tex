@@ -59,6 +59,7 @@ and render_game is_mainline ?(diagram_data = MoveMap.empty) ?(clock = false)
         ^ aux next_ply has_diag tail
     | head :: tail ->
         let is_move = match head with Move _ -> true | _ -> false in
+
         let next_ply =
           match head with Move _ when is_mainline -> ply + 1 | _ -> ply
         in
