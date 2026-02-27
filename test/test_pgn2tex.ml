@@ -19,7 +19,7 @@ let test_basic_pgn_to_tex _ctxt =
   let filename = "pgn_examples/1.pgn" in
   let ic = In_channel.open_text filename in
   let input_string = In_channel.input_all ic in
-  let actual = Pgn2tex.to_tex input_string diagram_data in
+  let actual = Pgn2tex.to_tex input_string diagram_data false in
   let expected =
     {|\title{URS-chJ}
 \author{Ibragimov, Ildar (2455) vs. Kramnik, Vladimir (2480)}
@@ -42,7 +42,7 @@ let test_pgn_with_clock_to_tex _ctxt =
   let filename = "pgn_examples/2.pgn" in
   let ic = In_channel.open_text filename in
   let input_string = In_channel.input_all ic in
-  let actual = Pgn2tex.to_tex input_string diagram_data in
+  let actual = Pgn2tex.to_tex input_string diagram_data true in
   print_endline actual;
   close_in ic
 
