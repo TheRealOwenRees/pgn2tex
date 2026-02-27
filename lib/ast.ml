@@ -1,3 +1,5 @@
+module MoveMap = Map.Make (Int)
+
 type tag = { key : string; value : string }
 
 type item =

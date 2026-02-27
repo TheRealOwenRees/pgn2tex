@@ -1,4 +1,4 @@
-module MoveMap = Map.Make (Int)
+module MoveMap = Ast.MoveMap
 
 let to_tex pgn diagram_data =
   let game = Parsing.parse_pgn pgn in

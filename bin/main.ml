@@ -1,5 +1,6 @@
 open Js_of_ocaml
 open Pgn_logic
+open Ast
 
 let parse_diagram_json json_str =
   let js_json_str = Js.string json_str in

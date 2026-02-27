@@ -1,51 +1,14 @@
 open Ast
-module MoveMap = Map.Make (Int)
+open Latex_helpers
 
-let escape_tex s =
-  let b = Buffer.create (String.length s) in
-  String.iter
-    (fun c ->
-      match c with
-      | '#' -> Buffer.add_string b "\\#"
-      | '%' -> Buffer.add_string b "\\%"
-      | '{' -> Buffer.add_string b "\\{"
-      | '}' -> Buffer.add_string b "\\}"
-      | '_' -> Buffer.add_string b "\\_"
-      | '&' -> Buffer.add_string b "\\&"
-      | _ -> Buffer.add_char b c)
-    s;
-  Buffer.contents b
-
-let get_tag_value key tags ~default =
-  match List.find_opt (fun t -> t.key = key) tags with
-  | Some t -> t.value
-  | None -> default
-
-let get_elo_text elo = if String.length elo > 0 then "(" ^ elo ^ ")" else ""
-
-let get_date_site date site =
-  match (date, site) with
-  | "", "" -> ""
-  | "", s -> s
-  | d, "" -> d
-  | d, s -> d ^ ", " ^ s
-
-let get_title_text event title subtitle =
-  match (event, title, subtitle) with
-  | event, "", "" -> "\\title{" ^ escape_tex event ^ "}"
-  | _event, title, subtitle ->
-      "\\title{" ^ title ^ "}\\\\[2ex]\\large{" ^ subtitle ^ "}"
-
-let get_author_text author white black white_elo black_elo =
-  match (author, white, black) with
-  | "", "", "" -> "\\author{}"
-  | "", white, black ->
-      "\\author{" ^ escape_tex white ^ " " ^ get_elo_text white_elo ^ " vs. "
-      ^ escape_tex black ^ " " ^ get_elo_text black_elo ^ "}"
-  | author, "", "" -> "\\author{" ^ escape_tex author ^ "}"
-  | _ -> ""
-
+(* convert PGN headers to title tex *)
 let tags_to_tex tags =
+  let get_tag_value key tags ~default =
+    match List.find_opt (fun t -> t.key = key) tags with
+    | Some t -> t.value
+    | None -> default
+  in
+
   let white = get_tag_value "White" tags ~default:"" in
   let black = get_tag_value "Black" tags ~default:"" in
   let event = get_tag_value "Event" tags ~default:"" in
@@ -57,32 +20,12 @@ let tags_to_tex tags =
   let subtitle = get_tag_value "Subtitle" tags ~default:"" in
   let author = get_tag_value "Author" tags ~default:"" in
 
-  let title_tex = get_title_text event title subtitle in
-  let author_tex = get_author_text author white black white_elo black_elo in
+  let title_tex = build_title_string event title subtitle in
+  let author_tex = build_author_string author white black white_elo black_elo in
 
-  let date_site_tex =
-    match get_date_site date site with "" -> "" | s -> "\\date{" ^ s ^ "}"
-  in
-
-  title_tex ^ "\n" ^ author_tex ^ "\n" ^ date_site_tex
+  title_tex ^ "\n" ^ author_tex ^ "\n"
+  ^ build_date_site_string date site
   ^ "\\maketitle\n\\newchessgame"
-
-let get_diagram ?(clock = false) ?(white_time = "0:00") ?(black_time = "0:00")
-    ply diagram_data =
-  match MoveMap.find_opt ply diagram_data with
-  | None -> None
-  | Some fen ->
-      if not clock then
-        Some
-          ("\n\\par\\nobreak\\medskip\\chessboard[setfen=" ^ fen
-         ^ ", vmargin=false]\\par\\medskip\n")
-      else
-        Some
-          ("\\par\\nobreak\\textbf{" ^ black_time
-         ^ "}\\par\\nobreak\\medskip\\chessboard[setfen=rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR \
-            w KQkq c6 0 3, \
-            vmargin=false]\\par\\medskip\\vspace{1mm}\\nobreak\\textbf{"
-         ^ white_time ^ "}\\par")
 
 let rec item_to_tex is_mainline ply ?(diagram_data = MoveMap.empty) = function
   | Number n -> if is_mainline then "\\textbf{" ^ n ^ "}" else n

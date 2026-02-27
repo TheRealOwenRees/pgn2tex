@@ -83,42 +83,50 @@ let test_diagram_placement _ctxt =
 
 let test_player_elo =
   [
-    ("White ELO" >:: fun _ -> ae "(1432)" (Latex.get_elo_text "1432"));
-    ("Black ELO" >:: fun _ -> ae "(1233)" (Latex.get_elo_text "1233"));
-    ("Empty ELO" >:: fun _ -> ae "" (Latex.get_elo_text ""));
+    ( "White ELO" >:: fun _ ->
+      ae "(1432)" (Latex_helpers.build_elo_string "1432") );
+    ( "Black ELO" >:: fun _ ->
+      ae "(1233)" (Latex_helpers.build_elo_string "1233") );
+    ("Empty ELO" >:: fun _ -> ae "" (Latex_helpers.build_elo_string ""));
   ]
 
 let test_date_site =
   [
     ( "Date and Site" >:: fun _ ->
-      ae "1991.01.01, Kherson" (Latex.get_date_site "1991.01.01" "Kherson") );
+      ae "\\date{1991.01.01, Kherson}"
+        (Latex_helpers.build_date_site_string "1991.01.01" "Kherson") );
     ( "Date and no site" >:: fun _ ->
-      ae "1991.01.01" (Latex.get_date_site "1991.01.01" "") );
+      ae "\\date{1991.01.01}"
+        (Latex_helpers.build_date_site_string "1991.01.01" "") );
     ( "No date but site" >:: fun _ ->
-      ae "Kherson" (Latex.get_date_site "" "Kherson") );
-    ("No date and no site" >:: fun _ -> ae "" (Latex.get_date_site "" ""));
+      ae "\\date{Kherson}" (Latex_helpers.build_date_site_string "" "Kherson")
+    );
+    ( "No date and no site" >:: fun _ ->
+      ae "\\date{}" (Latex_helpers.build_date_site_string "" "") );
   ]
 
 let test_title =
   [
     ( "Event only" >:: fun _ ->
-      ae "\\title{some event}" (Latex.get_title_text "some event" "" "") );
+      ae "\\title{some event}"
+        (Latex_helpers.build_title_string "some event" "" "") );
     ( "Title and subtitle" >:: fun _ ->
       ae "\\title{Some title}\\\\[2ex]\\large{Some subtitle}"
-        (Latex.get_title_text "irrelevant" "Some title" "Some subtitle") );
+        (Latex_helpers.build_title_string "irrelevant" "Some title"
+           "Some subtitle") );
   ]
 
 let test_author =
   [
     ( "Author only" >:: fun _ ->
       ae "\\author{Some author}"
-        (Latex.get_author_text "Some author" "" "" "" "") );
+        (Latex_helpers.build_author_string "Some author" "" "" "" "") );
     ( "Nothing" >:: fun _ ->
-      ae "\\author{}" (Latex.get_author_text "" "" "" "" "") );
+      ae "\\author{}" (Latex_helpers.build_author_string "" "" "" "" "") );
   ]
 
 let test_diagram _ctxt =
-  match Latex.get_diagram 5 Helpers.Latex_helper.diagram_data with
+  match Latex_helpers.get_diagram 5 Helpers.Latex_helper.diagram_data with
   | Some actual ->
       let expected =
         "\n\\par\\nobreak\\medskip\\chessboard[setfen="
@@ -130,7 +138,7 @@ let test_diagram _ctxt =
 
 let test_diagram_clock _ctxt =
   match
-    Latex.get_diagram 5 Helpers.Latex_helper.diagram_data ~clock:true
+    Latex_helpers.get_diagram 5 Helpers.Latex_helper.diagram_data ~clock:true
       ~white_time:"1:00" ~black_time:"0:21"
   with
   | Some actual ->
@@ -141,7 +149,7 @@ let test_diagram_clock _ctxt =
   | None -> assert_failure "Diagram for ply 5 was not found"
 
 let test_no_diagram _ctxt =
-  let result = Latex.get_diagram 99 Helpers.Latex_helper.diagram_data in
+  let result = Latex_helpers.get_diagram 99 Helpers.Latex_helper.diagram_data in
 
   match result with
   | None -> ()
