@@ -41,7 +41,8 @@ let rec item_to_tex is_mainline ply ?(diagram_data = MoveMap.empty) = function
       print_endline c;
       c
 
-and render_game is_mainline ?(diagram_data = MoveMap.empty) items =
+and render_game is_mainline ?(diagram_data = MoveMap.empty) ?(clock = false)
+    items =
   let rec aux ply interrupted = function
     | [] -> ""
     | Comment c :: Move m :: tail when is_mainline && ply mod 2 != 0 ->
@@ -90,9 +91,9 @@ and render_game is_mainline ?(diagram_data = MoveMap.empty) items =
   in
   String.trim (aux 0 false items)
 
-let game_to_tex game ~diagram_data =
+let game_to_tex game ~diagram_data ~clock =
   let header_tex = tags_to_tex game.tags in
-  let content_tex = render_game true ~diagram_data game.content in
+  let content_tex = render_game true ~diagram_data ~clock game.content in
 
   let result_tex =
     match game.result with Some r -> " \\textbf{" ^ r ^ "}" | None -> ""
