@@ -1,6 +1,5 @@
 open Ast
 
-(* State to track if we are inside a PGN tag [ ... ] *)
 let in_header = ref false
 
 let next_token buf =
@@ -22,7 +21,6 @@ let next_token buf =
 let parse_pgn s =
   let buf = Sedlexing.Utf8.from_string s in
   in_header := false;
-  (* Menhir's traditional2revised expects (unit -> token * pos * pos) *)
   let provider () =
     let tok = next_token buf in
     let start_pos, end_pos = Sedlexing.lexing_positions buf in

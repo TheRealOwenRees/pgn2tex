@@ -63,6 +63,7 @@ and read_comment b buf =
   match%sedlex buf with
   | Plus white_space -> read_comment b buf
   | "[%clk " -> read_comment_clock buf
+  | "[%" -> skip_bracket_tag buf b
   | '}' -> COMMENT (Buffer.contents b)
   | eof -> failwith "Unterminated comment"
   | any ->
@@ -75,21 +76,28 @@ and read_comment_clock buf =
   | clock_val ->
       let time = Utf8.lexeme buf in
       begin match%sedlex buf with
-      | ']' ->
-          (* Clock finished, now find closing brace of comment *)
-          begin match%sedlex buf with
+      | ']' -> begin
+          match%sedlex buf with
           | Star white_space, '}' -> CLOCK time
           | _ -> failwith "Expected closing '}' after clock comment"
-          end
+        end
       | _ -> failwith "Malformed clock in comment: expected ']'"
       end
   | _ -> failwith "Malformed clock value"
 
 and read_comment_content b buf =
   match%sedlex buf with
+  | "[%" -> skip_bracket_tag buf b
   | '}' -> COMMENT (String.trim (Buffer.contents b))
   | eof -> failwith "Unterminated comment"
   | any ->
       Buffer.add_string b (Utf8.lexeme buf);
       read_comment_content b buf
+  | _ -> failwith "Malformed comment"
+
+and skip_bracket_tag buf b =
+  match%sedlex buf with
+  | ']' -> read_comment_content b buf
+  | eof -> failwith "Unterminated [% tag inside comment"
+  | any -> skip_bracket_tag buf b
   | _ -> failwith "Malformed comment"
