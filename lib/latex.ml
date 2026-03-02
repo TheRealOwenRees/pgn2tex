@@ -38,12 +38,13 @@ let rec item_to_tex is_mainline ply ?(diagram_data = MoveMap.empty) = function
   | Variation v -> "( " ^ render_game false ~diagram_data v ^ " )"
   | Nag g -> " " ^ Nag.nag_to_tex g ^ "{}"
   | Clock c ->
-      print_endline c;
+      (* print_endline c; *)
       c
 
 and render_game is_mainline ?(diagram_data = MoveMap.empty) ?(clock = false)
     items =
-  let rec aux ply interrupted = function
+  let rec aux ply interrupted ?(white_time = "0:00") ?(black_time = "0:00") =
+    function
     | [] -> ""
     | Comment c :: Move m :: tail when is_mainline && ply mod 2 != 0 ->
         let next_ply = ply + 1 in
@@ -57,38 +58,51 @@ and render_game is_mainline ?(diagram_data = MoveMap.empty) ?(clock = false)
         let has_diag = diag_str <> "" in
         rendered_comment ^ " " ^ rendered_move ^ diag_str ^ " "
         ^ aux next_ply has_diag tail
-    | head :: tail ->
-        let is_move = match head with Move _ -> true | _ -> false in
+    | head :: tail -> (
+        match head with
+        | Clock c ->
+            if ply mod 2 = 0 then
+              aux ply interrupted ~white_time ~black_time:c tail
+            else aux ply interrupted ~white_time:c ~black_time tail
+        | _ ->
+            let is_move = match head with Move _ -> true | _ -> false in
 
-        let next_ply =
-          match head with Move _ when is_mainline -> ply + 1 | _ -> ply
-        in
+            let next_ply =
+              match head with Move _ when is_mainline -> ply + 1 | _ -> ply
+            in
 
-        let prefix =
-          if is_move && is_mainline && next_ply mod 2 == 0 && interrupted then
-            "\\ldots{}"
-          else ""
-        in
+            let prefix =
+              if is_move && is_mainline && next_ply mod 2 == 0 && interrupted
+              then "\\ldots{}"
+              else ""
+            in
 
-        let rendered_head =
-          let raw_head = item_to_tex is_mainline next_ply ~diagram_data head in
-          if prefix <> "" && raw_head <> "" then
-            "\\textbf{" ^ prefix ^ "}" ^ raw_head
-          else raw_head
-        in
+            let rendered_head =
+              let raw_head =
+                item_to_tex is_mainline next_ply ~diagram_data head
+              in
+              if prefix <> "" && raw_head <> "" then
+                "\\textbf{" ^ prefix ^ "}" ^ raw_head
+              else raw_head
+            in
 
-        let diag_str =
-          if is_move && is_mainline then get_diagram next_ply diagram_data
-          else None
-        in
+            let diag_str =
+              if is_move && is_mainline then
+                get_diagram next_ply diagram_data ~clock ~white_time ~black_time
+              else None
+            in
 
-        let diag_output = match diag_str with Some s -> s | None -> "" in
-        let is_comment = match head with Comment _ -> true | _ -> false in
-        let next_interrupted = diag_output <> "" || is_comment in
-        let rest = aux next_ply next_interrupted tail in
+            let diag_output = match diag_str with Some s -> s | None -> "" in
+            let is_comment = match head with Comment _ -> true | _ -> false in
+            let next_interrupted = diag_output <> "" || is_comment in
+            let rest =
+              aux next_ply next_interrupted ~white_time ~black_time tail
+            in
 
-        if rendered_head = "" then rest
-        else rendered_head ^ diag_output ^ if rest = "" then "" else " " ^ rest
+            if rendered_head = "" then rest
+            else
+              rendered_head ^ diag_output ^ if rest = "" then "" else " " ^ rest
+        )
   in
   String.trim (aux 0 false items)
 
