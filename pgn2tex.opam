@@ -4,7 +4,7 @@ synopsis: "A chess PGN to TeX conversion tool"
 description: "A longer description"
 maintainer: ["Owen Rees <owenrees.dev@gmail.com>"]
 authors: ["Owen Rees <owenrees.dev@gmail.com>"]
-license: "LICENSE"
+license: "MIT"
 tags: ["add topics" "to describe" "your" "project"]
 homepage: "https://github.com/therealowenrees/pgn2tex"
 doc: "https://url/to/documentation"

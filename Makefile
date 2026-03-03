@@ -13,6 +13,7 @@ install-deps:
 	opam install dune sedlex menhir js_of_ocaml js_of_ocaml-ppx ounit2 ocaml-lsp-server ocamlformat
 
 check:
+	opam lint
 	dune build @fmt @install @runtest @lint
 
 # bench:
