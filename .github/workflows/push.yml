@@ -14,11 +14,18 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Cache opam
+        uses: actions/cache@v4
+        with:
+          path: ~/.opam
+          key: opam-${{ runner.os }}-${{ hashFiles('**/*.opam', '**/dune-project') }}
+          restore-keys: |
+            opam-${{ runner.os }}-
+
       - name: Setup Opam
         uses: ocaml/setup-ocaml@v3
         with:
           ocaml-compiler: 5
-          opam-cache: true
           dune-cache: true
       - run: opam install . --deps-only --with-test --with-dev-setup
       - run: opam exec -- dune build @fmt @check @runtest
