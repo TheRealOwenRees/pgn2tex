@@ -27,5 +27,6 @@ jobs:
         with:
           ocaml-compiler: 5
           dune-cache: true
-      - run: opam install . --deps-only --with-test --with-dev-setup
+          opam-root: ~/.opam
+      - run: opam install . --deps-only --with-test --with-dev-setup -y
       - run: opam exec -- dune build @fmt @check @runtest
