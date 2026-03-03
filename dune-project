@@ -13,7 +13,7 @@
 
 (maintainers "Owen Rees <owenrees.dev@gmail.com>")
 
-(license LICENSE)
+(license MIT)
 
 (documentation https://url/to/documentation)
 
