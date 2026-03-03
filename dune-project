@@ -31,7 +31,9 @@
   (ounit2
    (and
     :with-test
-    (>= 2.2.7))))
+    (>= 2.2.7)))
+  ("ocamlformat"
+   (and :with-dev-setup)))
  (tags
   ("add topics" "to describe" your project)))
 
