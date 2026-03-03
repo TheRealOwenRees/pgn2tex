@@ -56,7 +56,8 @@ let get_diagram ?(clock = false) ?(white_time = "0:00") ?(black_time = "0:00")
          ^ ", vmargin=false]\\par\\medskip\n")
       else
         Some
-          ("\\par\\nobreak " ^ black_time
-         ^ "\\par\\nobreak\\chessboard[setfen=rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR \
-            w KQkq c6 0 3, vmargin=false]\\par\\medskip\\nobreak\\ "
-         ^ white_time ^ "\\par")
+          ("\\par\\medskip\\noindent" ^ "\\begin{minipage}{\\linewidth}"
+         ^ black_time ^ "\\par\\nopagebreak\\smallskip\n"
+         ^ "\\chessboard[setfen=" ^ fen
+         ^ ", vmargin=false]\\par\\nopagebreak\\vspace{1em}\n" ^ white_time
+         ^ "\\end{minipage}\\par\\medskip")
