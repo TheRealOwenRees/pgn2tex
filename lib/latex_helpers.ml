@@ -24,8 +24,8 @@ let build_author_string author white black white_elo black_elo =
   match (author, white, black) with
   | "", "", "" -> "\\author{}"
   | "", white, black ->
-      "\\author{" ^ escape_tex white ^ " " ^ build_elo_string white_elo
-      ^ " vs. " ^ escape_tex black ^ " " ^ build_elo_string black_elo ^ "}"
+      "\\author{" ^ escape_tex white ^ " " ^ build_elo_string white_elo ^ "\\\\"
+      ^ escape_tex black ^ " " ^ build_elo_string black_elo ^ "}"
   | author, "", "" -> "\\author{" ^ escape_tex author ^ "}"
   | _ -> ""
 
