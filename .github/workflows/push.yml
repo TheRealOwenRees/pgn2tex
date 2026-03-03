@@ -1,0 +1,24 @@
+name: Branch Push Validation
+
+on:
+  push:
+    branches-ignore:
+      - main
+
+jobs:
+  validate:
+    if: github.event_name == 'push' && !startsWith(github.ref, 'refs/pull/')
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Opam
+        uses: ocaml/setup-ocaml@v3
+        with:
+          ocaml-compiler: 5
+          opam-cache: true
+          dune-cache: true
+      - run: opam install . --deps-only --with-test --with-dev-setup
+      - run: opam exec -- dune build @fmt @check @runtest
