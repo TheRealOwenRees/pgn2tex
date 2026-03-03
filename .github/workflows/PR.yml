@@ -1,0 +1,37 @@
+name: Pull Request Validation
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  thorough-check:
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup OCaml & Opam
+        uses: ocaml/setup-ocaml@v3
+        with:
+          ocaml-compiler: 5
+          opam-cache: true
+          dune-cache: true
+
+      - name: Install All Dependencies
+        run: opam install . --deps-only --with-test --with-dev-setup --with-doc
+
+      - name: Metadata Audit
+        run: opam lint
+
+      - name: Full Quality Suite
+        run: opam exec -- dune build @fmt @install @runtest @doc
+
+      # OPTIONAL: Uncomment if you want to verify your Chess LaTeX output
+      # - name: Verify LaTeX Compilation
+      #   run: |
+      #     opam exec -- dune exec ./your_exe.exe > test.tex
+      #     sudo apt-get install -y texlive-latex-base texlive-latex-extra
+      #     pdflatex -interaction=nonstopmode test.tex
