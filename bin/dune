@@ -3,14 +3,20 @@
  (modes js)
  (libraries pgn2tex js_of_ocaml)
  (preprocess
-  (pps js_of_ocaml-ppx)))
+  (pps js_of_ocaml-ppx))
+ (enabled_if
+  (= %{env:CI=false} "false")))
 
 (rule
+ (enabled_if
+  (= %{env:CI=false} "false"))
  (targets pgn2tex.cjs)
  (action
   (copy main.bc.js %{targets})))
 
 (rule
+ (enabled_if
+  (= %{env:CI=false} "false"))
  (alias build-cjs)
  (action
   (diff? pgn2tex.cjs %{workspace_root}/pgn2tex.cjs)))
